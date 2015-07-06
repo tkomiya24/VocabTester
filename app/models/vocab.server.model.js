@@ -16,13 +16,21 @@ var VocabSchema = new Schema({
 		required: 'Please fill Vocab name',
 		trim: true
 	},
+	translations: [{
+		language: {
+			type: String,
+			trime: true,
+			enum: ['English', 'Japanese', 'Korean']
+		}
+		translation: {
+			type: String,
+			trim: true,
+			required: "Translation is requied"
+		}
+	}],
 	created: {
 		type: Date,
 		default: Date.now
-	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
 	}
 });
 
