@@ -89,9 +89,12 @@ var UserSchema = new Schema({
 	resetPasswordExpires: {
 		type: Date
 	}, 
-	vocabLists: {
-		type: Array		
-	}
+	vocabLists: [
+		{
+			type: Schema.ObjectId,
+			ref: 'Vocablist'
+		}
+	]
 });
 
 /**
