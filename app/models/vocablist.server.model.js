@@ -12,7 +12,6 @@ var mongoose = require('mongoose'),
 var VocablistSchema = new Schema({
 	name: {
 		type: String,
-		default: '',
 		required: 'Please fill Vocablist name',
 		trim: true
 	},
