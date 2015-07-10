@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-var supportedLanguages = ['English', 'Japanese', 'Korean'];
+const supportedLanguages = ['English', 'Japanese', 'Korean'];
 
 /**
  * Vocab Schema
