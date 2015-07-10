@@ -19,7 +19,7 @@ var VocabSchema = new Schema({
 	translations: [{
 		language: {
 			type: String,
-			trime: true,
+			trim: true,
 			enum: ['English', 'Japanese', 'Korean']
 		}
 		translation: {
