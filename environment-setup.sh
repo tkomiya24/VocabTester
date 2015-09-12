@@ -1,3 +1,13 @@
+function outputComment {
+	outputPoundLine
+	echo $1
+	outputPoundLine
+}
+
+function outputPoundLine {
+	echo "####################################"
+}
+
 outputComment "Checking for and installing/updating Homebrew"
 which -s brew
 if [[ $? != 0 ]] ; then
@@ -32,13 +42,3 @@ npm install -g bower
 
 outputComment "Installing local npm packages"
 npm install
-
-function outputComment {
-	outputPoundLine
-	echo $comment
-	outputPoundLine
-}
-
-function outputPoundLine {
-	echo "####################################"
-}
