@@ -14,7 +14,7 @@ It is therefore going to be very particular to my needs and studying habbits. Th
 
 ####For all OS's
 
-	* Git
+  * Git
 
 ####Mac OSX
 
