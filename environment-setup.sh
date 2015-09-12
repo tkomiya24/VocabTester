@@ -1,7 +1,10 @@
 function outputComment {
-	outputPoundLine
-	echo $1
-	outputPoundLine
+  if [ "$1" ]
+    then
+      outputPoundLine
+      echo $1
+      outputPoundLine
+  fi
 }
 
 function outputPoundLine {
@@ -37,8 +40,14 @@ if [[ $? != 0 ]] ; then
 fi
 
 outputComment "Installing required npm global packages"
-npm install -g grunt-cli
-npm install -g bower
+npm list -g grunt-cli &> /dev/null
+if [ $? -ne 0 ] ; then
+  npm install -g grunt-cli
+fi
+npm list -g bower &> /dev/null
+if [ $? -ne 0 ] ; then
+  npm install -g bower;
+fi
 
 outputComment "Installing local npm packages"
 npm install
