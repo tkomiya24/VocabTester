@@ -1,4 +1,6 @@
-#What is it?
+#Vocab Learner
+
+##What is it?
 
 This is a [MEAN.js] (http://meanjs.org/) webapp I've made for two reasons  
   1. To practice using the MEAN.js stack  
