@@ -28,7 +28,7 @@ if [[ $? != 0 ]] ; then
   echo 'export PATH=~/npm-global/bin:$PATH' >> ~/.bash_profile
   source ~/.bash_profile
 else
-  npm update -g npm
+  npm install -g npm@latest
 fi
 
 outputComment "Checking for and installing MongoDB"
