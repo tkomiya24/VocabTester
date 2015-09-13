@@ -21,3 +21,14 @@ It is therefore going to be very particular to my needs and studying habbits. Th
   * XCode via the Appstore (make sure you run it at least once!)
   * The commande line tools for XCode 
   
+###Installation  
+
+####All OS's  
+
+  * Clone the repo. From the folder of your choice run  
+  `git clone git@github.com:tkomiya24/VocabTester.git`   
+
+####Mac OSX  
+
+  * Run our custom setup script. Make sure you are within the project folder.   
+  `sh environment-setup.sh`
