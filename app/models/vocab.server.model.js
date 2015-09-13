@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-const supportedLanguages = ['English', 'Japanese', 'Korean'];
+var supportedLanguages = ['English', 'Japanese', 'Korean'];
 
 /**
  * Vocab Schema
@@ -22,11 +22,11 @@ var VocabSchema = new Schema({
 			type: String,
 			trim: true,
 			enum: supportedLanguages
-		}
+		},
 		translation: {
 			type: String,
 			trim: true,
-			required: "Translation is requied"
+			required: 'Translation is requied'
 		}
 	}],
 	created: {
