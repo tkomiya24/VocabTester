@@ -72,7 +72,7 @@ exports.delete = function(req, res) {
 /**
  * List of Vocablists
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
 	Vocablist.find().sort('-created').populate('user', 'displayName').exec(function(err, vocablists) {
 		if (err) {
 			return res.status(400).send({
@@ -87,8 +87,8 @@ exports.list = function(req, res) {
 /**
  * Vocablist middleware
  */
-exports.vocablistByID = function(req, res, next, id) { 
-	Vocablist.findById(id).populate('user', 'displayName').exec(function(err, vocablist) {
+exports.vocablistByID = function(req, res, next, id) {
+	Vocablist.findById(id).populate('vocabs').exec(function(err, vocablist) {
 		if (err) return next(err);
 		if (! vocablist) return next(new Error('Failed to load Vocablist ' + id));
 		req.vocablist = vocablist ;

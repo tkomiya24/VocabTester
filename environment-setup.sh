@@ -11,6 +11,13 @@ function outputPoundLine {
 	echo "####################################"
 }
 
+function installNpmGlobalPackage {
+  npm list -g $1 -g &> /dev/null
+  if [ $? -ne 0 ] ; then
+    npm install -g $1
+  fi
+}
+
 outputComment "Checking for and installing/updating Homebrew"
 which -s brew
 if [[ $? != 0 ]] ; then
@@ -40,14 +47,11 @@ if [[ $? != 0 ]] ; then
 fi
 
 outputComment "Installing required npm global packages"
-npm list -g grunt-cli &> /dev/null
-if [ $? -ne 0 ] ; then
-  npm install -g grunt-cli
-fi
-npm list -g bower &> /dev/null
-if [ $? -ne 0 ] ; then
-  npm install -g bower;
-fi
+installNpmGlobalPackage "grunt-cli"
+installNpmGlobalPackage "bower"
+installNpmGlobalPackage "yo"
+installNpmGlobalPackage "generator-meanjs"
+
 
 outputComment "Installing local npm packages"
 npm install
