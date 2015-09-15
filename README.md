@@ -1,6 +1,6 @@
 #Vocab Learner
 
-##What is it?
+## 1. What is it?
 
 This is a [MEAN.js] (http://meanjs.org/) webapp I've made for two reasons  
   1. To practice using the MEAN.js stack  
@@ -8,27 +8,27 @@ This is a [MEAN.js] (http://meanjs.org/) webapp I've made for two reasons
 
 It is therefore going to be very particular to my needs and studying habbits. The code will also likely be far from adhereing to the professional conventions of MEAN.js and webapp developers in general. I hope that over time the latter will improve. 
 
-##How To Install
+## 2.How To Install
 
-###Prerequisites
+### 2.1 Prerequisites
 
-####For all OS's
+#### 2.1.1 For all OS's
 
   * Git
 
-####Mac OSX
+#### 2.1.2 Mac OSX
 
   * XCode via the Appstore (make sure you run it at least once!)
   * The commande line tools for XCode 
   
-###Installation  
+### 2.2 Once Prerequisites are Installed  
 
-####All OS's  
+#### 2.2.1 All OS's  
 
   * Clone the repo. From the folder of your choice run  
   `git clone git@github.com:tkomiya24/VocabTester.git`   
 
-####Mac OSX  
+#### 2.2.2 Mac OSX  
 
   * Run our custom setup script. Make sure you are within the project folder.   
   `sh environment-setup.sh`
