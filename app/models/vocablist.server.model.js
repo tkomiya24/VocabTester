@@ -19,10 +19,10 @@ var VocablistSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	}
+	vocabs: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Vocab'
+	}]
 });
 
 mongoose.model('Vocablist', VocablistSchema);
