@@ -61,3 +61,5 @@ installNpmGlobalPackage "generator-meanjs"
 
 outputComment "Installing local npm packages"
 npm install
+
+grunt seed

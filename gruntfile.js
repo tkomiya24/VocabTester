@@ -139,6 +139,31 @@ module.exports = function(grunt) {
 			unit: {
 				configFile: 'karma.conf.js'
 			}
+		},
+		shell: {
+			mongodbStart: {
+				command: 'mongod --dbpath ~/.vocabtester-mongo-dev',
+				options: {
+					async: true,
+					stdout: false,
+					failOnError: true,
+					execOptions: {
+						cwd: '.'
+					}
+				}
+			},
+			seedMongo: {
+				command: 'mongorestore -d vocabtester-dev --host 127.0.0.1 --dir ./database-backup/vocabtester-dev',
+				options: {
+					async: false,
+					stdout: true,
+					stderr: true,
+					failOnError: true,
+					execoptions: {
+						cwd: '.'
+					}
+				}
+			}
 		}
 	});
 
@@ -174,4 +199,5 @@ module.exports = function(grunt) {
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	grunt.registerTask('seed', ['shell:mongodbStart', 'shell:seedMongo']);
 };
