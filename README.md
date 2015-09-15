@@ -32,3 +32,8 @@ It is therefore going to be very particular to my needs and studying habbits. Th
 
   * Run our custom setup script. Make sure you are within the project folder.   
   `sh environment-setup.sh`
+
+## 3. Running
+
+In shell, from the root folder of this project use the command  
+`grunt`  
