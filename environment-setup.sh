@@ -30,18 +30,22 @@ outputComment "Checking for and installing MongoDB"
 which -s mongod
 if [[ $? != 0 ]] ; then
   brew install mongodb
+fi
+if [[ ! -d ~/.vocabtester-mongo-dev ]] ; then
   mkdir ~/.vocabtester-mongo-dev
 fi
 
 outputComment "Checking for and installing Node.js"
-source ~/.nvm/nvm.sh
+if [[ -e ~/.nvm/nvm.sh ]] ; then
+  source ~/.nvm/nvm.sh
+fi
 nvm list &> /dev/null
 if [[ $? -ne 0 ]] ; then
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.26.1/install.sh | bash
-  which -s node
-  if [[ $? != 0 ]] ; then
-    nvm install v0.12.7
-    nvm use
+  nvm install v0.12.7
+  nvm use
+  $installed = which -s node
+  if [[ $installed != 0 ]] ; then
     mkdir ~/npm-global
     npm config set prefix '~/npm-global'
     echo 'export PATH=~/npm-global/bin:$PATH' >> ~/.bash_profile
