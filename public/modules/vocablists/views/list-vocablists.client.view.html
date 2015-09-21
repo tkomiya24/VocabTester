@@ -16,4 +16,35 @@
     <div class="alert alert-warning text-center" data-ng-hide="!vocablists.$resolved || vocablists.length">
     	No Vocablists yet, why don't you <a href="/#!/vocablists/create">create one</a>?
     </div>
+    <div class="pull-right" data-ng-show="((authentication.user))">
+    <!-- && (authentication.user._id == vocablist.user._id))"> -->
+      <a class="btn btn-primary" href="/#!/vocablists/{{vocablist._id}}/edit">
+        <i class="glyphicon glyphicon-edit"></i>
+      </a>
+      <a class="btn btn-primary" data-ng-click="remove();">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+    </div>
+    <table class="table table-striped" data-ng-init=findOne()>
+      <thead>
+        <tr>
+          <th>English</th>
+          <th>Korean</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="vocab in vocablist.vocabs">
+          <td>{{vocab.English.Translation}}</td>
+          <td>{{vocab.Korean.Translation}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <small>
+      <em class="text-muted">
+        Posted on
+        <span data-ng-bind="vocablist.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-bind="vocablist.user.displayName"></span>
+      </em>
+    </small>
 </section>

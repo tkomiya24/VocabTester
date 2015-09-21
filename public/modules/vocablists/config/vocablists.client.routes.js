@@ -15,7 +15,7 @@ angular.module('vocablists').config(['$stateProvider',
 		}).
 		state('viewVocablist', {
 			url: '/vocablists/:vocablistId',
-			templateUrl: 'modules/vocablists/views/view-vocablist.client.view.html'
+			templateUrl: 'modules/vocablists/views/list-vocablists.client.view.html'
 		}).
 		state('editVocablist', {
 			url: '/vocablists/:vocablistId/edit',
