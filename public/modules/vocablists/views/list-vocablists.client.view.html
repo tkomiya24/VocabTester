@@ -6,15 +6,17 @@
       <div id="tableRow">
         <div id="sidebar">
           <div class="list-group">
-              <a data-ng-repeat="vocablist in vocablists" data-ng-href="#!/vocablists/{{vocablist._id}}" class="list-group-item">
-      			<small class="list-group-item-text">
-      				Posted on
-      				<span data-ng-bind="vocablist.created | date:'medium'"></span>
-      				by
-      				<span data-ng-bind="vocablist.user.displayName"></span>
-      			</small>
-      			<h4 class="list-group-item-heading" data-ng-bind="vocablist.name"></h4>
-              </a>
+            <li data-ng-repeat="vocablist in vocablists" ng-click="selectVocablist($index)" class="list-group-item">
+              <div>
+                <small class="list-group-item-text">
+          				Posted on
+          				<span data-ng-bind="vocablist.created | date:'medium'"></span>
+          				by
+          				<span data-ng-bind="vocablist.user.displayName"></span>
+          			</small>
+          			<h4 class="list-group-item-heading" data-ng-bind="vocablist.name"></h4>
+              </div>
+            </li>
           </div>
           <div class="alert alert-warning text-center" data-ng-hide="!vocablists.$resolved || vocablists.length">
           	No Vocablists yet, why don't you <a href="/#!/vocablists/create">create one</a>?
@@ -30,7 +32,8 @@
           </div>
         </div>
         <div id="main">
-          <table class="table table-striped" data-ng-init=findOne()>
+          <h4>{{selectedVocablist.name}}</h4>
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th>English</th>
@@ -38,7 +41,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="vocab in vocablist.vocabs">
+              <tr ng-repeat="vocab in selectedVocablist.vocabs">
                 <td>{{vocab.English.Translation}}</td>
                 <td>{{vocab.Korean.Translation}}</td>
               </tr>
