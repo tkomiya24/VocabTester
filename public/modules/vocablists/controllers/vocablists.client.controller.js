@@ -25,7 +25,7 @@ angular.module('vocablists').controller('VocablistsController', ['$scope', '$sta
 
 		// Remove existing Vocablist
 		$scope.remove = function(vocablist) {
-			if ( vocablist ) { 
+			if ( vocablist ) {
 				vocablist.$remove();
 
 				for (var i in $scope.vocablists) {
@@ -54,13 +54,18 @@ angular.module('vocablists').controller('VocablistsController', ['$scope', '$sta
 		// Find a list of Vocablists
 		$scope.find = function() {
 			$scope.vocablists = Vocablists.query();
+			$scope.selectedVocablist = [];
 		};
 
 		// Find existing Vocablist
 		$scope.findOne = function() {
-			$scope.vocablist = Vocablists.get({ 
+			$scope.vocablist = Vocablists.get({
 				vocablistId: $stateParams.vocablistId
 			});
+		};
+
+		$scope.selectVocablist = function(index) {
+			$scope.selectedVocablist = $scope.vocablists[index];
 		};
 	}
 ]);

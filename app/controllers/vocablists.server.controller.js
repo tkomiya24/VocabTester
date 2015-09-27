@@ -73,7 +73,7 @@ exports.delete = function(req, res) {
  * List of Vocablists
  */
 exports.list = function(req, res) {
-	Vocablist.find().sort('-created').populate('user', 'displayName').exec(function(err, vocablists) {
+	Vocablist.find().sort('-created').populate('vocabs').exec(function(err, vocablists) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
