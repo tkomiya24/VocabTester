@@ -6,7 +6,7 @@
       <div id="tableRow">
         <div id="sidebar">
           <div class="list-group">
-            <li data-ng-repeat="vocablist in vocablists" ng-click="selectVocablist($index)" class="list-group-item">
+            <button data-ng-repeat="vocablist in vocablists" ng-click="selectVocablist($index)" class="list-group-item" ng-class="{ 'active' : vocablist == selectedVocablist}">
               <div>
                 <small class="list-group-item-text">
           				Posted on
@@ -16,7 +16,7 @@
           			</small>
           			<h4 class="list-group-item-heading" data-ng-bind="vocablist.name"></h4>
               </div>
-            </li>
+            </button>
           </div>
           <div class="alert alert-warning text-center" data-ng-hide="!vocablists.$resolved || vocablists.length">
           	No Vocablists yet, why don't you <a href="/#!/vocablists/create">create one</a>?
