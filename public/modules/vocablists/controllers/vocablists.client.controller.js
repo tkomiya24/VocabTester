@@ -52,9 +52,14 @@ angular.module('vocablists').controller('VocablistsController', ['$scope', '$sta
 		};
 
 		$scope.test = function() {
-			$scope.responses = [];
 			$scope.findOne();
-		}
+			$scope.responses = [];
+			$scope.grades = [];
+			$scope.grade = 0;
+			for (var i = 0; i < $scope.vocablist.length; i++) {
+				$scope.grades[i] = false;
+			}
+		};
 
 		// Find a list of Vocablists
 		$scope.find = function() {
@@ -75,6 +80,15 @@ angular.module('vocablists').controller('VocablistsController', ['$scope', '$sta
 
 		$scope.restartTest = function() {
 			$scope.responses = [];
+		};
+
+		$scope.gradeTest = function() {
+			for (var i = 0; i < $scope.responses.length; i++) {
+				if ($scope.responses[i] === $scope.vocablist.vocabs[i].Korean.Translation) {
+					$scope.grades[i] = true;
+					$scope.grade++;
+				}
+			}
 		};
 	}
 ]);

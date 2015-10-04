@@ -1,5 +1,6 @@
-<section data-ng-controller="VocablistsController">
-  <table class="table table-striped" data-ng-init="test()">
+<section data-ng-controller="VocablistsController" data-ng-init="test()">
+  {{grade}}
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>English</th>
@@ -10,13 +11,13 @@
       <tr ng-repeat="vocab in vocablist.vocabs">
         <td>{{vocab.English.Translation}}</td>
         <td>
-          <input type="text" ng-model="responses[vocab._id]">
-          </input>
+          <input type="text" ng-model="responses[$index]" ng-hide="grades[$index]"></input>
+          <label ng-show="grades[$index]">{{vocab.Korean.Translation}}</index>
         </td>
       </tr>
     </tbody>
   </table>
-  <button class="btn btn-primary" ng-click="submitTest()">
+  <button class="btn btn-primary" ng-click="gradeTest()">
     Submit
   </button>
   <button class="btn btn-primary" ng-click="restartTest()">
