@@ -1,0 +1,19 @@
+<section data-ng-controller="VocablistsController">
+  <table class="table table-striped" data-ng-init="findOne()">
+    <thead>
+      <tr>
+        <th>English</th>
+        <th>Korean</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="vocab in vocablist.vocabs">
+        <td>{{vocab.English.Translation}}</td>
+        <td>
+          <input type="text" ng-model="response['vocab._id']">
+          </input>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
