@@ -5,6 +5,7 @@
       <tr>
         <th>English</th>
         <th>Korean</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
@@ -14,7 +15,11 @@
           <input type="text" ng-model="responses[$index]" ng-hide="grades[$index]"></input>
           <label ng-show="grades[$index]">{{vocab.Korean.Translation}}</index>
         </td>
-      </tr>
+        <td>
+          <span class="glyphicon glyphicon-ok" ng-show="grades[$index]"></span>
+          <span class="glyphicon glyphicon-remove" ng-hide="grades[$index]"></span>
+        </td>
+       </tr>
     </tbody>
   </table>
   <button class="btn btn-primary" ng-click="gradeTest()">
