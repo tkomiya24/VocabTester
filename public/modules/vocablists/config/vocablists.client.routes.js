@@ -20,6 +20,10 @@ angular.module('vocablists').config(['$stateProvider',
 		state('editVocablist', {
 			url: '/vocablists/:vocablistId/edit',
 			templateUrl: 'modules/vocablists/views/edit-vocablist.client.view.html'
+		}).
+		state('testVocablist', {
+			url: '/vocablists/:vocablistId/test',
+			templateUrl: 'modules/vocablists/views/test-vocablist.client.view.html'
 		});
 	}
 ]);
