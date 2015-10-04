@@ -51,6 +51,11 @@ angular.module('vocablists').controller('VocablistsController', ['$scope', '$sta
 			});
 		};
 
+		$scope.test = function() {
+			$scope.responses = [];
+			$scope.findOne();
+		}
+
 		// Find a list of Vocablists
 		$scope.find = function() {
 			$scope.vocablists = Vocablists.query();
@@ -66,6 +71,10 @@ angular.module('vocablists').controller('VocablistsController', ['$scope', '$sta
 
 		$scope.selectVocablist = function(index) {
 			$scope.selectedVocablist = $scope.vocablists[index];
+		};
+
+		$scope.restartTest = function() {
+			$scope.responses = [];
 		};
 	}
 ]);
