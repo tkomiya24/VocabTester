@@ -54,7 +54,7 @@ angular.module('vocablists').controller('VocablistsController', ['$scope', '$sta
 		// Find a list of Vocablists
 		$scope.find = function() {
 			$scope.vocablists = Vocablists.query();
-			$scope.selectedVocablist = [];
+			$scope.selectedVocablist = {};
 		};
 
 		// Find existing Vocablist
