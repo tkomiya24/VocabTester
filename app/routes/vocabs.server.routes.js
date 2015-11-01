@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 	app.route('/vocabs/:vocabId')
 		.get(vocabs.read)
-		.put(users.requiresLogin, vocabs.hasAuthorization, vocabs.update)
+		.put(users.requiresLogin, vocabs.update)
 		.delete(users.requiresLogin, vocabs.hasAuthorization, vocabs.delete);
 
 	// Finish by binding the Vocab middleware
