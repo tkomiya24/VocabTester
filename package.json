@@ -10,8 +10,11 @@
   "scripts": {
     "start": "grunt",
     "test": "grunt test",
+    "jshint": "grunt jshint",
+    "csslint": "grunt csslint",
     "postinstall": "bower install --config.interactive=false"
   },
+  "pre-commit": ["jshint", "csslint"],
   "dependencies": {
     "express": "~4.10.1",
     "express-session": "~1.9.1",
@@ -63,6 +66,7 @@
     "karma-jasmine": "~0.2.1",
     "karma-phantomjs-launcher": "~0.1.2",
     "load-grunt-tasks": "~1.0.0",
+    "pre-commit": "^1.1.2",
     "should": "~4.1.0",
     "supertest": "~0.14.0"
   }

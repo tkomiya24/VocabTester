@@ -2,9 +2,9 @@
     <div class="page-header">
         <h1>Vocablists</h1>
     </div>
-    <div id="tableContainer">
-      <div id="tableRow">
-        <div id="sidebar">
+    <div class="tableContainer">
+      <div class="tableRow">
+        <div class="sidebar">
           <div class="list-group">
             <button data-ng-repeat="vocablist in vocablists" ng-click="selectVocablist($index)" class="list-group-item" ng-class="{ 'active' : vocablist == selectedVocablist}">
               <div>
@@ -31,7 +31,7 @@
             </a>
           </div>
         </div>
-        <div id="main">
+        <div class="main">
           <h4>{{selectedVocablist.name}}</h4>
           <table class="table table-striped">
             <thead>

@@ -1,15 +1,15 @@
-div#tableContainer {
+div.tableContainer {
   display: table;
 }
 
-div#tableRow {
+div.tableRow {
   display: table-row;
 }
 
-div#main {
+div.main {
   display: table-cell;
 }
 
-div#sidebar {
+div.sidebar {
   display: table-cell;
 }
