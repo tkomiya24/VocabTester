@@ -10,10 +10,10 @@
   "scripts": {
     "start": "grunt",
     "test": "grunt test",
-    "lint": "grunt jshint",
+    "jshint": "grunt jshint",
     "postinstall": "bower install --config.interactive=false"
   },
-  "pre-commit": ["lint"],
+  "pre-commit": ["jshint"],
   "dependencies": {
     "express": "~4.10.1",
     "express-session": "~1.9.1",
