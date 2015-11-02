@@ -37,6 +37,12 @@ exports.read = function(req, res) {
  * Update a Vocab
  */
 exports.update = function(req, res) {
+	if (req.vocabs) {
+		for (var i = 0; i < req.vocabs.length; i++) {
+			vocabs[i].save();
+		}
+	}
+
 	var vocab = req.vocab ;
 
 	vocab = _.extend(vocab , req.body);
@@ -72,7 +78,7 @@ exports.delete = function(req, res) {
 /**
  * List of Vocabs
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
 	Vocab.find().sort('-created').populate('user', 'displayName').exec(function(err, vocabs) {
 		if (err) {
 			return res.status(400).send({
@@ -87,7 +93,7 @@ exports.list = function(req, res) {
 /**
  * Vocab middleware
  */
-exports.vocabByID = function(req, res, next, id) { 
+exports.vocabByID = function(req, res, next, id) {
 	Vocab.findById(id).populate('user', 'displayName').exec(function(err, vocab) {
 		if (err) return next(err);
 		if (! vocab) return next(new Error('Failed to load Vocab ' + id));
