@@ -57,6 +57,15 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+    jscs: {
+      src: watchFiles.clientJS.concat(watchFiles.serverJS),
+      options: {
+        config:'.jscsrc',
+        esnext: false,
+        verbose: true,
+        fix: true
+      }
+    },
 		csslint: {
 			options: {
 				csslintrc: '.csslintrc',
