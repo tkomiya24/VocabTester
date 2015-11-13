@@ -63,7 +63,8 @@ module.exports = function(grunt) {
         config: '.jscsrc',
         esnext: false,
         verbose: true,
-        fix: true
+        fix: true,
+        force: true
       }
     },
     csslint: {
