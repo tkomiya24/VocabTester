@@ -12,11 +12,13 @@
     "test": "grunt test",
     "jshint": "grunt jshint",
     "csslint": "grunt csslint",
-    "postinstall": "bower install --config.interactive=false"
+    "postinstall": "bower install --config.interactive=false",
+    "jscs": "grunt jscs"
   },
   "pre-commit": [
     "jshint",
-    "csslint"
+    "csslint",
+    "jscs"
   ],
   "dependencies": {
     "express": "~4.10.1",
