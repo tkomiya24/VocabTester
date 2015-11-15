@@ -5,6 +5,24 @@ angular.module('vocablists').
   controller('VocablistsController',
     ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists',
       function($scope, $stateParams, $location, Authentication, Vocablists) {
+
+        function guessIsCorrect(i) {
+          return $scope.responses[i] === $scope.vocablist.vocabs[i].Korean.Translation;
+        }
+
+        function markCorrect(i) {
+          $scope.grades[i] = true;
+          $scope.grade++;
+          $scope.vocablist.vocabs[i].Korean['Times Correct']++;
+        }
+
+        function gradeQuestion(i) {
+          if (guessIsCorrect(i)) {
+            markCorrect(i);
+          }
+          $scope.vocablist.vocabs[i].Korean['Times Tested']++;
+        }
+
         $scope.authentication = Authentication;
 
         // Create new Vocablist
@@ -86,12 +104,7 @@ angular.module('vocablists').
 
         $scope.gradeTest = function() {
           for (var i = 0; i < $scope.responses.length; i++) {
-            if ($scope.responses[i] === $scope.vocablist.vocabs[i].Korean.Translation) {
-              $scope.grades[i] = true;
-              $scope.grade++;
-              $scope.vocablist.vocabs[i].Korean.timesCorrect++;
-            }
-            $scope.vocablist.vocabs[i].Korean.timesTested++;
+            gradeQuestion(i);
           }
           $scope.vocablist.$update(
             function() {
