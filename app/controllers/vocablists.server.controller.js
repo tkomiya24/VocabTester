@@ -32,7 +32,13 @@ exports.create = function(req, res) {
  * Show the current Vocablist
  */
 exports.read = function(req, res) {
-  res.jsonp(req.vocablist);
+  req.vocablist.populate('vocabs', function(err) {
+    if (err) {
+      return res.status(400).send(new Error('Failed to load Vocablist ' + req.vocablist._id));
+    } else {
+      res.jsonp(req.vocablist);
+    }
+  });
 };
 
 /**
