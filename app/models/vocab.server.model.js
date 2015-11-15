@@ -27,6 +27,12 @@ var VocabSchema = new Schema({
       type: String,
       trim: true,
       required: 'Translation is requied'
+    },
+    timesTested: {
+      type: Number
+    },
+    timesCorrect: {
+      type: Number
     }
   }],
   created: {
