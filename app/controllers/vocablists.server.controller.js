@@ -3,10 +3,10 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-  errorHandler = require('./errors.server.controller'),
-  Vocablist = mongoose.model('Vocablist'),
-  _ = require('lodash');
+var mongoose = require('mongoose');
+var errorHandler = require('./errors.server.controller');
+var Vocablist = mongoose.model('Vocablist');
+var _ = require('lodash');
 var Vocab = mongoose.model('Vocab');
 
 /**
