@@ -38,21 +38,9 @@ exports.read = function(req, res) {
  * Update a Vocablist
  */
 exports.update = function(req, res) {
-  var vocablist = req.vocablist;
+  var vocablist = req.vocablist ;
 
-  vocablist = _.extend(vocablist, req.body);
-  var vocabs = vocablist.vocabs;
-  for (var i = 0; i < vocabs.length; i++) {
-    vocabs[i].save(function(err) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-
-      }
-    });
-  }
+  vocablist = _.extend(vocablist , req.body);
 
   vocablist.save(function(err) {
     if (err) {

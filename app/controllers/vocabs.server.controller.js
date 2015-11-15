@@ -88,7 +88,7 @@ exports.list = function(req, res) {
 exports.vocabByID = function(req, res, next, id) {
   Vocab.findById(id).populate('user', 'displayName').exec(function(err, vocab) {
     if (err) return next(err);
-    if (! vocab) return next(new Error('Failed to load Vocab ' + id));
+    if (!vocab) return next(new Error('Failed to load Vocab ' + id));
     req.vocab = vocab ;
     next();
   });
