@@ -10,6 +10,66 @@ var _ = require('lodash');
 var Vocab = mongoose.model('Vocab');
 var rsvp = require('rsvp');
 
+function findVocabPromise(vocab) {
+  console.log(vocab);
+  console.log('Making find vocab promise with vocab: ' + vocab._id);
+  return new rsvp.Promise(function(resolve, error) {
+    Vocab.findById(vocab._id,
+      function(err, doc) {
+        if (err) {
+          error(err);
+        } else if (!doc) {
+          error(new Error('Failed to load Vocab ' + vocab._id));
+        } else {
+          _.extend(doc, vocab);
+          resolve(doc);
+        }
+      }
+    );
+  });
+}
+
+function makeFindVocabPromises(vocabs) {
+  console.log('making find vocab promises');
+  var promises = [];
+  for (var i = 0; i < vocabs.length; i++) {
+    promises.push(findVocabPromise(vocabs[i]));
+  }
+  return rsvp.all(promises);
+}
+
+function makeSaveVocabPromise(vocab) {
+  return new rsvp.Promise(function(resolve, error) {
+    vocab.save(function(err) {
+      if (err) {
+        error(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+function makeSaveVocabPromises(vocabs) {
+  console.log('making save vocab pormises');
+  var promises = [];
+  for (var i = 0; i < vocabs.length; i++) {
+    promises.push(makeSaveVocabPromise(vocabs[i]));
+  }
+  return rsvp.all(promises);
+}
+
+function saveVocablistPromise(vocablist) {
+  return rsvp.Promise(function(resolve, error) {
+    vocablist.save(function(err) {
+      if (err) {
+        error(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
 /**
  * Create a Vocablist
  */
@@ -45,19 +105,24 @@ exports.read = function(req, res) {
  * Update a Vocablist
  */
 exports.update = function(req, res) {
-  var vocablist = req.vocablist ;
-
+  console.log('in the update method');
+  var vocablist = req.vocablist;
+  console.log(req.body);
   vocablist = _.extend(vocablist , req.body);
-
-  vocablist.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
+  makeFindVocabPromises(vocablist.vocabs).then(makeSaveVocabPromises).
+    then(function() {
+      return saveVocablistPromise(vocablist);
+    }).
+    then(function() {
       res.jsonp(vocablist);
-    }
-  });
+    }).
+    catch(
+      function(err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
+    );
 };
 
 /**
