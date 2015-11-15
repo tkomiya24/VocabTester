@@ -9,10 +9,10 @@ module.exports = function(app) {
   .get(vocabs.list)
   .post(users.requiresLogin, vocabs.create);
 
-	app.route('/vocabs/:vocabId')
-		.get(vocabs.read)
-		.put(users.requiresLogin, vocabs.update)
-		.delete(users.requiresLogin, vocabs.hasAuthorization, vocabs.delete);
+  app.route('/vocabs/:vocabId')
+    .get(vocabs.read)
+    .put(users.requiresLogin, vocabs.update)
+    .delete(users.requiresLogin, vocabs.hasAuthorization, vocabs.delete);
 
   // Finish by binding the Vocab middleware
   app.param('vocabId', vocabs.vocabByID);
