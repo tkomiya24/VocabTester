@@ -52,14 +52,16 @@ module.exports = function(grunt) {
 		jshint: {
 			all: {
 				src: watchFiles.clientJS.concat(watchFiles.serverJS),
-				options: {
-					jshintrc: true
-				}
-			}
+			},
+      options: {
+        jshintrc: '.jshintrc',
+        force: false
+      }
 		},
 		csslint: {
 			options: {
 				csslintrc: '.csslintrc',
+        force: false
 			},
 			all: {
 				src: watchFiles.clientCSS
