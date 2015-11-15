@@ -4,6 +4,7 @@
       <tr>
         <th>English</th>
         <th>Korean</th>
+        <th>Record</th>
         <th>Status</th>
       </tr>
     </thead>
@@ -13,6 +14,9 @@
         <td>
           <input type="text" ng-model="responses[$index]" ng-hide="grades[$index]"></input>
           <label ng-show="grades[$index]">{{vocab.Korean.Translation}}</index>
+        </td>
+        <td>
+          {{vocab.Korean["Times Correct"]}} / {{vocab.Korean["Times Tested"]}}
         </td>
         <td>
           <span class="glyphicon glyphicon-ok" ng-show="grades[$index]"></span>
