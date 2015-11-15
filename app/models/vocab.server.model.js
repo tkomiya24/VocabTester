@@ -8,6 +8,19 @@ var mongoose = require('mongoose'),
 
 var supportedLanguages = ['English', 'Japanese', 'Korean'];
 
+var translationSchema = {
+  translation: {
+    type: String,
+    trim: true,
+    required: 'Translation is requied'
+  },
+  timesTested: {
+    type: Number
+  },
+  timesCorrect: {
+    type: Number
+  }
+};
 /**
  * Vocab Schema
  */
@@ -17,24 +30,9 @@ var VocabSchema = new Schema({
     required: 'Please set primary language',
     enum: supportedLanguages
   },
-  translations: [{
-    language: {
-      type: String,
-      trim: true,
-      enum: supportedLanguages
-    },
-    translation: {
-      type: String,
-      trim: true,
-      required: 'Translation is requied'
-    },
-    timesTested: {
-      type: Number
-    },
-    timesCorrect: {
-      type: Number
-    }
-  }],
+  english: translationSchema,
+  korean: translationSchema,
+  japanese: translationSchema,
   created: {
     type: Date,
     default: Date.now
