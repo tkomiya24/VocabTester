@@ -8,6 +8,7 @@ var errorHandler = require('./errors.server.controller');
 var Vocablist = mongoose.model('Vocablist');
 var _ = require('lodash');
 var Vocab = mongoose.model('Vocab');
+var rsvp = require('rsvp');
 
 /**
  * Create a Vocablist
@@ -90,8 +91,12 @@ exports.list = function(req, res) {
  */
 exports.vocablistByID = function(req, res, next, id) {
   Vocablist.findById(id).exec(function(err, vocablist) {
-    if (err) return next(err);
-    if (!vocablist) return next(new Error('Failed to load Vocablist ' + id));
+    if (err) {
+      return next(err);
+    }
+    if (!vocablist) {
+      return next(new Error('Failed to load Vocablist ' + id));
+    }
     req.vocablist = vocablist;
     next();
   });
