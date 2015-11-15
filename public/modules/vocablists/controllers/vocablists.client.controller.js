@@ -89,8 +89,17 @@ angular.module('vocablists').
             if ($scope.responses[i] === $scope.vocablist.vocabs[i].Korean.Translation) {
               $scope.grades[i] = true;
               $scope.grade++;
+              $scope.vocablist.vocabs[i].Korean.timesCorrect++;
             }
+            $scope.vocablist.vocabs[i].Korean.timesTested++;
           }
+          $scope.vocablist.$update(
+            function() {
+              $location.path('vocablists/' + $scope.vocablist._id);
+            },
+            function(errorResponse) {
+              $scope.error = errorResponse.data.message;
+            });
         };
       }
 ]);
