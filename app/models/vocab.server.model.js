@@ -19,6 +19,9 @@ var translationSchema = {
   },
   timesCorrect: {
     type: Number
+  },
+  lastTested: {
+    type: Date
   }
 };
 /**
