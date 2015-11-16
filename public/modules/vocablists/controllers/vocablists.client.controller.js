@@ -7,20 +7,20 @@ angular.module('vocablists').
       function($scope, $stateParams, $location, Authentication, Vocablists) {
 
         function guessIsCorrect(i) {
-          return $scope.responses[i] === $scope.vocablist.vocabs[i].Korean.Translation;
+          return $scope.responses[i] === $scope.vocablist.vocab[i].korean.translation[0];
         }
 
         function markCorrect(i) {
           $scope.grades[i] = true;
           $scope.grade++;
-          $scope.vocablist.vocabs[i].Korean['Times Correct']++;
+          $scope.vocablist.vocab[i].korean.timesCorrect++;
         }
 
         function gradeQuestion(i) {
           if (guessIsCorrect(i)) {
             markCorrect(i);
           }
-          $scope.vocablist.vocabs[i].Korean['Times Tested']++;
+          $scope.vocablist.vocab[i].korean.timesTested++;
         }
 
         $scope.authentication = Authentication;

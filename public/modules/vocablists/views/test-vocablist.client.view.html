@@ -9,14 +9,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="vocab in vocablist.vocabs">
-        <td>{{vocab.English.Translation}}</td>
+      <tr ng-repeat="vocab in vocablist.vocab">
+        <td>{{vocab.english.translation}}</td>
         <td>
           <input type="text" ng-model="responses[$index]" ng-hide="grades[$index]"></input>
-          <label ng-show="grades[$index]">{{vocab.Korean.Translation}}</index>
+          <label ng-show="grades[$index]">{{vocab.korean.translation}}</index>
         </td>
         <td>
-          {{vocab.Korean["Times Correct"]}} / {{vocab.Korean["Times Tested"]}}
+          {{vocab.korean.timesCorrect}} / {{vocab.korean.timesTested}}
         </td>
         <td>
           <span class="glyphicon glyphicon-ok" ng-show="grades[$index]"></span>
