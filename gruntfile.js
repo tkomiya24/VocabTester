@@ -31,7 +31,7 @@ module.exports = function(grunt) {
       clientViews: {
         files: watchFiles.clientViews,
         options: {
-          livereload: true,
+          livereload: true
         }
       },
       clientJS: {
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
     },
     jshint: {
       all: {
-        src: watchFiles.clientJS.concat(watchFiles.serverJS),
+        src: watchFiles.clientJS.concat(watchFiles.serverJS)
       },
       options: {
         jshintrc: '.jshintrc'
@@ -162,14 +162,38 @@ module.exports = function(grunt) {
           }
         }
       },
-      seedMongo: {
-        command: 'mongorestore -d vocabtester-dev --host 127.0.0.1 --dir ./database-backup/vocabtester-dev',
+      clearDatabase: {
+        command: 'mongo vocabtester-dev --eval "db.dropDatabase()"',
         options: {
           async: false,
           stdout: true,
           stderr: true,
           failOnError: true,
-          execoptions: {
+          execOptions: {
+            cwd: '.'
+          }
+        }
+      },
+      seedMongo: {
+        command: 'mongoimport -d vocabtester-dev -c vocablists --type json --file ./database-backup/master.json --jsonArray --host 127.0.0.1',
+        options: {
+          async: false,
+          stdout: true,
+          stderr: true,
+          failOnError: true,
+          execOptions: {
+            cwd: '.'
+          }
+        }
+      },
+      fixRelations: {
+        command: 'mongo vocabtester-dev db-setup.js',
+        options: {
+          async: false,
+          stdout: true,
+          stderr: true,
+          failOnError: true,
+          execOptions: {
             cwd: '.'
           }
         }
@@ -184,7 +208,8 @@ module.exports = function(grunt) {
   // grunt.option('force', true);
 
   // A Task for loading the configuration object
-  grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function() {
+  grunt.task.registerTask('loadConfig',
+    'Task that loads the config into a grunt option.', function() {
     var init = require('./config/init')();
     var config = require('./config/config');
 
@@ -209,5 +234,6 @@ module.exports = function(grunt) {
 
   // Test task.
   grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
-  grunt.registerTask('seed', ['shell:mongodbStart', 'shell:seedMongo']);
+  grunt.registerTask('seed',
+    ['shell:mongodbStart', 'shell:clearDatabase','shell:seedMongo', 'shell:fixRelations']);
 };
