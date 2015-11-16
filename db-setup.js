@@ -6,7 +6,7 @@ db.vocablists.find({}).forEach(function(vocablist) {
     db.vocabs.insert(vocablist.vocab, {ordered: false});
   }
   vocablist.vocab.forEach(function(vocab) {
-    idArray.push(db.vocabs.findOne({english: vocab.english})._id);
+    idArray.push(db.vocabs.findOne({'english.translation': vocab.english.translation})._id);
   });
   db.vocablists.update({_id: vocablist._id}, {$set: {vocab: idArray}});
 });
