@@ -92,7 +92,7 @@ exports.create = function(req, res) {
  * Show the current Vocablist
  */
 exports.read = function(req, res) {
-  req.vocablist.populate('vocabs', function(err) {
+  req.vocablist.populate('vocab', function(err) {
     if (err) {
       return res.status(400).send(new Error('Failed to load Vocablist ' + req.vocablist._id));
     } else {
@@ -109,7 +109,7 @@ exports.update = function(req, res) {
   var vocablist = req.vocablist;
   console.log(req.body);
   vocablist = _.extend(vocablist , req.body);
-  makeFindVocabPromises(vocablist.vocabs).then(makeSaveVocabPromises).
+  makeFindVocabPromises(vocablist.vocab).then(makeSaveVocabPromises).
     then(function() {
       return saveVocablistPromise(vocablist);
     }).
@@ -146,7 +146,7 @@ exports.delete = function(req, res) {
  * List of Vocablists
  */
 exports.list = function(req, res) {
-  Vocablist.find().sort('-created').populate('vocabs').exec(function(err, vocablists) {
+  Vocablist.find().sort('-created').populate('vocab').exec(function(err, vocablists) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

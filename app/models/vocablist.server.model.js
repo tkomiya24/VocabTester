@@ -19,7 +19,7 @@ var VocablistSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  vocabs: [{
+  vocab: [{
     type: Schema.Types.ObjectId,
     ref: 'Vocab'
   }]
