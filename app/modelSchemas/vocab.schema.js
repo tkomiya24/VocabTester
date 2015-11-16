@@ -8,11 +8,11 @@ var Schema = mongoose.Schema;
 var supportedLanguages = ['English', 'Japanese', 'Korean'];
 
 var translationSchema = {
-  translation: {
+  translation: [{
     type: String,
     trim: true,
     required: 'Translation is requied'
-  },
+  }],
   timesTested: {
     type: Number
   },
