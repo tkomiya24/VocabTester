@@ -4,9 +4,9 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	errorHandler = require('./errors.server.controller'),
-	Vocab = mongoose.model('Vocab'),
-	_ = require('lodash');
+  errorHandler = require('./errors.server.controller'),
+  Vocab = mongoose.model('Vocab'),
+  _ = require('lodash');
 
 /**
  * Create a Vocab
@@ -38,9 +38,7 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
   var vocab = req.vocab ;
-
   vocab = _.extend(vocab , req.body);
-
   vocab.save(function(err) {
     if (err) {
       return res.status(400).send({

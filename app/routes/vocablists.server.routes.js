@@ -10,9 +10,9 @@ module.exports = function(app) {
   .post(users.requiresLogin, vocablists.create);
 
   app.route('/vocablists/:vocablistId')
-  .get(vocablists.read)
-  .put(users.requiresLogin, vocablists.hasAuthorization, vocablists.update)
-  .delete(users.requiresLogin, vocablists.hasAuthorization, vocablists.delete);
+    .get(vocablists.read)
+    .put(users.requiresLogin, vocablists.update)
+    .delete(users.requiresLogin, vocablists.hasAuthorization, vocablists.delete);
 
   // Finish by binding the Vocablist middleware
   app.param('vocablistId', vocablists.vocablistByID);

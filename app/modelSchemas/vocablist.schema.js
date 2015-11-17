@@ -14,5 +14,8 @@ module.exports = new Schema({
   vocab: [{
     type: Schema.Types.ObjectId,
     ref: 'Vocab'
-  }]
+  }],
+  chapter: {
+    type: Number
+  }
 });

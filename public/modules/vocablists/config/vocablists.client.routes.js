@@ -18,8 +18,12 @@ angular.module('vocablists').config(['$stateProvider',
   templateUrl: 'modules/vocablists/views/list-vocablists.client.view.html'
 		}).
 		state('editVocablist', {
-  url: '/vocablists/:vocablistId/edit',
-  templateUrl: 'modules/vocablists/views/edit-vocablist.client.view.html'
+			url: '/vocablists/:vocablistId/edit',
+			templateUrl: 'modules/vocablists/views/edit-vocablist.client.view.html'
+		}).
+		state('testVocablist', {
+			url: '/vocablists/:vocablistId/test',
+			templateUrl: 'modules/vocablists/views/test-vocablist.client.view.html'
 		});
 	}
 ]);

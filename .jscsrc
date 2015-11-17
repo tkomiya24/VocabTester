@@ -82,5 +82,6 @@
         "checkTypes": true,
         "checkRedundantAccess": true,
         "requireNewlineAfterDescription": true
-    }
+    },
+    "disallowTrailingComma": true
 }

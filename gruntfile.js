@@ -31,7 +31,7 @@ module.exports = function(grunt) {
       clientViews: {
         files: watchFiles.clientViews,
         options: {
-          livereload: true,
+          livereload: true
         }
       },
       clientJS: {
@@ -51,10 +51,10 @@ module.exports = function(grunt) {
     },
     jshint: {
       all: {
-        src: watchFiles.clientJS.concat(watchFiles.serverJS),
-        options: {
-          jshintrc: true
-        }
+        src: watchFiles.clientJS.concat(watchFiles.serverJS)
+      },
+      options: {
+        jshintrc: '.jshintrc'
       }
     },
     jscs: {
@@ -63,13 +63,13 @@ module.exports = function(grunt) {
         config: '.jscsrc',
         esnext: false,
         verbose: true,
-        fix: true,
+        fix: false,
         force: true
       }
     },
     csslint: {
       options: {
-        csslintrc: '.csslintrc',
+        csslintrc: '.csslintrc'
       },
       all: {
         src: watchFiles.clientCSS
@@ -169,7 +169,7 @@ module.exports = function(grunt) {
           stdout: true,
           stderr: true,
           failOnError: true,
-          execoptions: {
+          execOptions: {
             cwd: '.'
           }
         }
@@ -181,10 +181,11 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   // Making grunt default to force in order not to break the project.
-  grunt.option('force', true);
+  // grunt.option('force', true);
 
   // A Task for loading the configuration object
-  grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function() {
+  grunt.task.registerTask('loadConfig',
+    'Task that loads the config into a grunt option.', function() {
     var init = require('./config/init')();
     var config = require('./config/config');
 
@@ -209,5 +210,6 @@ module.exports = function(grunt) {
 
   // Test task.
   grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
-  grunt.registerTask('seed', ['shell:mongodbStart', 'shell:seedMongo']);
+  grunt.registerTask('seed',
+    ['shell:mongodbStart', 'shell:seedMongo']);
 };

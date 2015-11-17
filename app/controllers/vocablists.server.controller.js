@@ -3,10 +3,81 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-	errorHandler = require('./errors.server.controller'),
-	Vocablist = mongoose.model('Vocablist'),
-	_ = require('lodash');
+var mongoose = require('mongoose');
+var errorHandler = require('./errors.server.controller');
+var Vocablist = mongoose.model('Vocablist');
+var _ = require('lodash');
+var Vocab = mongoose.model('Vocab');
+var rsvp = require('rsvp');
+
+function findVocabPromise(vocab) {
+  return new rsvp.Promise(function(resolve, error) {
+    Vocab.findById(vocab._id,
+      function(err, doc) {
+        if (err) {
+          error(err);
+        } else if (!doc) {
+          error(new Error('Failed to load Vocab ' + vocab._id));
+        } else {
+          _.extend(doc, vocab);
+          resolve(doc);
+        }
+      }
+    );
+  });
+}
+
+function makeFindVocabPromises(vocabs) {
+  var promises = [];
+  for (var i = 0; i < vocabs.length; i++) {
+    promises.push(findVocabPromise(vocabs[i]));
+  }
+  return rsvp.all(promises);
+}
+
+function makeSaveVocabPromise(vocab) {
+  return new rsvp.Promise(function(resolve, error) {
+    vocab.save(function(err) {
+      if (err) {
+        error(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+function makeSaveVocabPromises(vocabs) {
+  var promises = [];
+  for (var i = 0; i < vocabs.length; i++) {
+    promises.push(makeSaveVocabPromise(vocabs[i]));
+  }
+  return rsvp.all(promises);
+}
+
+function saveVocablistPromise(vocablist) {
+  return new rsvp.Promise(function(resolve, error) {
+    vocablist.save(function(err) {
+      if (err) {
+        error(err);
+      } else {
+        resolve(vocablist);
+      }
+    });
+  });
+}
+
+function populateVocablist(vocablist) {
+  return new rsvp.Promise(function(resolve, error) {
+    vocablist.populate('vocab', function(err) {
+      if (err) {
+        error(err);
+      } else {
+        resolve(vocablist);
+      }
+    });
+  });
+}
 
 /**
  * Create a Vocablist
@@ -30,33 +101,43 @@ exports.create = function(req, res) {
  * Show the current Vocablist
  */
 exports.read = function(req, res) {
-  res.jsonp(req.vocablist);
+  req.vocablist.populate('vocab', function(err) {
+    if (err) {
+      return res.status(400).send(new Error('Failed to load Vocablist ' + req.vocablist._id));
+    } else {
+      res.jsonp(req.vocablist);
+    }
+  });
 };
 
 /**
  * Update a Vocablist
  */
 exports.update = function(req, res) {
-  var vocablist = req.vocablist ;
-
+  var vocablist = req.vocablist;
   vocablist = _.extend(vocablist , req.body);
-
-  vocablist.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
+  makeFindVocabPromises(req.body.vocab).then(makeSaveVocabPromises).
+    then(function() {
+      return saveVocablistPromise(vocablist);
+    }).
+    then(populateVocablist).
+    then(function(vocablist) {
       res.jsonp(vocablist);
-    }
-  });
+    }).
+    catch(
+      function(err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
+    );
 };
 
 /**
  * Delete an Vocablist
  */
 exports.delete = function(req, res) {
-  var vocablist = req.vocablist ;
+  var vocablist = req.vocablist;
 
   vocablist.remove(function(err) {
     if (err) {
@@ -73,7 +154,7 @@ exports.delete = function(req, res) {
  * List of Vocablists
  */
 exports.list = function(req, res) {
-  Vocablist.find().sort('-created').populate('vocabs').exec(function(err, vocablists) {
+  Vocablist.find().sort('-created').populate('vocab').exec(function(err, vocablists) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -88,10 +169,14 @@ exports.list = function(req, res) {
  * Vocablist middleware
  */
 exports.vocablistByID = function(req, res, next, id) {
-  Vocablist.findById(id).populate('vocabs').exec(function(err, vocablist) {
-    if (err) return next(err);
-    if (!vocablist) return next(new Error('Failed to load Vocablist ' + id));
-    req.vocablist = vocablist ;
+  Vocablist.findById(id).exec(function(err, vocablist) {
+    if (err) {
+      return next(err);
+    }
+    if (!vocablist) {
+      return next(new Error('Failed to load Vocablist ' + id));
+    }
+    req.vocablist = vocablist;
     next();
   });
 };

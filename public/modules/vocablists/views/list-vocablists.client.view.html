@@ -38,15 +38,18 @@
               <tr>
                 <th>English</th>
                 <th>Korean</th>
+                <th>Score</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="vocab in selectedVocablist.vocabs">
-                <td>{{vocab.English.Translation}}</td>
-                <td>{{vocab.Korean.Translation}}</td>
+              <tr ng-repeat="vocab in selectedVocablist.vocab">
+                <td>{{vocab.english.translation}}</td>
+                <td>{{vocab.korean.translation}}</td>
+                <td>{{vocab.korean.timesCorrect}}/{{vocab.korean.timesTested}}</td>
               </tr>
             </tbody>
           </table>
+          <a href="/#!/vocablists/{{selectedVocablist._id}}/test">Test</a>
         </div>
       </div>
     </div>
