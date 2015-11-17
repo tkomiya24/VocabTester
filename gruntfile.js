@@ -175,7 +175,7 @@ module.exports = function(grunt) {
         }
       },
       seedMongo: {
-        command: 'mongoimport -d vocabtester-dev -c vocablists --type json --file ./database-backup/master.json --jsonArray --host 127.0.0.1',
+        command: 'node seeder.js',
         options: {
           async: false,
           stdout: true,

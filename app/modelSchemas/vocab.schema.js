@@ -6,7 +6,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var supportedLanguages = ['English', 'Japanese', 'Korean'];
-
 var translationSchema = {
   translation: [{
     type: String,

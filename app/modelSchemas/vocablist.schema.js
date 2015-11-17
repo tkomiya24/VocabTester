@@ -1,7 +1,7 @@
 'use strict';
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-module.export = new Schema({
+module.exports = new Schema({
   name: {
     type: String,
     required: 'Please fill Vocablist name',
