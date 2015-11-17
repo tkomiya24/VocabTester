@@ -11,8 +11,6 @@ var Vocab = mongoose.model('Vocab');
 var rsvp = require('rsvp');
 
 function findVocabPromise(vocab) {
-  console.log(vocab);
-  console.log('Making find vocab promise with vocab: ' + vocab._id);
   return new rsvp.Promise(function(resolve, error) {
     Vocab.findById(vocab._id,
       function(err, doc) {
@@ -30,7 +28,6 @@ function findVocabPromise(vocab) {
 }
 
 function makeFindVocabPromises(vocabs) {
-  console.log('making find vocab promises');
   var promises = [];
   for (var i = 0; i < vocabs.length; i++) {
     promises.push(findVocabPromise(vocabs[i]));
@@ -51,7 +48,6 @@ function makeSaveVocabPromise(vocab) {
 }
 
 function makeSaveVocabPromises(vocabs) {
-  console.log('making save vocab pormises');
   var promises = [];
   for (var i = 0; i < vocabs.length; i++) {
     promises.push(makeSaveVocabPromise(vocabs[i]));
@@ -60,7 +56,7 @@ function makeSaveVocabPromises(vocabs) {
 }
 
 function saveVocablistPromise(vocablist) {
-  return rsvp.Promise(function(resolve, error) {
+  return new rsvp.Promise(function(resolve, error) {
     vocablist.save(function(err) {
       if (err) {
         error(err);
@@ -105,11 +101,9 @@ exports.read = function(req, res) {
  * Update a Vocablist
  */
 exports.update = function(req, res) {
-  console.log('in the update method');
   var vocablist = req.vocablist;
-  console.log(req.body);
   vocablist = _.extend(vocablist , req.body);
-  makeFindVocabPromises(vocablist.vocab).then(makeSaveVocabPromises).
+  makeFindVocabPromises(req.body.vocab).then(makeSaveVocabPromises).
     then(function() {
       return saveVocablistPromise(vocablist);
     }).
