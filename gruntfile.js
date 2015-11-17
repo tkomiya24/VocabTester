@@ -163,7 +163,7 @@ module.exports = function(grunt) {
         }
       },
       seedMongo: {
-        command: 'mongorestore -d vocabtester-dev --host 127.0.0.1 --dir ./database-backup/vocabtester-dev',
+        command: 'node seeder.js',
         options: {
           async: false,
           stdout: true,
