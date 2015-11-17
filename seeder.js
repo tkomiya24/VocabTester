@@ -8,29 +8,6 @@ var Vocab = mongoose.model('Vocab', VocabSchema);
 var Vocablist = mongoose.model('Vocablist', VocablistSchema);
 var db = mongoose.connection;
 
-function getAllVocabs() {
-  var vocabs = [];
-  for (var i = 0; i < vocablists.length; i++) {
-    vocabs.push.apply(vocabs, vocablists[i].vocab);
-  }
-  return vocabs;
-}
-
-function saveVocabs() {
-  var vocabs = getAllVocabs();
-  return new rsvp.Promise(function(res, err) {
-    Vocab.create(vocabs, function(error, result) {
-      if (error) {
-        err(error);
-      } else if (!result) {
-        err('Result was empty...');
-      } else {
-        res(result);
-      }
-    });
-  });
-}
-
 function dropDatabase() {
   return new rsvp.Promise(function(res, err) {
     db.db.dropDatabase(function(error) {
@@ -51,10 +28,40 @@ function exitError(error) {
   console.log(error);
   process.exit(1);
 }
+
+function createVocablistPromise(vocablist) {
+  return new rsvp.Promise(function(resolve, error) {
+    Vocab.create(vocablist.vocab, function(err, vocabsDoc) {
+      if (err) {
+        error(err);
+      } else if (!vocabsDoc) {
+        err('Vocabs was empty...');
+      } else {
+        var vlistDoc = new Vocablist(vocablist);
+        vlistDoc.vocab = vocabsDoc;
+        vlistDoc.save(function(err) {
+          if (err) {
+            error(err);
+          } else {
+            resolve();
+          }
+        });
+      }
+    });
+  });
+}
+
+function createPromises() {
+  var promises = [];
+  for (var i = 0; i < vocablists.length; i++) {
+    promises.push(createVocablistPromise(vocablists[i]));
+  }
+  return rsvp.all(promises);
+}
+
 mongoose.connect('mongodb://localhost/vocabtester-dev');
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(callback) {
-  dropDatabase().then(saveVocabs).then(exit).catch(exitError);
+  dropDatabase().then(createPromises).then(exit).catch(exitError);
 });
-//add all vocab objects to database
 //for all vocablists, find the vocabs and add their reference
