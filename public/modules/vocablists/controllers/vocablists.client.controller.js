@@ -108,7 +108,9 @@ angular.module('vocablists').
           }
           $scope.vocablist.$update(
             null,
-            null,
+            function(vocablist) {
+              $scope.vocablist = vocablist;
+            },
             function(errorResponse) {
               $scope.error = errorResponse.data.message;
             });
