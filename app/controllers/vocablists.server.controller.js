@@ -61,11 +61,24 @@ function saveVocablistPromise(vocablist) {
       if (err) {
         error(err);
       } else {
-        resolve();
+        resolve(vocablist);
       }
     });
   });
 }
+
+function populateVocablist(vocablist) {
+  return new rsvp.Promise(function(resolve, error) {
+    vocablist.populate('vocab', function(err) {
+      if (err) {
+        error(err);
+      } else {
+        resolve(vocablist);
+      }
+    });
+  });
+}
+
 /**
  * Create a Vocablist
  */
@@ -107,7 +120,8 @@ exports.update = function(req, res) {
     then(function() {
       return saveVocablistPromise(vocablist);
     }).
-    then(function() {
+    then(populateVocablist).
+    then(function(vocablist) {
       res.jsonp(vocablist);
     }).
     catch(
