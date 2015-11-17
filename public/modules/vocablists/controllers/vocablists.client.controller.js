@@ -103,13 +103,12 @@ angular.module('vocablists').
         };
 
         $scope.gradeTest = function() {
-          for (var i = 0; i < $scope.responses.length; i++) {
+          for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
             gradeQuestion(i);
           }
           $scope.vocablist.$update(
-            function() {
-              $location.path('vocablists/' + $scope.vocablist._id);
-            },
+            null,
+            null,
             function(errorResponse) {
               $scope.error = errorResponse.data.message;
             });
