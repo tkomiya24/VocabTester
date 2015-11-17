@@ -162,32 +162,8 @@ module.exports = function(grunt) {
           }
         }
       },
-      clearDatabase: {
-        command: 'mongo vocabtester-dev --eval "db.dropDatabase()"',
-        options: {
-          async: false,
-          stdout: true,
-          stderr: true,
-          failOnError: true,
-          execOptions: {
-            cwd: '.'
-          }
-        }
-      },
       seedMongo: {
         command: 'node seeder.js',
-        options: {
-          async: false,
-          stdout: true,
-          stderr: true,
-          failOnError: true,
-          execOptions: {
-            cwd: '.'
-          }
-        }
-      },
-      fixRelations: {
-        command: 'mongo vocabtester-dev db-setup.js',
         options: {
           async: false,
           stdout: true,
@@ -235,5 +211,5 @@ module.exports = function(grunt) {
   // Test task.
   grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
   grunt.registerTask('seed',
-    ['shell:mongodbStart', 'shell:clearDatabase','shell:seedMongo', 'shell:fixRelations']);
+    ['shell:mongodbStart', 'shell:seedMongo']);
 };
