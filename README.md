@@ -6,7 +6,7 @@ This is a [MEAN.js] (http://meanjs.org/) webapp I've made for two reasons
   1. To practice using the MEAN.js stack  
   2. To help myself learn Korean.
 
-It is therefore going to be very particular to my needs and studying habbits. The code will also likely be far from adhereing to the professional conventions of MEAN.js and webapp developers in general. I hope that over time the latter will improve. 
+It is therefore going to be very particular to my needs and studying habbits. The code will also likely be far from adhereing to the professional conventions of MEAN.js and webapp developers in general. I hope that over time the latter will improve.
 
 ## 2.How To Install
 
@@ -19,8 +19,14 @@ It is therefore going to be very particular to my needs and studying habbits. Th
 #### 2.1.2 Mac OSX
 
   * XCode via the Appstore (make sure you run it at least once!)
-  * The commande line tools for XCode 
-  
+  * The commande line tools for XCode
+
+#### 2.1.3 Development dependencies
+
+  npm Global packages:
+  * `npm install -g grunt-cli bower yo generator-meanjs`
+  * Optional: `npm install -g jsonlint jshint nodemon node-inspector`  
+
 ### 2.2 Once Prerequisites are Installed  
 
 #### 2.2.1 All OS's  
