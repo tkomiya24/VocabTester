@@ -62,6 +62,10 @@ installNpmGlobalPackage "grunt-cli"
 installNpmGlobalPackage "bower"
 installNpmGlobalPackage "yo"
 installNpmGlobalPackage "generator-meanjs"
+installNpmGlobalPackage "jsonlint"
+installNpmGlobalPackage "jshint"
+installNpmGlobalPackage "nodemon"
+installNpmGlobalPackage "node-inspector"
 
 outputComment "Installing local npm packages"
 npm install
