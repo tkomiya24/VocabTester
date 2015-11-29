@@ -9,8 +9,7 @@ var supportedLanguages = ['English', 'Japanese', 'Korean'];
 var translationSchema = {
   translation: {
     type: String,
-    trim: true,
-    required: 'Translation is requied'
+    trim: true
   },
   timesTested: {
     type: Number
