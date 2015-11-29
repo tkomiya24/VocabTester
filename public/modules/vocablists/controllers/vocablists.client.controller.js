@@ -6,6 +6,16 @@ angular.module('vocablists').
     ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists',
       function($scope, $stateParams, $location, Authentication, Vocablists) {
 
+        var finished = {};
+
+        function isFinished(i) {
+          return finished[i];
+        }
+
+        function markFinished(i) {
+          finished[i] = true;
+        }
+
         function guessIsCorrect(i) {
           return $scope.responses[i] === $scope.vocablist.vocab[i].korean.translation;
         }
@@ -17,8 +27,12 @@ angular.module('vocablists').
         }
 
         function gradeQuestion(i) {
+          if (isFinished(i)) {
+            return;
+          }
           if (guessIsCorrect(i)) {
             markCorrect(i);
+            markFinished(i);
           }
           $scope.vocablist.vocab[i].korean.timesTested++;
         }
