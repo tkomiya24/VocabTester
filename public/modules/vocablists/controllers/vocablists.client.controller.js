@@ -7,7 +7,7 @@ angular.module('vocablists').
       function($scope, $stateParams, $location, Authentication, Vocablists) {
 
         function guessIsCorrect(i) {
-          return $scope.responses[i] === $scope.vocablist.vocab[i].korean.translation[0];
+          return $scope.responses[i] === $scope.vocablist.vocab[i].korean.translation;
         }
 
         function markCorrect(i) {
