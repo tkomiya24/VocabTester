@@ -12,8 +12,8 @@ It is therefore going to be very particular to my needs and studying habbits. Th
 
 ### 2.1 Prerequisites
 
-#### 2.1.1 Mac OSX
-
+  * MongoDB version 3
+  * Node v0.12.7
   * XCode via the Appstore (make sure you run it at least once!)
   * The commande line tools for XCode
 
