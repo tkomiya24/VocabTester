@@ -6,38 +6,40 @@ This is a [MEAN.js] (http://meanjs.org/) webapp I've made for two reasons
   1. To practice using the MEAN.js stack  
   2. To help myself learn Korean.
 
-It is therefore going to be very particular to my needs and studying habbits. The code will also likely be far from adhereing to the professional conventions of MEAN.js and webapp developers in general. I hope that over time the latter will improve.
+It is therefore going to be very particular to my needs and studying habits. The code will also likely be far from adhering to the professional conventions of MEAN.js and webapp developers in general. I hope that over time the latter will improve.
 
-## 2.How To Install
+## 2. Installation
 
 ### 2.1 Prerequisites
 
-#### 2.1.1 For all OS's
-
-  * Git
-
-#### 2.1.2 Mac OSX
-
+  * MongoDB version 3
+  * Node v0.12.7
   * XCode via the Appstore (make sure you run it at least once!)
-  * The commande line tools for XCode
+  * The command line tools for XCode
 
-#### 2.1.3 Development dependencies
+  * Some Node global packages:
+    * grunt-cli
+    * bower
+    * yo
+    * generator-meanjs
+    * jsonlint
+    * jshint
+    * nodemon
+    * node-inspector
 
-  npm Global packages:
-  * `npm install -g grunt-cli bower yo generator-meanjs`
-  * Optional: `npm install -g jsonlint jshint nodemon node-inspector`  
+### 2.2 Database setup
 
-### 2.2 Once Prerequisites are Installed  
+  1. \*Make a folder called '.vocabtester-mongo-dev' in your home directory. `mkdir ~/.vocabtester-mongo-dev` on Mac OS X
 
-#### 2.2.1 All OS's  
+ \*If you would like to use a different location for the MongoDB database, modify the Gruntfile 'shell:mongodbStart' task to use your path.  
+ 
+### 2.3 Install process
 
-  * Clone the repo. From the folder of your choice run  
-  `git clone git@github.com:tkomiya24/VocabTester.git`   
+  1. Run `npm install`  
 
-#### 2.2.2 Mac OSX  
+### 2.4 Seeding the database
 
-  * Run our custom setup script. Make sure you are within the project folder.   
-  `sh environment-setup.sh`
+  1. Run `grunt seed`. Alternatively, run `node seeder.js` while MongoDB instance is active.
 
 ## 3. Running
 
