@@ -19,10 +19,16 @@ It is therefore going to be very particular to my needs and studying habbits. Th
 
 #### 2.1.2 Development dependencies
 
-  npm Global packages:
-  * `npm install -g grunt-cli bower yo generator-meanjs`
-  * Optional: `npm install -g jsonlint jshint nodemon node-inspector`  
-
+  Some Node global packages:
+    * grunt-cli
+    * bower
+    * yo
+    * generator-meanjs
+    * jsonlint
+    * jshint
+    * nodemon
+    * node-inspector
+    
 ### 2.2 Once Prerequisites are Installed  
 
 #### 2.2.1 All OS's  
