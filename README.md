@@ -12,11 +12,7 @@ It is therefore going to be very particular to my needs and studying habbits. Th
 
 ### 2.1 Prerequisites
 
-#### 2.1.1 For all OS's
-
-  * Git
-
-#### 2.1.2 Mac OSX
+#### 2.1.1 Mac OSX
 
   * XCode via the Appstore (make sure you run it at least once!)
   * The commande line tools for XCode
