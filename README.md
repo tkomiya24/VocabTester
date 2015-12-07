@@ -10,16 +10,14 @@ It is therefore going to be very particular to my needs and studying habbits. Th
 
 ## 2.How To Install
 
-### 2.1.1 Prerequisites
+### 2.1 Prerequisites
 
   * MongoDB version 3
   * Node v0.12.7
   * XCode via the Appstore (make sure you run it at least once!)
   * The command line tools for XCode
 
-#### 2.1.2 Development dependencies
-
-  Some Node global packages:
+  * Some Node global packages:
     * grunt-cli
     * bower
     * yo
@@ -28,7 +26,7 @@ It is therefore going to be very particular to my needs and studying habbits. Th
     * jshint
     * nodemon
     * node-inspector
-    
+
 ### 2.2 Once Prerequisites are Installed  
 
 #### 2.2.1 All OS's  
