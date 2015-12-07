@@ -27,17 +27,13 @@ It is therefore going to be very particular to my needs and studying habits. The
     * nodemon
     * node-inspector
 
-### 2.2 Once Prerequisites are Installed  
+### 2.2 Install process
 
-#### 2.2.1 All OS's  
+  1. Run `npm install`  
 
-  * Clone the repo. From the folder of your choice run  
-  `git clone git@github.com:tkomiya24/VocabTester.git`   
+### 2.3 Seeding the database
 
-#### 2.2.2 Mac OSX  
-
-  * Run our custom setup script. Make sure you are within the project folder.   
-  `sh environment-setup.sh`
+  1. Run `grunt seed`. Alternatively, run `node seeder.js` while MongoDB instance is active. 
 
 ## 3. Running
 
