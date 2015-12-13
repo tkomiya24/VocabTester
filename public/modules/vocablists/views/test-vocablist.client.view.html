@@ -12,8 +12,8 @@
       <tr ng-repeat="vocab in vocablist.vocab">
         <td>{{vocab.english.translation}}</td>
         <td>
-          <input type="text" ng-model="responses[$index]" ng-hide="grades[$index]"></input>
-          <label ng-show="grades[$index]">{{vocab.korean.translation}}</index>
+          <input type="text" ng-model="responses[$index]" ng-show="isTextFieldEnabled($index)"></input>
+          <label ng-hide="isTextFieldEnabled($index)">{{vocab.korean.translation}}</index>
         </td>
         <td>
           {{vocab.korean.timesCorrect}} / {{vocab.korean.timesTested}}
@@ -30,5 +30,8 @@
   </button>
   <button class="btn btn-primary" ng-click="restartTest()">
     Restart
+  </button>
+  <button class="btn btn-primary" ng-click="retestIncorrect()" ng-show="testIsFinished">
+    Redo mistakes
   </button>
 </section>

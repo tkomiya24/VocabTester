@@ -86,6 +86,7 @@ angular.module('vocablists').
         };
 
         $scope.test = function() {
+          $scope.testIsFinished = false;
           $scope.findOne();
           $scope.responses = [];
           $scope.grades = [];
@@ -113,10 +114,19 @@ angular.module('vocablists').
         };
 
         $scope.restartTest = function() {
+          $scope.testIsFinished = false;
+          $scope.grades = [];
+          $scope.responses = [];
+          finished = {};
+        };
+
+        $scope.retestIncorrect = function() {
+          $scope.testIsFinished = false;
           $scope.responses = [];
         };
 
         $scope.gradeTest = function() {
+          $scope.testIsFinished = true;
           for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
             gradeQuestion(i);
           }
@@ -128,6 +138,10 @@ angular.module('vocablists').
             function(errorResponse) {
               $scope.error = errorResponse.data.message;
             });
+        };
+
+        $scope.isTextFieldEnabled = function(index) {
+          return !$scope.testIsFinished && !$scope.grades[index];
         };
       }
 ]);
