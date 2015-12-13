@@ -1,7 +1,10 @@
 <section data-ng-controller="VocablistsController" data-ng-init="find()">
     <div class="sidebar">
       <div class="list-group">
-        <button data-ng-repeat="vocablist in vocablists" ng-click="selectVocablist($index)" class="list-group-item" ng-class="{ 'active' : vocablist == selectedVocablist}">
+        <button data-ng-repeat="vocablist in vocablists"
+                ng-click="selectVocablist($index)"
+                class="list-group-item"
+                ng-class="{ 'active' : vocablist == selectedVocablist}">
           {{vocablist.name}}
         </button>
       </div>
