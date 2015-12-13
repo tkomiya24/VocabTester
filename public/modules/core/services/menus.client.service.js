@@ -79,7 +79,8 @@ angular.module('core').service('Menus', [
     };
 
     // Add menu item object
-    this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemType, menuItemUIRoute, isPublic, roles, position) {
+    this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemType, menuItemUIRoute,
+      isPublic, roles, position) {
       // Validate that the menu exists
       this.validateMenuExistance(menuId);
 
@@ -90,8 +91,10 @@ angular.module('core').service('Menus', [
         menuItemType: menuItemType || 'item',
         menuItemClass: menuItemType,
         uiRoute: menuItemUIRoute || ('/' + menuItemURL),
-        isPublic: ((isPublic === null || typeof isPublic === 'undefined') ? this.menus[menuId].isPublic : isPublic),
-        roles: ((roles === null || typeof roles === 'undefined') ? this.menus[menuId].roles : roles),
+        isPublic: ((isPublic === null || typeof isPublic === 'undefined') ?
+          this.menus[menuId].isPublic : isPublic),
+        roles: ((roles === null || typeof roles === 'undefined') ?
+          this.menus[menuId].roles : roles),
         position: position || 0,
         items: [],
         shouldRender: shouldRender
@@ -102,7 +105,8 @@ angular.module('core').service('Menus', [
     };
 
     // Add submenu item object
-    this.addSubMenuItem = function(menuId, rootMenuItemURL, menuItemTitle, menuItemURL, menuItemUIRoute, isPublic, roles, position) {
+    this.addSubMenuItem = function(menuId, rootMenuItemURL, menuItemTitle, menuItemURL,
+      menuItemUIRoute, isPublic, roles, position) {
       // Validate that the menu exists
       this.validateMenuExistance(menuId);
 
@@ -114,8 +118,10 @@ angular.module('core').service('Menus', [
             title: menuItemTitle,
             link: menuItemURL,
             uiRoute: menuItemUIRoute || ('/' + menuItemURL),
-            isPublic: ((isPublic === null || typeof isPublic === 'undefined') ? this.menus[menuId].items[itemIndex].isPublic : isPublic),
-            roles: ((roles === null || typeof roles === 'undefined') ? this.menus[menuId].items[itemIndex].roles : roles),
+            isPublic: ((isPublic === null || typeof isPublic === 'undefined') ?
+              this.menus[menuId].items[itemIndex].isPublic : isPublic),
+            roles: ((roles === null || typeof roles === 'undefined') ?
+              this.menus[menuId].items[itemIndex].roles : roles),
             position: position || 0,
             shouldRender: shouldRender
           });
