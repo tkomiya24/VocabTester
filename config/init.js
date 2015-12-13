@@ -4,16 +4,16 @@
  * Module dependencies.
  */
 var glob = require('glob'),
-	chalk = require('chalk');
+  chalk = require('chalk');
 
 /**
  * Module init function.
  */
 module.exports = function() {
   /**
-  	 * Before we begin, lets set the environment variable
-  	 * We'll Look for a valid NODE_ENV variable and if one cannot be found load the development NODE_ENV
-  	 */
+  * Before we begin, lets set the environment variable
+  * We'll Look for a valid NODE_ENV variable and if one cannot be found load the development NODE_ENV
+  */
   glob('./config/env/' + process.env.NODE_ENV + '.js', {
     sync: true
   }, function(err, environmentFiles) {
@@ -23,7 +23,6 @@ module.exports = function() {
       } else {
         console.error(chalk.red('NODE_ENV is not defined! Using default development environment'));
       }
-
       process.env.NODE_ENV = 'development';
     } else {
       console.log(chalk.black.bgWhite('Application loaded using the "' + process.env.NODE_ENV + '" environment configuration'));
