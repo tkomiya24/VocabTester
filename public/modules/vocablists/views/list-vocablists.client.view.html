@@ -8,15 +8,6 @@
       <div class="alert alert-warning text-center" data-ng-hide="!vocablists.$resolved || vocablists.length">
         No Vocablists yet, why don't you <a href="/#!/vocablists/create">create one</a>?
       </div>
-      <div class="pull-right" data-ng-show="((authentication.user))">
-      <!-- && (authentication.user._id == vocablist.user._id))"> -->
-        <a class="btn btn-primary" href="/#!/vocablists/{{vocablist._id}}/edit">
-          <i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn btn-primary" data-ng-click="remove();">
-          <i class="glyphicon glyphicon-trash"></i>
-        </a>
-      </div>
     </div>
     <div class="main">
       <h4>{{selectedVocablist.name}}</h4>
@@ -36,6 +27,15 @@
           </tr>
         </tbody>
       </table>
+      <div class="pull-right" data-ng-show="((authentication.user))">
+      <!-- && (authentication.user._id == vocablist.user._id))"> -->
+        <a class="btn btn-primary" href="/#!/vocablists/{{vocablist._id}}/edit">
+          <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary" data-ng-click="remove();">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
+      </div>
       <a href="/#!/vocablists/{{selectedVocablist._id}}/test">Test</a>
     </div>
     <small>
