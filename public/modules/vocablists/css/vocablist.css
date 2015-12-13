@@ -7,9 +7,14 @@ div.tableRow {
 }
 
 div.main {
-  display: table-cell;
+  margin-left: 250px;
+  margin-right: 250px;
 }
 
 div.sidebar {
-  display: table-cell;
+  position: fixed;
+  font-size: 11px;
+  width: 150px;
+  overflow-y: scroll;
+  max-height: 100%;
 }
