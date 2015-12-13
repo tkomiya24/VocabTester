@@ -117,6 +117,7 @@ angular.module('vocablists').
           $scope.testIsFinished = false;
           $scope.grades = [];
           $scope.responses = [];
+          finished = {};
         };
 
         $scope.gradeTest = function() {
@@ -132,6 +133,10 @@ angular.module('vocablists').
             function(errorResponse) {
               $scope.error = errorResponse.data.message;
             });
+        };
+
+        $scope.isTextFieldEnabled = function(index) {
+          return !$scope.testIsFinished && !$scope.grades[index];
         };
       }
 ]);
