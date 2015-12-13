@@ -114,6 +114,8 @@ angular.module('vocablists').
         };
 
         $scope.restartTest = function() {
+          $scope.testIsFinished = false;
+          $scope.grades = [];
           $scope.responses = [];
         };
 
