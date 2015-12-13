@@ -12,8 +12,8 @@
       <tr ng-repeat="vocab in vocablist.vocab">
         <td>{{vocab.english.translation}}</td>
         <td>
-          <input type="text" ng-model="responses[$index]" ng-hide="grades[$index]"></input>
-          <label ng-show="grades[$index]">{{vocab.korean.translation}}</index>
+          <input type="text" ng-model="responses[$index]" ng-hide="testIsFinished"></input>
+          <label ng-show="testIsFinished">{{vocab.korean.translation}}</index>
         </td>
         <td>
           {{vocab.korean.timesCorrect}} / {{vocab.korean.timesTested}}
