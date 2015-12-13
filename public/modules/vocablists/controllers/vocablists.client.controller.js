@@ -120,6 +120,11 @@ angular.module('vocablists').
           finished = {};
         };
 
+        $scope.retestIncorrect = function() {
+          $scope.testIsFinished = false;
+          $scope.responses = [];
+        };
+
         $scope.gradeTest = function() {
           $scope.testIsFinished = true;
           for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
