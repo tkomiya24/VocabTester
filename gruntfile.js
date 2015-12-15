@@ -174,6 +174,13 @@ module.exports = function(grunt) {
           }
         }
       }
+    },
+    sass: {
+      dist: {
+        files: {
+          './public/styles.css': './sass/styles.scss'
+        }
+      }
     }
   });
 
