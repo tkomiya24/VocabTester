@@ -1,0 +1,20 @@
+div.tableContainer {
+  display: table;
+}
+
+div.tableRow {
+  display: table-row;
+}
+
+div.main {
+  margin-left: 250px;
+  margin-right: 250px;
+}
+
+div.sidebar {
+  position: fixed;
+  font-size: 11px;
+  width: 150px;
+  overflow-y: scroll;
+  max-height: 100%;
+}

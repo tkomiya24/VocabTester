@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
     clientViews: ['public/modules/**/views/**/*.html'],
     clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
-    clientCSS: ['public/modules/**/*.css'],
+    clientCSS: ['sass/**/*.scss'],
     mochaTests: ['app/tests/**/*.js']
   };
 
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
       },
       clientCSS: {
         files: watchFiles.clientCSS,
-        tasks: ['csslint'],
+        tasks: ['sass'],
         options: {
           livereload: true
         }
@@ -65,14 +65,6 @@ module.exports = function(grunt) {
         verbose: true,
         fix: false,
         force: true
-      }
-    },
-    csslint: {
-      options: {
-        csslintrc: '.csslintrc'
-      },
-      all: {
-        src: watchFiles.clientCSS
       }
     },
     uglify: {
@@ -174,6 +166,13 @@ module.exports = function(grunt) {
           }
         }
       }
+    },
+    sass: {
+      dist: {
+        files: {
+          './public/styles.css': './sass/styles.scss'
+        }
+      }
     }
   });
 
@@ -194,7 +193,7 @@ module.exports = function(grunt) {
   });
 
   // Default task(s).
-  grunt.registerTask('default', ['shell:mongodbStart', 'lint', 'concurrent:default']);
+  grunt.registerTask('default', ['sass', 'shell:mongodbStart', 'lint', 'concurrent:default']);
 
   // Debug task.
   grunt.registerTask('debug', ['lint', 'concurrent:debug']);
@@ -203,10 +202,10 @@ module.exports = function(grunt) {
   grunt.registerTask('secure', ['env:secure', 'lint', 'concurrent:default']);
 
   // Lint task(s).
-  grunt.registerTask('lint', ['jshint', 'csslint']);
+  grunt.registerTask('lint', ['jshint']);
 
   // Build task(s).
-  grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
+  grunt.registerTask('build', ['lint', 'sass', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
   // Test task.
   grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
