@@ -201,7 +201,7 @@ module.exports = function(grunt) {
   });
 
   // Default task(s).
-  grunt.registerTask('default', ['shell:mongodbStart', 'lint', 'concurrent:default']);
+  grunt.registerTask('default', ['sass', 'shell:mongodbStart', 'lint', 'concurrent:default']);
 
   // Debug task.
   grunt.registerTask('debug', ['lint', 'concurrent:debug']);
