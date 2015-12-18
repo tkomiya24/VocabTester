@@ -6,14 +6,14 @@ angular.module('vocablists').
     ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists',
       function($scope, $stateParams, $location, Authentication, Vocablists) {
 
-        var finished = {};
+        $scope.finished = {};
 
         function isFinished(i) {
-          return finished[i];
+          return $scope.finished[i];
         }
 
         function markFinished(i) {
-          finished[i] = true;
+          $scope.finished[i] = true;
         }
 
         function guessIsCorrect(i) {
@@ -117,7 +117,7 @@ angular.module('vocablists').
           $scope.testIsFinished = false;
           $scope.grades = [];
           $scope.responses = [];
-          finished = {};
+          $scope.finished = {};
         };
 
         $scope.retestIncorrect = function() {
