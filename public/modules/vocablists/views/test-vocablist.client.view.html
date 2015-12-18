@@ -8,8 +8,8 @@
         <th>Status</th>
       </tr>
     </thead>
-    <tbody>
-      <tr ng-repeat="vocab in vocablist.vocab">
+    <tbody class="test-table">
+      <tr ng-repeat="vocab in vocablist.vocab" ng-class="{correct: finished[$index]}">
         <td>{{vocab.english.translation}}</td>
         <td>
           <input type="text" ng-model="responses[$index]" ng-show="isTextFieldEnabled($index)"></input>
