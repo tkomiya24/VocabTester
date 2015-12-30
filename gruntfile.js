@@ -143,17 +143,6 @@ module.exports = function(grunt) {
       }
     },
     shell: {
-      mongodbStart: {
-        command: 'mongod --dbpath ~/.vocabtester-mongo-dev',
-        options: {
-          async: true,
-          stdout: false,
-          failOnError: true,
-          execOptions: {
-            cwd: '.'
-          }
-        }
-      },
       seedMongo: {
         command: 'node ./database-backup/seeder.js',
         options: {
@@ -193,7 +182,7 @@ module.exports = function(grunt) {
   });
 
   // Default task(s).
-  grunt.registerTask('default', ['sass', 'shell:mongodbStart', 'lint', 'concurrent:default']);
+  grunt.registerTask('default', ['sass', 'lint', 'concurrent:default']);
 
   // Debug task.
   grunt.registerTask('debug', ['lint', 'concurrent:debug']);
@@ -209,6 +198,5 @@ module.exports = function(grunt) {
 
   // Test task.
   grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
-  grunt.registerTask('seed',
-    ['shell:mongodbStart', 'shell:seedMongo']);
+  grunt.registerTask('seed', ['shell:seedMongo']);
 };
