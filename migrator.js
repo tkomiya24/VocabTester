@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports.convertVocab = function(vocab) {
+module.exports.migrate = function(vocab) {
 
   var refactoredVocab = {};
   refactoredVocab.word = vocab.english.translation;
