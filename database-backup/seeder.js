@@ -1,9 +1,9 @@
 /* jshint strict: false */
 var mongoose = require('mongoose');
-var vocablists = require('./database-backup/seed.json');
+var vocablists = require('./seed.json');
 var rsvp = require('rsvp');
-var VocablistSchema = require('./app/modelSchemas/vocablist.schema');
-var VocabSchema = require('./app/modelSchemas/vocab.schema');
+var VocablistSchema = require('./../app/modelSchemas/vocablist.schema');
+var VocabSchema = require('./../app/modelSchemas/vocab.schema');
 var Vocab = mongoose.model('Vocab', VocabSchema);
 var Vocablist = mongoose.model('Vocablist', VocablistSchema);
 var db = mongoose.connection;
