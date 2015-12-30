@@ -155,7 +155,7 @@ module.exports = function(grunt) {
         }
       },
       seedMongo: {
-        command: 'node seeder.js',
+        command: 'node ./database-backup/seeder.js',
         options: {
           async: false,
           stdout: true,

@@ -5,33 +5,25 @@
  */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var supportedLanguages = ['English', 'Japanese', 'Korean'];
-var translationSchema = {
+
+module.exports = new Schema({
+  word: {
+    type: String,
+    required: 'Please enter the word'
+  },
   translation: {
     type: String,
-    trim: true
+    required: 'Please enter the translation of this word'
   },
   timesTested: {
-    type: Number
+    type: Number,
+    default: 0
   },
   timesCorrect: {
-    type: Number
+    type: Number,
+    default: 0
   },
   lastTested: {
     type: Date
-  }
-};
-module.exports = new Schema({
-  primaryLanguage: {
-    type: String,
-    required: 'Please set primary language',
-    enum: supportedLanguages
-  },
-  english: translationSchema,
-  korean: translationSchema,
-  japanese: translationSchema,
-  created: {
-    type: Date,
-    default: Date.now
   }
 });

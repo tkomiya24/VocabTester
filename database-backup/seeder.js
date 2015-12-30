@@ -1,12 +1,13 @@
 /* jshint strict: false */
 var mongoose = require('mongoose');
-var vocablists = require('./database-backup/seed.json');
+var vocablists = require('./seed.json');
 var rsvp = require('rsvp');
-var VocablistSchema = require('./app/modelSchemas/vocablist.schema');
-var VocabSchema = require('./app/modelSchemas/vocab.schema');
+var VocablistSchema = require('./../app/modelSchemas/vocablist.schema');
+var VocabSchema = require('./../app/modelSchemas/vocab.schema');
 var Vocab = mongoose.model('Vocab', VocabSchema);
 var Vocablist = mongoose.model('Vocablist', VocablistSchema);
 var db = mongoose.connection;
+var migrator = require('./migrator');
 
 function dropDatabase() {
   return new rsvp.Promise(function(res, err) {
@@ -29,9 +30,17 @@ function exitError(error) {
   process.exit(1);
 }
 
+function migrate(vocablist) {
+  var migratedList = [];
+  for (var i = 0; i < vocablist.length; i++) {
+    migratedList.push(migrator.migrate(vocablist[i]));
+  }
+  return migratedList;
+}
+
 function createVocablistPromise(vocablist) {
   return new rsvp.Promise(function(resolve, error) {
-    Vocab.create(vocablist.vocab, function(err, vocabsDoc) {
+    Vocab.create(migrate(vocablist.vocab), function(err, vocabsDoc) {
       if (err) {
         error(err);
       } else if (!vocabsDoc) {
