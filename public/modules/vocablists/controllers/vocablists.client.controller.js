@@ -17,13 +17,13 @@ angular.module('vocablists').
         }
 
         function guessIsCorrect(i) {
-          return $scope.responses[i] === $scope.vocablist.vocab[i].korean.translation;
+          return $scope.responses[i] === $scope.vocablist.vocab[i].translation;
         }
 
         function markCorrect(i) {
           $scope.grades[i] = true;
           $scope.grade++;
-          $scope.vocablist.vocab[i].korean.timesCorrect++;
+          $scope.vocablist.vocab[i].timesCorrect++;
         }
 
         function gradeQuestion(i) {
@@ -34,7 +34,7 @@ angular.module('vocablists').
             markCorrect(i);
             markFinished(i);
           }
-          $scope.vocablist.vocab[i].korean.timesTested++;
+          $scope.vocablist.vocab[i].timesTested++;
         }
 
         $scope.authentication = Authentication;
