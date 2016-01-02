@@ -1,0 +1,49 @@
+.content {
+  margin-top: 70px; }
+
+.undecorated-link:hover {
+  text-decoration: none; }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
+
+.signin .ng-invalid.ng-dirty {
+  border-color: #FA787E; }
+
+.signin .ng-valid.ng-dirty {
+  border-color: #78FA89; }
+
+@media (min-width: 992px) {
+  .nav-users {
+    position: fixed; } }
+.remove-account-container {
+  display: inline-block;
+  position: relative; }
+
+.btn-remove-account {
+  top: 10px;
+  right: 10px;
+  position: absolute; }
+
+div.tableContainer {
+  display: table; }
+
+div.tableRow {
+  display: table-row; }
+
+div.main {
+  margin-left: 250px;
+  margin-right: 250px; }
+
+div.sidebar {
+  position: fixed;
+  font-size: 11px;
+  width: 150px;
+  overflow-y: scroll;
+  height: 100%; }
+
+.table-striped > .test-table tr.correct {
+  background: rgba(63, 244, 7, 0.2);
+  font-style: italic; }
+
+/*# sourceMappingURL=styles.css.map */
