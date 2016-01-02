@@ -13,7 +13,10 @@ angular.module('vocablists').
       };
 
       $scope.create = function() {
-        $scope.vocablist.$create(null, function() {},
+        $scope.vocablist.$create(null,
+          function(vocablist) {
+            $location.path('vocablists/list');
+          },
           function(response) {
             if (typeof response === 'object') {
               $scope.error = JSON.stringify(response);
