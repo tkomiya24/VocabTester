@@ -83,18 +83,24 @@ function populateVocablist(vocablist) {
  * Create a Vocablist
  */
 exports.create = function(req, res) {
-  var vocablist = new Vocablist(req.body);
-  vocablist.user = req.user;
-
-  vocablist.save(function(err) {
-    if (err) {
+  var vocabs = req.body.vocab;
+  Vocab.create(vocabs).
+    then(function(vocabDocs) {
+      console.log('Successfully created vocabs');
+      var vocablist = req.body;
+      vocablist.vocab = vocabDocs;
+      return Vocablist.create(vocablist);
+    }).
+    then(function(vocablist) {
+      console.log('Successfully saved vocablist');
+      res.jsonp(vocablist);
+      return;
+    }).
+    catch(function(err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
-    } else {
-      res.jsonp(vocablist);
-    }
-  });
+    });
 };
 
 /**
