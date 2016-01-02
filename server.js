@@ -20,6 +20,8 @@ var db = mongoose.connect(config.db, function(err) {
   }
 });
 
+mongoose.Promise = global.Promise;
+
 mongoose.connection.once('open', function() {
   var app = require('./config/express')(db);
   require('./config/passport')();

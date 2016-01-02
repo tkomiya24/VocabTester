@@ -39,24 +39,6 @@ angular.module('vocablists').
 
         $scope.authentication = Authentication;
 
-        // Create new Vocablist
-        $scope.create = function() {
-          // Create new Vocablist object
-          var vocablist = new Vocablists({
-            name: this.name
-          });
-
-          // Redirect after save
-          vocablist.$save(function(response) {
-            $location.path('vocablists/' + response._id);
-
-            // Clear form fields
-            $scope.name = '';
-          }, function(errorResponse) {
-            $scope.error = errorResponse.data.message;
-          });
-        };
-
         // Remove existing Vocablist
         $scope.remove = function(vocablist) {
           if (vocablist) {
