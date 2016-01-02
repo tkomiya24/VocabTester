@@ -11,6 +11,10 @@ angular.module('vocablists').factory('Vocablists', ['$resource',
       {
         update: {
           method: 'PUT'
+        },
+        create: {
+          method: 'POST',
+          url: 'vocablists/'
         }
       }
     );

@@ -12,5 +12,15 @@ angular.module('vocablists').
         $scope.vocablist.vocab.push({word: 'Word', translation: 'Translation'});
       };
 
+      $scope.create = function() {
+        $scope.vocablist.$create(null, function() {},
+          function(response) {
+            if (typeof response === 'object') {
+              $scope.error = JSON.stringify(response);
+            } else {
+              $scope.error = response;
+            }
+          });
+      };
     }
   ]);
