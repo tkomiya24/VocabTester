@@ -9,7 +9,7 @@ angular.module('vocablists').
       $scope.vocablist.vocab = [];
 
       $scope.addVocab = function() {
-        $scope.vocablist.vocab.push({word: 'Word', translation: 'Translation'});
+        $scope.vocablist.vocab.push({});
       };
 
       $scope.create = function() {
