@@ -139,20 +139,27 @@ exports.update = function(req, res) {
     );
 };
 
+function deleteVocabs(vocablist) {
+  var ids = [];
+  for (var i = 0; i < vocablist.vocab.length; i++) {
+    ids.push(vocablist.vocab[i]);
+  }
+  return Vocab.remove({_id: {$in: ids}});
+}
+
 /**
  * Delete an Vocablist
  */
 exports.delete = function(req, res) {
   var vocablist = req.vocablist;
-
-  vocablist.remove(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(vocablist);
-    }
+  deleteVocabs(vocablist).then(function() {
+    return vocablist.remove();
+  }).then(function() {
+    res.jsonp(vocablist);
+  }).catch(function(err) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
   });
 };
 
