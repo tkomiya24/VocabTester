@@ -40,19 +40,19 @@ angular.module('vocablists').
         $scope.authentication = Authentication;
 
         // Remove existing Vocablist
-        $scope.remove = function(vocablist) {
-          if (vocablist) {
-            vocablist.$remove();
-
-            for (var i in $scope.vocablists) {
-              if ($scope.vocablists [i] === vocablist) {
-                $scope.vocablists.splice(i, 1);
+        $scope.remove = function(vocablist, index) {
+          if ($scope.selectedVocablist) {
+            $scope.selectedVocablist.$remove(
+              null,
+              function(value, responseHeaders) {
+                $scope.vocablists.splice($scope.currentIndex, 1);
+                $scope.selectedVocablist = null;
+                $scope.currentIndex = -1;
+              },
+              function(httpResponse) {
+                $scope.error = JSON.stringify(httpResponse);
               }
-            }
-          } else {
-            $scope.vocablist.$remove(function() {
-              $location.path('vocablists');
-            });
+            );
           }
         };
 
@@ -93,6 +93,7 @@ angular.module('vocablists').
 
         $scope.selectVocablist = function(index) {
           $scope.selectedVocablist = $scope.vocablists[index];
+          $scope.currentIndex = index;
         };
 
         $scope.restartTest = function() {
