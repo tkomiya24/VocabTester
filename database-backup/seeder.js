@@ -1,5 +1,6 @@
 /* jshint strict: false */
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 var vocablists = require('./seed.json');
 var VocablistSchema = require('./../app/modelSchemas/vocablist.schema');
 var VocabSchema = require('./../app/modelSchemas/vocab.schema');
@@ -8,6 +9,15 @@ var Vocablist = mongoose.model('Vocablist', VocablistSchema);
 var User = mongoose.model('User', require('./../app/modelSchemas/user.schema'));
 var db = mongoose.connection;
 var migrator = require('./migrator');
+var takeruUser = {
+  firstName: 'Takeru',
+  lastName: 'Komiya',
+  email: 'takeru@fake.com',
+  username: 'tkomiya',
+  password: 'password',
+  provider: 'local',
+  displayName: 'Takeru Komiya'
+};
 
 function dropDatabase() {
   return new Promise(function(resolve, reject) {
@@ -71,6 +81,12 @@ function createPromises() {
 mongoose.connect('mongodb://localhost/vocabtester-dev');
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(callback) {
-  dropDatabase().then(createPromises).then(exit).catch(exitError);
+  dropDatabase().
+    then(function() {
+      return User.create(takeruUser);
+    }).
+    then(createPromises).
+    then(exit).
+    catch(exitError);
 });
 //for all vocablists, find the vocabs and add their reference
