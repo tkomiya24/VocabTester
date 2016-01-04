@@ -48,7 +48,8 @@ function migrate(vocablist) {
   return migratedList;
 }
 
-function createVocablistPromise(vocablist) {
+function createVocablistPromise(vocablist, user) {
+  vocablist.user = user;
   return new Promise(function(resolve, reject) {
     Vocab.create(migrate(vocablist.vocab), function(err, vocabsDoc) {
       if (err) {
@@ -70,10 +71,10 @@ function createVocablistPromise(vocablist) {
   });
 }
 
-function createPromises() {
+function createPromises(user) {
   var promises = [];
   for (var i = 0; i < vocablists.length; i++) {
-    promises.push(createVocablistPromise(vocablists[i]));
+    promises.push(createVocablistPromise(vocablists[i], user));
   }
   return Promise.all(promises);
 }
