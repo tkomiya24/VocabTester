@@ -167,7 +167,8 @@ exports.delete = function(req, res) {
  * List of Vocablists
  */
 exports.list = function(req, res) {
-  Vocablist.find().sort('-created').populate('vocab').exec(function(err, vocablists) {
+  var query = req.query.userId ? {user: req.query.userId} : {};
+  Vocablist.find(query).sort('-created').populate('vocab').exec(function(err, vocablists) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
