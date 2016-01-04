@@ -17,5 +17,9 @@ module.exports = new Schema({
   }],
   chapter: {
     type: Number
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
 });
