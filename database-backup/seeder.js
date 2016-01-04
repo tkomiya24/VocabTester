@@ -6,6 +6,7 @@ var VocablistSchema = require('./../app/modelSchemas/vocablist.schema');
 var VocabSchema = require('./../app/modelSchemas/vocab.schema');
 var Vocab = mongoose.model('Vocab', VocabSchema);
 var Vocablist = mongoose.model('Vocablist', VocablistSchema);
+var User = mongoose.model('User', require('./../app/modelSchemas/user.schema'));
 var db = mongoose.connection;
 var migrator = require('./migrator');
 
