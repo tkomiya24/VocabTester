@@ -1,7 +1,6 @@
 /* jshint strict: false */
 var mongoose = require('mongoose');
 var vocablists = require('./seed.json');
-var rsvp = require('rsvp');
 var VocablistSchema = require('./../app/modelSchemas/vocablist.schema');
 var VocabSchema = require('./../app/modelSchemas/vocab.schema');
 var Vocab = mongoose.model('Vocab', VocabSchema);
@@ -11,12 +10,12 @@ var db = mongoose.connection;
 var migrator = require('./migrator');
 
 function dropDatabase() {
-  return new rsvp.Promise(function(res, err) {
+  return new Promise(function(resolve, reject) {
     db.db.dropDatabase(function(error) {
       if (error) {
-        err(error);
+        reject(error);
       } else {
-        res();
+        resolve();
       }
     });
   });
@@ -40,10 +39,10 @@ function migrate(vocablist) {
 }
 
 function createVocablistPromise(vocablist) {
-  return new rsvp.Promise(function(resolve, error) {
+  return new Promise(function(resolve, reject) {
     Vocab.create(migrate(vocablist.vocab), function(err, vocabsDoc) {
       if (err) {
-        error(err);
+        reject(err);
       } else if (!vocabsDoc) {
         err('Vocabs was empty...');
       } else {
@@ -51,7 +50,7 @@ function createVocablistPromise(vocablist) {
         vlistDoc.vocab = vocabsDoc;
         vlistDoc.save(function(err) {
           if (err) {
-            error(err);
+            reject(err);
           } else {
             resolve();
           }
@@ -66,7 +65,7 @@ function createPromises() {
   for (var i = 0; i < vocablists.length; i++) {
     promises.push(createVocablistPromise(vocablists[i]));
   }
-  return rsvp.all(promises);
+  return Promise.all(promises);
 }
 
 mongoose.connect('mongodb://localhost/vocabtester-dev');
