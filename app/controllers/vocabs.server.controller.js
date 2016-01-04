@@ -3,10 +3,10 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-  errorHandler = require('./errors.server.controller'),
-  Vocab = mongoose.model('Vocab'),
-  _ = require('lodash');
+var mongoose = require('mongoose');
+var errorHandler = require('./errors.server.controller');
+var Vocab = mongoose.model('Vocab');
+var _ = require('lodash');
 
 /**
  * Create a Vocab
@@ -87,8 +87,12 @@ exports.list = function(req, res) {
  */
 exports.vocabByID = function(req, res, next, id) {
   Vocab.findById(id).populate('user', 'displayName').exec(function(err, vocab) {
-    if (err) return next(err);
-    if (!vocab) return next(new Error('Failed to load Vocab ' + id));
+    if (err) {
+      return next(err);
+    }
+    if (!vocab) {
+      return next(new Error('Failed to load Vocab ' + id));
+    }
     req.vocab = vocab ;
     next();
   });
