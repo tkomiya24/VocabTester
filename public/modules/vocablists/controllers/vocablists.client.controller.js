@@ -131,5 +131,9 @@ angular.module('vocablists').
         $scope.addVocab = function() {
           $scope.vocablist.vocab.push({});
         };
+
+        $scope.removeVocab = function(index) {
+          $scope.vocablist.vocab[index].deleted = true;
+        };
       }
 ]);
