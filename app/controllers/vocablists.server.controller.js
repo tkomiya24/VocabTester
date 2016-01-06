@@ -86,13 +86,11 @@ exports.create = function(req, res) {
   var vocabs = req.body.vocab;
   Vocab.create(vocabs).
     then(function(vocabDocs) {
-      console.log('Successfully created vocabs');
       var vocablist = req.body;
       vocablist.vocab = vocabDocs;
       return Vocablist.create(vocablist);
     }).
     then(function(vocablist) {
-      console.log('Successfully saved vocablist');
       res.jsonp(vocablist);
       return;
     }).
