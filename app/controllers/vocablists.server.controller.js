@@ -10,7 +10,20 @@ var _ = require('lodash');
 var Vocab = mongoose.model('Vocab');
 
 function findAndUpdateVocab(vocab) {
-  if (vocab._id) {
+  if (vocab.deleted) {
+    return new Promise(function(resolve, reject) {
+      Vocab.findByIdAndRemove(
+        vocab._id,
+        function(err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        }
+      );
+    });
+  } else if (vocab._id) {
     return new Promise(function(resolve, reject) {
       Vocab.findByIdAndUpdate(
         vocab._id,
@@ -107,6 +120,11 @@ exports.update = function(req, res) {
   vocablist = _.extend(vocablist , req.body);
   findAndUpdateVocabs(req.body.vocab).
     then(function(vocabs) {
+      for (var i = 0; i < vocabs.length; i++) {
+        if (!vocabs[i]) {
+          vocabs.splice(i, 1);
+        }
+      }
       vocablist.vocab = vocabs;
       return saveVocablistPromise(vocablist);
     }).
