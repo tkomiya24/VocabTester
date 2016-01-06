@@ -15,7 +15,7 @@
             <input type="text" data-ng-model="vocablist.chapter" class="form-control shortfield" placeholder="Chapter">
           </div>
         </div>
-        <div ng-repeat="vocab in vocablist.vocab">
+        <div ng-repeat="vocab in vocablist.vocab" ng-hide="vocab.deleted">
           <div class="controls">
             <label class="control-label" for="word">Word</label>
             <input type="text" data-ng-model="vocab.word" class="form-control shortfield" placeholder="Word">
@@ -24,6 +24,9 @@
             <label class="control-label" for="translation">Translation</label>
             <input type="text" data-ng-model="vocab.translation" class="form-control shortfield" placeholder="Translation">
           </div>
+          <button type="button" class="btn btn-primary" ng-click="removeVocab($index)">
+            <span class="glyphicon glyphicon-remove"/>
+          </button>
         </div>
         <div class="form-group">
           <input type="submit" value="Update" class="btn btn-default">

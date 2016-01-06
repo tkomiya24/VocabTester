@@ -10,7 +10,20 @@ var _ = require('lodash');
 var Vocab = mongoose.model('Vocab');
 
 function findAndUpdateVocab(vocab) {
-  if (vocab._id) {
+  if (vocab.deleted) {
+    return new Promise(function(resolve, reject) {
+      Vocab.findByIdAndRemove(
+        vocab._id,
+        function(err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        }
+      );
+    });
+  } else if (vocab._id) {
     return new Promise(function(resolve, reject) {
       Vocab.findByIdAndUpdate(
         vocab._id,
@@ -63,6 +76,14 @@ function populateVocablist(vocablist) {
   });
 }
 
+function removeNullFromArray(array) {
+  for (var i = 0; i < array.length; i++) {
+    if (!array[i]) {
+      array.splice(i, 1);
+    }
+  }
+}
+
 /**
  * Create a Vocablist
  */
@@ -107,6 +128,7 @@ exports.update = function(req, res) {
   vocablist = _.extend(vocablist , req.body);
   findAndUpdateVocabs(req.body.vocab).
     then(function(vocabs) {
+      removeNullFromArray(vocabs);
       vocablist.vocab = vocabs;
       return saveVocablistPromise(vocablist);
     }).
@@ -183,7 +205,7 @@ exports.vocablistByID = function(req, res, next, id) {
  * Vocablist authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-  if (req.vocablist.user.id !== req.user.id) {
+  if (req.vocablist.user.toString() !== req.user._id.toString()) {
     return res.status(403).send('User is not authorized');
   }
   next();
