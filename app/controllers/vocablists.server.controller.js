@@ -88,6 +88,7 @@ exports.create = function(req, res) {
     then(function(vocabDocs) {
       var vocablist = req.body;
       vocablist.vocab = vocabDocs;
+      vocablist.user = req.user;
       return Vocablist.create(vocablist);
     }).
     then(function(vocablist) {
