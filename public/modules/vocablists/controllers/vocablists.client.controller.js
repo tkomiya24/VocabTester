@@ -58,13 +58,14 @@ angular.module('vocablists').
 
         // Update existing Vocablist
         $scope.update = function() {
-          var vocablist = $scope.vocablist;
-
-          vocablist.$update(function() {
-            $location.path('vocablists/' + vocablist._id);
-          }, function(errorResponse) {
-            $scope.error = errorResponse.data.message;
-          });
+          $scope.vocablist.$update(
+            null,
+            function(vocablist) {
+              $scope.vocablist = vocablist;
+            },
+            function(errorResponse) {
+              $scope.error = errorResponse.data.message;
+            });
         };
 
         $scope.test = function() {
@@ -125,6 +126,10 @@ angular.module('vocablists').
 
         $scope.isTextFieldEnabled = function(index) {
           return !$scope.testIsFinished && !$scope.grades[index];
+        };
+
+        $scope.addVocab = function() {
+          $scope.vocablist.vocab.push({});
         };
       }
 ]);

@@ -8,55 +8,39 @@ var errorHandler = require('./errors.server.controller');
 var Vocablist = mongoose.model('Vocablist');
 var _ = require('lodash');
 var Vocab = mongoose.model('Vocab');
-var rsvp = require('rsvp');
 
-function findVocabPromise(vocab) {
-  return new rsvp.Promise(function(resolve, error) {
-    Vocab.findById(vocab._id,
-      function(err, doc) {
-        if (err) {
-          error(err);
-        } else if (!doc) {
-          error(new Error('Failed to load Vocab ' + vocab._id));
-        } else {
-          _.extend(doc, vocab);
-          resolve(doc);
+function findAndUpdateVocab(vocab) {
+  if (vocab._id) {
+    return new Promise(function(resolve, reject) {
+      Vocab.findByIdAndUpdate(
+        vocab._id,
+        vocab,
+        function(err, doc) {
+          if (err) {
+            reject(err);
+          } else if (!doc) {
+            reject(new Error('Failed to update vocab ' + vocab.word));
+          } else {
+            resolve(doc);
+          }
         }
-      }
-    );
-  });
-}
-
-function makeFindVocabPromises(vocabs) {
-  var promises = [];
-  for (var i = 0; i < vocabs.length; i++) {
-    promises.push(findVocabPromise(vocabs[i]));
-  }
-  return rsvp.all(promises);
-}
-
-function makeSaveVocabPromise(vocab) {
-  return new rsvp.Promise(function(resolve, error) {
-    vocab.save(function(err) {
-      if (err) {
-        error(err);
-      } else {
-        resolve();
-      }
+      );
     });
-  });
+  } else {
+    return Vocab.create(vocab);
+  }
 }
 
-function makeSaveVocabPromises(vocabs) {
+function findAndUpdateVocabs(vocabs) {
   var promises = [];
   for (var i = 0; i < vocabs.length; i++) {
-    promises.push(makeSaveVocabPromise(vocabs[i]));
+    promises.push(findAndUpdateVocab(vocabs[i]));
   }
-  return rsvp.all(promises);
+  return Promise.all(promises);
 }
 
 function saveVocablistPromise(vocablist) {
-  return new rsvp.Promise(function(resolve, error) {
+  return new Promise(function(resolve, error) {
     vocablist.save(function(err) {
       if (err) {
         error(err);
@@ -68,7 +52,7 @@ function saveVocablistPromise(vocablist) {
 }
 
 function populateVocablist(vocablist) {
-  return new rsvp.Promise(function(resolve, error) {
+  return new Promise(function(resolve, error) {
     vocablist.populate('vocab', function(err) {
       if (err) {
         error(err);
@@ -121,8 +105,9 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
   var vocablist = req.vocablist;
   vocablist = _.extend(vocablist , req.body);
-  makeFindVocabPromises(req.body.vocab).then(makeSaveVocabPromises).
-    then(function() {
+  findAndUpdateVocabs(req.body.vocab).
+    then(function(vocabs) {
+      vocablist.vocab = vocabs;
       return saveVocablistPromise(vocablist);
     }).
     then(populateVocablist).
