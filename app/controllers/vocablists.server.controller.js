@@ -183,7 +183,7 @@ exports.vocablistByID = function(req, res, next, id) {
  * Vocablist authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-  if (req.vocablist.user.id !== req.user.id) {
+  if (req.vocablist.user.toString() !== req.user._id.toString()) {
     return res.status(403).send('User is not authorized');
   }
   next();
