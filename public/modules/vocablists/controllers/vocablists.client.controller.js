@@ -126,5 +126,9 @@ angular.module('vocablists').
         $scope.isTextFieldEnabled = function(index) {
           return !$scope.testIsFinished && !$scope.grades[index];
         };
+
+        $scope.addVocab = function() {
+          $scope.vocablist.vocab.push({});
+        };
       }
 ]);
