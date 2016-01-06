@@ -151,8 +151,9 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
   var vocablist = req.vocablist;
   vocablist = _.extend(vocablist , req.body);
-  makeFindVocabPromises(req.body.vocab).then(makeSaveVocabPromises).
-    then(function() {
+  findAndUpdateVocabs(req.body.vocab).
+    then(function(vocabs) {
+      vocablist.vocab = vocabs;
       return saveVocablistPromise(vocablist);
     }).
     then(populateVocablist).
