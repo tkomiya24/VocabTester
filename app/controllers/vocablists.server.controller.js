@@ -76,6 +76,14 @@ function populateVocablist(vocablist) {
   });
 }
 
+function removeNullFromArray(array) {
+  for (var i = 0; i < array.length; i++) {
+    if (!array[i]) {
+      array.splice(i, 1);
+    }
+  }
+}
+
 /**
  * Create a Vocablist
  */
@@ -120,11 +128,7 @@ exports.update = function(req, res) {
   vocablist = _.extend(vocablist , req.body);
   findAndUpdateVocabs(req.body.vocab).
     then(function(vocabs) {
-      for (var i = 0; i < vocabs.length; i++) {
-        if (!vocabs[i]) {
-          vocabs.splice(i, 1);
-        }
-      }
+      removeNullFromArray(vocabs);
       vocablist.vocab = vocabs;
       return saveVocablistPromise(vocablist);
     }).
