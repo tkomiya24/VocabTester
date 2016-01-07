@@ -25,5 +25,9 @@ angular.module('vocablists').
             }
           });
       };
+
+      $scope.removeVocab = function(index) {
+        $scope.vocablist.vocab.splice(index, 1);
+      };
     }
   ]);
