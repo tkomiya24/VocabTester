@@ -3,11 +3,11 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-	errorHandler = require('../errors.server.controller'),
-	mongoose = require('mongoose'),
-	passport = require('passport'),
-	User = mongoose.model('User');
+var _ = require('lodash');
+var errorHandler = require('../errors.server.controller');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var User = mongoose.model('User');
 
 /**
  * Signup
