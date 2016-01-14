@@ -1,0 +1,33 @@
+{
+  "vocab": [
+    {
+      "word": "Monday",
+      "translation": "월요일"
+    },
+    {
+      "word": "Tuesday",
+      "translation": "월요일"
+    },
+    {
+      "word": "Wednesday",
+      "translation": "수요일"
+    },
+    {
+      "word": "Thursday",
+      "translation": "목요일"
+    },
+    {
+      "word": "Friday",
+      "translation": "금요일"
+    },
+    {
+      "word": "Saturday",
+      "translation": "토요일"
+    },
+    {
+      "word": "Sunday",
+      "translation": "일요일"
+    }
+  ],
+  "name": "Days of the Week"
+}

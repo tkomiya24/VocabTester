@@ -3,11 +3,14 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-	errorHandler = require('../errors.server.controller'),
-	mongoose = require('mongoose'),
-	passport = require('passport'),
-	User = mongoose.model('User');
+var _ = require('lodash');
+var errorHandler = require('../errors.server.controller');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var User = mongoose.model('User');
+var Vocablist = mongoose.model('Vocablist');
+var Vocab = mongoose.model('Vocab');
+var sampleVocablist = require('./../../data/seed/daysOfTheWeek');
 
 /**
  * Signup
@@ -25,16 +28,19 @@ exports.signup = function(req, res) {
   user.displayName = user.firstName + ' ' + user.lastName;
 
   // Then save the user
-  user.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      // Remove sensitive data before login
+  user.
+    save().
+    then(function(user) {
+      return Vocab.create(sampleVocablist.vocab);
+    }).
+    then(function(vocabs) {
+      sampleVocablist.vocab = vocabs;
+      sampleVocablist.user = user;
+      return new Vocablist(sampleVocablist).save();
+    }).
+    then(function(vocablist) {
       user.password = undefined;
       user.salt = undefined;
-
       req.login(user, function(err) {
         if (err) {
           res.status(400).send(err);
@@ -42,7 +48,11 @@ exports.signup = function(req, res) {
           res.json(user);
         }
       });
-    }
+    }).
+    catch(function(error) {
+    return res.status(400).send({
+      message: errorHandler.getErrorMessage(error)
+    });
   });
 };
 
