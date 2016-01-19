@@ -2,18 +2,23 @@
     <div class="page-header">
         <h1>Vocabs</h1>
     </div>
-    <div class="list-group">
-        <a data-ng-repeat="vocab in vocabs" data-ng-href="#!/vocabs/{{vocab._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="vocab.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="vocab.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="vocab.name"></h4>
-        </a>
-    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>English</th>
+          <th>Translation</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="vocab in vocabs">
+          <td>{{vocab.word}}</td>
+          <td>{{vocab.translation}}</td>
+          <td>{{vocab.timesCorrect}}/{{vocab.timesTested}}</td>
+        </tr>
+      </tbody>
+    </table>
     <div class="alert alert-warning text-center" data-ng-hide="!vocabs.$resolved || vocabs.length">
-    	No Vocabs yet, why don't you <a href="/#!/vocabs/create">create one</a>?
+      No Vocabs yet, why don't you <a href="/#!/vocabs/create">create one</a>?
     </div>
 </section>
