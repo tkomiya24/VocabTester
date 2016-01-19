@@ -6,24 +6,6 @@ angular.module('vocabs').controller('VocabsController',
   function($scope, $stateParams, $location, Authentication, Vocabs) {
     $scope.authentication = Authentication;
 
-    // Create new Vocab
-    $scope.create = function() {
-      // Create new Vocab object
-      var vocab = new Vocabs({
-        name: this.name
-      });
-
-      // Redirect after save
-      vocab.$save(function(response) {
-        $location.path('vocabs/' + response._id);
-
-        // Clear form fields
-        $scope.name = '';
-      }, function(errorResponse) {
-        $scope.error = errorResponse.data.message;
-      });
-    };
-
     // Remove existing Vocab
     $scope.remove = function(vocab) {
       if (vocab) {
