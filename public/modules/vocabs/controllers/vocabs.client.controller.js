@@ -2,7 +2,7 @@
 
 // Vocabs controller
 angular.module('vocabs').controller('VocabsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Vocabs',
-	function($scope, $stateParams, $location, Authentication, Vocabs) {
+  function($scope, $stateParams, $location, Authentication, Vocabs) {
   $scope.authentication = Authentication;
 
   // Create new Vocab
@@ -62,5 +62,5 @@ angular.module('vocabs').controller('VocabsController', ['$scope', '$stateParams
       vocabId: $stateParams.vocabId
     });
   };
-	}
+  }
 ]);
