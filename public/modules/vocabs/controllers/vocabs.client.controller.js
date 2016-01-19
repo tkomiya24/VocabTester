@@ -1,7 +1,8 @@
 'use strict';
 
 // Vocabs controller
-angular.module('vocabs').controller('VocabsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Vocabs',
+angular.module('vocabs').controller('VocabsController',
+  ['$scope', '$stateParams', '$location', 'Authentication', 'Vocabs',
   function($scope, $stateParams, $location, Authentication, Vocabs) {
     $scope.authentication = Authentication;
 
