@@ -9,7 +9,7 @@ angular.module('vocablists').
         $scope.vocablist = Vocablists.get({
           vocablistId: $stateParams.vocablistId
         });
-        $scope.testIsFinished = false;
+        $scope.isSubmitted = false;
         $scope.responses = [];
         $scope.grades = [];
         $scope.grade = 0;
@@ -50,7 +50,7 @@ angular.module('vocablists').
         $scope.authentication = Authentication;
 
         $scope.test = function() {
-          $scope.testIsFinished = false;
+          $scope.isSubmitted = false;
           $scope.findOne();
           $scope.responses = [];
           $scope.grades = [];
@@ -61,19 +61,19 @@ angular.module('vocablists').
         };
 
         $scope.restartTest = function() {
-          $scope.testIsFinished = false;
+          $scope.isSubmitted = false;
           $scope.grades = [];
           $scope.responses = [];
           $scope.finished = {};
         };
 
         $scope.retestIncorrect = function() {
-          $scope.testIsFinished = false;
+          $scope.isSubmitted = false;
           $scope.responses = [];
         };
 
         $scope.gradeTest = function() {
-          $scope.testIsFinished = true;
+          $scope.isSubmitted = true;
           for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
             gradeQuestion(i);
           }
@@ -88,7 +88,7 @@ angular.module('vocablists').
         };
 
         $scope.isTextFieldEnabled = function(index) {
-          return !$scope.testIsFinished && !$scope.grades[index];
+          return !$scope.isSubmitted && !$scope.grades[index];
         };
 
       }
