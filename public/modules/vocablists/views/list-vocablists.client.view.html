@@ -30,15 +30,17 @@
           </tr>
         </tbody>
       </table>
-      <div class="pull-right" data-ng-show="((authentication.user))">
-      <!-- && (authentication.user._id == vocablist.user._id))"> -->
-        <a class="btn btn-primary" href="/#!/vocablists/{{selectedVocablist._id}}/edit">
-          <i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn btn-primary" data-ng-click="remove();">
-          <i class="glyphicon glyphicon-trash"></i>
-        </a>
+      <div data-ng-show="((authentication.user)) && selectedVocablist">
+        <a href="/#!/vocablists/{{selectedVocablist._id}}/test">Test</a>
+        <div class="pull-right">
+        <!-- && (authentication.user._id == vocablist.user._id))"> -->
+          <a class="btn btn-primary" href="/#!/vocablists/{{selectedVocablist._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+          </a>
+          <a class="btn btn-primary" data-ng-click="remove();">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </div>
       </div>
-      <a href="/#!/vocablists/{{selectedVocablist._id}}/test">Test</a>
     </div>
 </section>
