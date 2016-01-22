@@ -6,6 +6,16 @@ angular.module('vocablists').
     ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists',
       function($scope, $stateParams, $location, Authentication, Vocablists) {
 
+        $scope.vocablist = Vocablists.get({
+          vocablistId: $stateParams.vocablistId
+        });
+        $scope.testIsFinished = false;
+        $scope.responses = [];
+        $scope.grades = [];
+        $scope.grade = 0;
+        for (var i = 0; i < $scope.vocablist.length; i++) {
+          $scope.grades[i] = false;
+        }
         $scope.finished = {};
 
         function isFinished(i) {
