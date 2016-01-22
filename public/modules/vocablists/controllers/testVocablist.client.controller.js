@@ -7,9 +7,16 @@ angular.module('vocablists').
       function($scope, $stateParams, $location, Authentication, Vocablists) {
 
         Authentication.redirectUnauthenticated();
-        $scope.vocablist = Vocablists.get({
-          vocablistId: $stateParams.vocablistId
-        });
+        $scope.vocablist = Vocablists.get(
+          {
+            vocablistId: $stateParams.vocablistId
+          },
+          function(value, responseHeaders) {
+            if (value.user._id !== Authentication.user._id) {
+              $scope.authenticationError = 'You are not authorized to use this vocablist';
+            }
+          }
+        );
         $scope.isSubmitted = false;
         $scope.responses = [];
         $scope.grades = [];
