@@ -28,13 +28,13 @@
   <a href="/#!/vocablists/" class="btn btn-primary">
     Back to list
   </a>
-  <button class="btn btn-primary" ng-click="gradeTest()">
+  <button class="btn btn-primary" ng-click="gradeTest()" ng-hide="testIsFinished && grade !== vocablist.vocab.length">
     Submit
-  </button>
-  <button class="btn btn-primary" ng-click="restartTest()">
-    Restart
   </button>
   <button class="btn btn-primary" ng-click="retestIncorrect()" ng-show="testIsFinished && grade !== vocablist.vocab.length">
     Redo mistakes
+  </button>
+  <button class="btn btn-primary" ng-click="restartTest()">
+    Restart
   </button>
 </section>
