@@ -1,5 +1,8 @@
 <section data-ng-controller="TestController">
-  <table class="table table-striped">
+  <div data-ng-show="authenticationError" class="text-center text-danger">
+    <strong data-ng-bind="authenticationError"></strong>
+  </div>
+  <table data-ng-hide="authenticationError" class="table table-striped">
     <thead>
       <tr>
         <th>English</th>
@@ -28,13 +31,15 @@
   <a href="/#!/vocablists/" class="btn btn-primary">
     Back to list
   </a>
-  <button class="btn btn-primary" ng-click="gradeTest()" ng-show="!isSubmitted && grade !== vocablist.vocab.length">
-    Submit
-  </button>
-  <button class="btn btn-primary" ng-click="retestIncorrect()" ng-show="isSubmitted && grade !== vocablist.vocab.length">
-    Redo mistakes
-  </button>
-  <button class="btn btn-primary" ng-click="restartTest()">
-    Restart
-  </button>
+  <div ng-hide="authenticationError">
+    <button class="btn btn-primary" ng-click="gradeTest()" ng-show="!isSubmitted && grade !== vocablist.vocab.length">
+      Submit
+    </button>
+    <button class="btn btn-primary" ng-click="retestIncorrect()" ng-show="isSubmitted && grade !== vocablist.vocab.length">
+      Redo mistakes
+    </button>
+    <button class="btn btn-primary" ng-click="restartTest()">
+      Restart
+    </button>
+  </div>
 </section>
