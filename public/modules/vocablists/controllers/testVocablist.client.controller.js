@@ -6,6 +6,7 @@ angular.module('vocablists').
     ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists',
       function($scope, $stateParams, $location, Authentication, Vocablists) {
 
+        Authentication.redirectUnauthenticated();
         $scope.vocablist = Vocablists.get({
           vocablistId: $stateParams.vocablistId
         });
