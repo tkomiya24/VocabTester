@@ -6,37 +6,6 @@ angular.module('vocablists').
     ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists',
       function($scope, $stateParams, $location, Authentication, Vocablists) {
 
-        $scope.finished = {};
-
-        function isFinished(i) {
-          return $scope.finished[i];
-        }
-
-        function markFinished(i) {
-          $scope.finished[i] = true;
-        }
-
-        function guessIsCorrect(i) {
-          return $scope.responses[i] === $scope.vocablist.vocab[i].translation;
-        }
-
-        function markCorrect(i) {
-          $scope.grades[i] = true;
-          $scope.grade++;
-          $scope.vocablist.vocab[i].timesCorrect++;
-        }
-
-        function gradeQuestion(i) {
-          if (isFinished(i)) {
-            return;
-          }
-          if (guessIsCorrect(i)) {
-            markCorrect(i);
-            markFinished(i);
-          }
-          $scope.vocablist.vocab[i].timesTested++;
-        }
-
         $scope.authentication = Authentication;
 
         // Remove existing Vocablist
@@ -68,17 +37,6 @@ angular.module('vocablists').
             });
         };
 
-        $scope.test = function() {
-          $scope.testIsFinished = false;
-          $scope.findOne();
-          $scope.responses = [];
-          $scope.grades = [];
-          $scope.grade = 0;
-          for (var i = 0; i < $scope.vocablist.length; i++) {
-            $scope.grades[i] = false;
-          }
-        };
-
         // Find a list of Vocablists
         $scope.find = function() {
           $scope.vocablists = Vocablists.query({userId: $scope.authentication.user._id});
@@ -95,37 +53,6 @@ angular.module('vocablists').
         $scope.selectVocablist = function(index) {
           $scope.selectedVocablist = $scope.vocablists[index];
           $scope.currentIndex = index;
-        };
-
-        $scope.restartTest = function() {
-          $scope.testIsFinished = false;
-          $scope.grades = [];
-          $scope.responses = [];
-          $scope.finished = {};
-        };
-
-        $scope.retestIncorrect = function() {
-          $scope.testIsFinished = false;
-          $scope.responses = [];
-        };
-
-        $scope.gradeTest = function() {
-          $scope.testIsFinished = true;
-          for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
-            gradeQuestion(i);
-          }
-          $scope.vocablist.$update(
-            null,
-            function(vocablist) {
-              $scope.vocablist = vocablist;
-            },
-            function(errorResponse) {
-              $scope.error = errorResponse.data.message;
-            });
-        };
-
-        $scope.isTextFieldEnabled = function(index) {
-          return !$scope.testIsFinished && !$scope.grades[index];
         };
 
         $scope.addVocab = function() {
