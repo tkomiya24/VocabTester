@@ -53,35 +53,35 @@ describe('Vocablist CRUD tests', function() {
     .expect(200)
     .end(function(signinErr, signinRes) {
       // Handle signin error
-      if (signinErr) done(signinErr);
-
+      if (signinErr) {
+        done(signinErr);
+      }
       // Get the userId
       var userId = user.id;
-
       // Save a new Vocablist
       agent.post('/vocablists')
       .send(vocablist)
       .expect(200)
       .end(function(vocablistSaveErr, vocablistSaveRes) {
         // Handle Vocablist save error
-        if (vocablistSaveErr) done(vocablistSaveErr);
-
+        if (vocablistSaveErr) {
+          done(vocablistSaveErr);
+        }
         // Get a list of Vocablists
         agent.get('/vocablists').
           end(function(vocablistsGetErr, vocablistsGetRes) {
             // Handle Vocablist save error
-            if (vocablistsGetErr) done(vocablistsGetErr);
-
+            if (vocablistsGetErr) {
+              done(vocablistsGetErr);
+            }
             // Get Vocablists list
             var vocablists = vocablistsGetRes.body;
-
             // Set assertions
             (vocablists[0].user._id).should.equal(userId);
             (vocablists[0].name).should.match('Vocablist Name');
-
             // Call the assertion callback
             done();
-        });
+          });
       });
     });
   });
@@ -91,8 +91,8 @@ describe('Vocablist CRUD tests', function() {
     .send(vocablist)
     .expect(401)
     .end(function(vocablistSaveErr, vocablistSaveRes) {
-        // Call the assertion callback
-        done(vocablistSaveErr);
+      // Call the assertion callback
+      done(vocablistSaveErr);
     });
   });
 
@@ -105,11 +105,11 @@ describe('Vocablist CRUD tests', function() {
     .expect(200)
     .end(function(signinErr, signinRes) {
       // Handle signin error
-      if (signinErr) done(signinErr);
-
+      if (signinErr) {
+        done(signinErr);
+      }
       // Get the userId
       var userId = user.id;
-
       // Save a new Vocablist
       agent.post('/vocablists')
       .send(vocablist)
@@ -117,7 +117,6 @@ describe('Vocablist CRUD tests', function() {
       .end(function(vocablistSaveErr, vocablistSaveRes) {
         // Set message assertion
         (vocablistSaveRes.body.message).should.match('Please fill Vocablist name');
-
         // Handle Vocablist save error
         done(vocablistSaveErr);
       });
@@ -130,8 +129,9 @@ describe('Vocablist CRUD tests', function() {
     .expect(200)
     .end(function(signinErr, signinRes) {
       // Handle signin error
-      if (signinErr) done(signinErr);
-
+      if (signinErr) {
+        done(signinErr);
+      }
       // Get the userId
       var userId = user.id;
 
@@ -141,8 +141,9 @@ describe('Vocablist CRUD tests', function() {
       .expect(200)
       .end(function(vocablistSaveErr, vocablistSaveRes) {
         // Handle Vocablist save error
-        if (vocablistSaveErr) done(vocablistSaveErr);
-
+        if (vocablistSaveErr) {
+          done(vocablistSaveErr);
+        }
         // Update Vocablist name
         vocablist.name = 'WHY YOU GOTTA BE SO MEAN?';
 
@@ -152,12 +153,12 @@ describe('Vocablist CRUD tests', function() {
         .expect(200)
         .end(function(vocablistUpdateErr, vocablistUpdateRes) {
           // Handle Vocablist update error
-          if (vocablistUpdateErr) done(vocablistUpdateErr);
-
+          if (vocablistUpdateErr) {
+            done(vocablistUpdateErr);
+          }
           // Set assertions
           (vocablistUpdateRes.body._id).should.equal(vocablistSaveRes.body._id);
           (vocablistUpdateRes.body.name).should.match('WHY YOU GOTTA BE SO MEAN?');
-
           // Call the assertion callback
           done();
         });
@@ -175,7 +176,6 @@ describe('Vocablist CRUD tests', function() {
       .end(function(req, res) {
         // Set assertion
         res.body.should.be.an.Array.with.lengthOf(1);
-
         // Call the assertion callback
         done();
       });
@@ -192,7 +192,6 @@ describe('Vocablist CRUD tests', function() {
       .end(function(req, res) {
         // Set assertion
         res.body.should.be.an.Object.with.property('name', vocablist.name);
-
         // Call the assertion callback
         done();
       });
@@ -204,31 +203,34 @@ describe('Vocablist CRUD tests', function() {
     .send(credentials)
     .expect(200)
     .end(function(signinErr, signinRes) {
-          // Handle signin error
-          if (signinErr) done(signinErr);
-
-          // Get the userId
-          var userId = user.id;
-
-          // Save a new Vocablist
-          agent.post('/vocablists')
-          .send(vocablist)
-          .expect(200)
-          .end(function(vocablistSaveErr, vocablistSaveRes) {
-          // Handle Vocablist save error
-          if (vocablistSaveErr) done(vocablistSaveErr);
-
-          // Delete existing Vocablist
-          agent.delete('/vocablists/' + vocablistSaveRes.body._id)
-          .send(vocablist)
-          .expect(200)
-          .end(function(vocablistDeleteErr, vocablistDeleteRes) {
-            // Handle Vocablist error error
-            if (vocablistDeleteErr) done(vocablistDeleteErr);
-            // Set assertions
-            (vocablistDeleteRes.body._id).should.equal(vocablistSaveRes.body._id);
-            // Call the assertion callback
-            done();
+      // Handle signin error
+      if (signinErr) {
+        done(signinErr);
+      }
+      // Get the userId
+      var userId = user.id;
+      // Save a new Vocablist
+      agent.post('/vocablists')
+      .send(vocablist)
+      .expect(200)
+      .end(function(vocablistSaveErr, vocablistSaveRes) {
+        // Handle Vocablist save error
+        if (vocablistSaveErr) {
+          done(vocablistSaveErr);
+        }
+        // Delete existing Vocablist
+        agent.delete('/vocablists/' + vocablistSaveRes.body._id)
+        .send(vocablist)
+        .expect(200)
+        .end(function(vocablistDeleteErr, vocablistDeleteRes) {
+          // Handle Vocablist error error
+          if (vocablistDeleteErr) {
+            done(vocablistDeleteErr);
+          }
+          // Set assertions
+          (vocablistDeleteRes.body._id).should.equal(vocablistSaveRes.body._id);
+          // Call the assertion callback
+          done();
         });
       });
     });
