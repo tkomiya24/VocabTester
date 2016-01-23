@@ -1,17 +1,19 @@
 'use strict';
 
-var should = require('should'),
-	request = require('supertest'),
-	app = require('../../server'),
-	mongoose = require('mongoose'),
-	User = mongoose.model('User'),
-	Vocab = mongoose.model('Vocab'),
-	agent = request.agent(app);
+var should = require('should');
+var request = require('supertest');
+var app = require('../../server');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var Vocab = mongoose.model('Vocab');
+var agent = request.agent(app);
 
 /**
  * Globals
  */
-var credentials, user, vocab;
+var credentials;
+var user;
+var vocab;
 
 /**
  * Vocab routes tests
