@@ -12,7 +12,7 @@ angular.module('vocablists').
             vocablistId: $stateParams.vocablistId
           },
           function(value, responseHeaders) {
-            if (value.user._id !== Authentication.user._id) {
+            if (value.user !== Authentication.user._id) {
               $scope.authenticationError = 'You are not authorized to use this vocablist';
             }
           }
