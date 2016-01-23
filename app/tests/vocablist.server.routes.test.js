@@ -1,17 +1,19 @@
 'use strict';
 
-var should = require('should'),
-	request = require('supertest'),
-	app = require('../../server'),
-	mongoose = require('mongoose'),
-	User = mongoose.model('User'),
-	Vocablist = mongoose.model('Vocablist'),
-	agent = request.agent(app);
+var should = require('should');
+var request = require('supertest');
+var app = require('../../server');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var Vocablist = mongoose.model('Vocablist');
+var agent = request.agent(app);
 
 /**
  * Globals
  */
-var credentials, user, vocablist;
+var credentials;
+var user;
+var vocablist;
 
 /**
  * Vocablist routes tests
@@ -49,7 +51,7 @@ describe('Vocablist CRUD tests', function() {
     agent.post('/auth/signin')
     .send(credentials)
     .expect(200)
-			.end(function(signinErr, signinRes) {
+      .end(function(signinErr, signinRes) {
   // Handle signin error
   if (signinErr) done(signinErr);
 
@@ -60,13 +62,13 @@ describe('Vocablist CRUD tests', function() {
   agent.post('/vocablists')
   .send(vocablist)
   .expect(200)
-					.end(function(vocablistSaveErr, vocablistSaveRes) {
+          .end(function(vocablistSaveErr, vocablistSaveRes) {
   // Handle Vocablist save error
   if (vocablistSaveErr) done(vocablistSaveErr);
 
   // Get a list of Vocablists
   agent.get('/vocablists')
-							.end(function(vocablistsGetErr, vocablistsGetRes) {
+              .end(function(vocablistsGetErr, vocablistsGetRes) {
   // Handle Vocablist save error
   if (vocablistsGetErr) done(vocablistsGetErr);
 
@@ -79,19 +81,19 @@ describe('Vocablist CRUD tests', function() {
 
   // Call the assertion callback
   done();
-							});
-					});
-			});
+              });
+          });
+      });
   });
 
   it('should not be able to save Vocablist instance if not logged in', function(done) {
     agent.post('/vocablists')
     .send(vocablist)
     .expect(401)
-			.end(function(vocablistSaveErr, vocablistSaveRes) {
+      .end(function(vocablistSaveErr, vocablistSaveRes) {
   // Call the assertion callback
   done(vocablistSaveErr);
-			});
+      });
   });
 
   it('should not be able to save Vocablist instance if no name is provided', function(done) {
@@ -101,7 +103,7 @@ describe('Vocablist CRUD tests', function() {
     agent.post('/auth/signin')
     .send(credentials)
     .expect(200)
-			.end(function(signinErr, signinRes) {
+      .end(function(signinErr, signinRes) {
   // Handle signin error
   if (signinErr) done(signinErr);
 
@@ -112,21 +114,21 @@ describe('Vocablist CRUD tests', function() {
   agent.post('/vocablists')
   .send(vocablist)
   .expect(400)
-					.end(function(vocablistSaveErr, vocablistSaveRes) {
+          .end(function(vocablistSaveErr, vocablistSaveRes) {
   // Set message assertion
   (vocablistSaveRes.body.message).should.match('Please fill Vocablist name');
 
   // Handle Vocablist save error
   done(vocablistSaveErr);
-					});
-			});
+          });
+      });
   });
 
   it('should be able to update Vocablist instance if signed in', function(done) {
     agent.post('/auth/signin')
     .send(credentials)
     .expect(200)
-			.end(function(signinErr, signinRes) {
+      .end(function(signinErr, signinRes) {
   // Handle signin error
   if (signinErr) done(signinErr);
 
@@ -137,7 +139,7 @@ describe('Vocablist CRUD tests', function() {
   agent.post('/vocablists')
   .send(vocablist)
   .expect(200)
-					.end(function(vocablistSaveErr, vocablistSaveRes) {
+          .end(function(vocablistSaveErr, vocablistSaveRes) {
   // Handle Vocablist save error
   if (vocablistSaveErr) done(vocablistSaveErr);
 
@@ -148,7 +150,7 @@ describe('Vocablist CRUD tests', function() {
   agent.put('/vocablists/' + vocablistSaveRes.body._id)
   .send(vocablist)
   .expect(200)
-							.end(function(vocablistUpdateErr, vocablistUpdateRes) {
+              .end(function(vocablistUpdateErr, vocablistUpdateRes) {
   // Handle Vocablist update error
   if (vocablistUpdateErr) done(vocablistUpdateErr);
 
@@ -158,9 +160,9 @@ describe('Vocablist CRUD tests', function() {
 
   // Call the assertion callback
   done();
-							});
-					});
-			});
+              });
+          });
+      });
   });
 
   it('should be able to get a list of Vocablists if not signed in', function(done) {
@@ -171,13 +173,13 @@ describe('Vocablist CRUD tests', function() {
     vocablistObj.save(function() {
       // Request Vocablists
       request(app).get('/vocablists')
-				.end(function(req, res) {
+        .end(function(req, res) {
   // Set assertion
   res.body.should.be.an.Array.with.lengthOf(1);
 
   // Call the assertion callback
   done();
-				});
+        });
 
     });
   });
@@ -189,13 +191,13 @@ describe('Vocablist CRUD tests', function() {
     // Save the Vocablist
     vocablistObj.save(function() {
       request(app).get('/vocablists/' + vocablistObj._id)
-				.end(function(req, res) {
+        .end(function(req, res) {
   // Set assertion
   res.body.should.be.an.Object.with.property('name', vocablist.name);
 
   // Call the assertion callback
   done();
-				});
+        });
     });
   });
 
@@ -203,7 +205,7 @@ describe('Vocablist CRUD tests', function() {
     agent.post('/auth/signin')
     .send(credentials)
     .expect(200)
-			.end(function(signinErr, signinRes) {
+      .end(function(signinErr, signinRes) {
   // Handle signin error
   if (signinErr) done(signinErr);
 
@@ -214,7 +216,7 @@ describe('Vocablist CRUD tests', function() {
   agent.post('/vocablists')
   .send(vocablist)
   .expect(200)
-					.end(function(vocablistSaveErr, vocablistSaveRes) {
+          .end(function(vocablistSaveErr, vocablistSaveRes) {
   // Handle Vocablist save error
   if (vocablistSaveErr) done(vocablistSaveErr);
 
@@ -222,7 +224,7 @@ describe('Vocablist CRUD tests', function() {
   agent.delete('/vocablists/' + vocablistSaveRes.body._id)
   .send(vocablist)
   .expect(200)
-							.end(function(vocablistDeleteErr, vocablistDeleteRes) {
+              .end(function(vocablistDeleteErr, vocablistDeleteRes) {
   // Handle Vocablist error error
   if (vocablistDeleteErr) done(vocablistDeleteErr);
 
@@ -231,9 +233,9 @@ describe('Vocablist CRUD tests', function() {
 
   // Call the assertion callback
   done();
-							});
-					});
-			});
+              });
+          });
+      });
   });
 
   it('should not be able to delete Vocablist instance if not signed in', function(done) {
@@ -248,13 +250,13 @@ describe('Vocablist CRUD tests', function() {
       // Try deleting Vocablist
       request(app).delete('/vocablists/' + vocablistObj._id)
       .expect(401)
-			.end(function(vocablistDeleteErr, vocablistDeleteRes) {
+      .end(function(vocablistDeleteErr, vocablistDeleteRes) {
   // Set message assertion
   (vocablistDeleteRes.body.message).should.match('User is not logged in');
 
   // Handle Vocablist error error
   done(vocablistDeleteErr);
-			});
+      });
 
     });
   });
