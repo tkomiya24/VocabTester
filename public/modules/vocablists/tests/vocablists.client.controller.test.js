@@ -35,7 +35,8 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_) {
+    beforeEach(inject(function($controller, $rootScope,
+                               _$location_, _$stateParams_, _$httpBackend_) {
       // Set a new global scope
       scope = $rootScope.$new();
 
@@ -50,7 +51,8 @@
       });
     }));
 
-    it('$scope.find() should create an array with at least one Vocablist object fetched from XHR', inject(function(Vocablists) {
+    it('$scope.find() should create an array with at least one Vocablist object fetched from XHR',
+       inject(function(Vocablists) {
       // Create sample Vocablist using the Vocablists service
       var sampleVocablist = new Vocablists({
         name: 'New Vocablist'
@@ -70,7 +72,8 @@
       expect(scope.vocablists).toEqualData(sampleVocablists);
     }));
 
-    it('$scope.findOne() should create an array with one Vocablist object fetched from XHR using a vocablistId URL parameter', inject(function(Vocablists) {
+    it('$scope.findOne() should create an array with one Vocablist object fetched' +
+       'from XHR using a vocablistId URL parameter', inject(function(Vocablists) {
       // Define a sample Vocablist object
       var sampleVocablist = new Vocablists({
         name: 'New Vocablist'
@@ -90,7 +93,8 @@
       expect(scope.vocablist).toEqualData(sampleVocablist);
     }));
 
-    it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Vocablists) {
+    it('$scope.create() with valid form data should send a POST request with the' +
+       'form input values and then locate to new object URL', inject(function(Vocablists) {
       // Create a sample Vocablist object
       var sampleVocablistPostData = new Vocablists({
         name: 'New Vocablist'
@@ -106,7 +110,9 @@
       scope.name = 'New Vocablist';
 
       // Set POST response
-      $httpBackend.expectPOST('vocablists', sampleVocablistPostData).respond(sampleVocablistResponse);
+      $httpBackend.
+        expectPOST('vocablists', sampleVocablistPostData).
+        respond(sampleVocablistResponse);
 
       // Run controller functionality
       scope.create();
@@ -140,7 +146,8 @@
       expect($location.path()).toBe('/vocablists/' + sampleVocablistPutData._id);
     }));
 
-    it('$scope.remove() should send a DELETE request with a valid vocablistId and remove the Vocablist from the scope', inject(function(Vocablists) {
+    it('$scope.remove() should send a DELETE request with a valid' +
+       'vocablistId and remove the Vocablist from the scope', inject(function(Vocablists) {
       // Create new Vocablist object
       var sampleVocablist = new Vocablists({
         _id: '525a8422f6d0f87f0e407a33'
