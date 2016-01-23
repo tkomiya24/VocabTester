@@ -3,15 +3,16 @@
 /**
  * Module dependencies.
  */
-var should = require('should'),
-	mongoose = require('mongoose'),
-	User = mongoose.model('User'),
-	Vocablist = mongoose.model('Vocablist');
+var should = require('should');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var Vocablist = mongoose.model('Vocablist');
 
 /**
  * Globals
  */
-var user, vocablist;
+var user;
+var vocablist;
 
 /**
  * Unit tests
