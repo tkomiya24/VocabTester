@@ -2,10 +2,10 @@
 
 // Config HTTP Error Handling
 angular.module('users').config(['$httpProvider',
-	function($httpProvider) {
+  function($httpProvider) {
   // Set the httpProvider "not authorized" interceptor
   $httpProvider.interceptors.push(['$q', '$location', 'Authentication',
-			function($q, $location, Authentication) {
+      function($q, $location, Authentication) {
   return {
     responseError: function(rejection) {
       switch (rejection.status) {
@@ -24,7 +24,7 @@ angular.module('users').config(['$httpProvider',
       return $q.reject(rejection);
     }
   };
-			}
-		]);
-	}
+      }
+    ]);
+  }
 ]);
