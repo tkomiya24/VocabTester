@@ -53,8 +53,9 @@ describe('Vocab CRUD tests', function() {
     .expect(200)
 			.end(function(signinErr, signinRes) {
   // Handle signin error
-  if (signinErr) done(signinErr);
-
+  if (signinErr) {
+    done(signinErr);
+  }
   // Get the userId
   var userId = user.id;
 
@@ -64,17 +65,18 @@ describe('Vocab CRUD tests', function() {
   .expect(200)
 					.end(function(vocabSaveErr, vocabSaveRes) {
   // Handle Vocab save error
-  if (vocabSaveErr) done(vocabSaveErr);
-
+  if (vocabSaveErr) {
+    done(vocabSaveErr);
+  }
   // Get a list of Vocabs
   agent.get('/vocabs')
 							.end(function(vocabsGetErr, vocabsGetRes) {
   // Handle Vocab save error
-  if (vocabsGetErr) done(vocabsGetErr);
-
+  if (vocabsGetErr) {
+    done(vocabsGetErr);
+  }
   // Get Vocabs list
   var vocabs = vocabsGetRes.body;
-
   // Set assertions
   (vocabs[0].user._id).should.equal(userId);
   (vocabs[0].name).should.match('Vocab Name');
@@ -105,7 +107,9 @@ describe('Vocab CRUD tests', function() {
     .expect(200)
 			.end(function(signinErr, signinRes) {
   // Handle signin error
-  if (signinErr) done(signinErr);
+  if (signinErr) {
+    done(signinErr);
+  }
 
   // Get the userId
   var userId = user.id;
@@ -130,7 +134,9 @@ describe('Vocab CRUD tests', function() {
     .expect(200)
 			.end(function(signinErr, signinRes) {
   // Handle signin error
-  if (signinErr) done(signinErr);
+  if (signinErr) {
+    done(signinErr);
+  }
 
   // Get the userId
   var userId = user.id;
@@ -141,7 +147,9 @@ describe('Vocab CRUD tests', function() {
   .expect(200)
 					.end(function(vocabSaveErr, vocabSaveRes) {
   // Handle Vocab save error
-  if (vocabSaveErr) done(vocabSaveErr);
+  if (vocabSaveErr) {
+    done(vocabSaveErr);
+  }
 
   // Update Vocab name
   vocab.name = 'WHY YOU GOTTA BE SO MEAN?';
@@ -152,12 +160,12 @@ describe('Vocab CRUD tests', function() {
   .expect(200)
 							.end(function(vocabUpdateErr, vocabUpdateRes) {
   // Handle Vocab update error
-  if (vocabUpdateErr) done(vocabUpdateErr);
-
+  if (vocabUpdateErr) {
+    done(vocabUpdateErr);
+  }
   // Set assertions
   (vocabUpdateRes.body._id).should.equal(vocabSaveRes.body._id);
   (vocabUpdateRes.body.name).should.match('WHY YOU GOTTA BE SO MEAN?');
-
   // Call the assertion callback
   done();
 							});
@@ -207,7 +215,9 @@ describe('Vocab CRUD tests', function() {
     .expect(200)
 			.end(function(signinErr, signinRes) {
   // Handle signin error
-  if (signinErr) done(signinErr);
+  if (signinErr) {
+    done(signinErr);
+  }
 
   // Get the userId
   var userId = user.id;
@@ -218,16 +228,18 @@ describe('Vocab CRUD tests', function() {
   .expect(200)
 					.end(function(vocabSaveErr, vocabSaveRes) {
   // Handle Vocab save error
-  if (vocabSaveErr) done(vocabSaveErr);
-
+  if (vocabSaveErr) {
+    done(vocabSaveErr);
+  }
   // Delete existing Vocab
   agent.delete('/vocabs/' + vocabSaveRes.body._id)
   .send(vocab)
   .expect(200)
 							.end(function(vocabDeleteErr, vocabDeleteRes) {
   // Handle Vocab error error
-  if (vocabDeleteErr) done(vocabDeleteErr);
-
+  if (vocabDeleteErr) {
+    done(vocabDeleteErr);
+  }
   // Set assertions
   (vocabDeleteRes.body._id).should.equal(vocabSaveRes.body._id);
 
