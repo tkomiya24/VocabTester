@@ -10,8 +10,8 @@
       <form class="form-horizontal" data-ng-submit="update()" novalidate>
         <fieldset>
           <div class="form-group">
-            <label class="control-label" for="name">Name</label>
             <div class="controls">
+              <label class="control-label" for="name">Name</label>
               <input type="text" data-ng-model="vocablist.name" id="name" class="form-control shortfield" placeholder="Name">
             </div>
             <div class="controls">
@@ -20,14 +20,10 @@
             </div>
           </div>
           <div ng-repeat="vocab in vocablist.vocab" ng-hide="vocab.deleted">
-            <div class="controls">
-              <label class="control-label" for="word">Word</label>
-              <input type="text" data-ng-model="vocab.word" class="form-control shortfield" placeholder="Word">
-            </div>
-            <div class="controls">
-              <label class="control-label" for="translation">Translation</label>
-              <input type="text" data-ng-model="vocab.translation" class="form-control shortfield" placeholder="Translation">
-            </div>
+            <label class="control-label" for="word">Word</label>
+            <input type="text" data-ng-model="vocab.word" class="form-control shortfield" placeholder="Word">
+            <label class="control-label" for="translation">Translation</label>
+            <input type="text" data-ng-model="vocab.translation" class="form-control shortfield" placeholder="Translation">
             <button type="button" class="btn btn-primary" ng-click="removeVocab($index)">
               <span class="glyphicon glyphicon-remove"/>
             </button>
