@@ -49,6 +49,7 @@ div.sidebar {
 section.create-vocablist {
   padding: 50px; }
   section.create-vocablist input.shortfield {
-    width: 150px; }
+    width: 150px;
+    display: inline; }
 
 /*# sourceMappingURL=styles.css.map */
