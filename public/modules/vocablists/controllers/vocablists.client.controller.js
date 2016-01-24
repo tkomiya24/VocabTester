@@ -30,7 +30,7 @@ angular.module('vocablists').
           $scope.vocablist.$update(
             null,
             function(vocablist) {
-              $scope.vocablist = vocablist;
+              $location.path('/vocablist');
             },
             function(errorResponse) {
               $scope.error = errorResponse.data.message;
