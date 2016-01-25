@@ -21,3 +21,12 @@ angular.element(document).ready(function() {
   //Then init the app
   angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 });
+
+angular.module(ApplicationConfiguration.applicationModuleName).run(['$rootScope', '$state',
+  function($rootScope, $state) {
+    $rootScope.$on('$stateChangeError',
+      function(event, toState, toParams, fromState, fromParams, error) {
+        $rootScope.error = error;
+        return $state.go('signin');
+      });
+  }]);
