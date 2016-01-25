@@ -6,8 +6,6 @@ angular.module('vocablists').
     ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists',
       function($scope, $stateParams, $location, Authentication, Vocablists) {
 
-        $scope.authentication = Authentication;
-
         // Remove existing Vocablist
         $scope.remove = function(vocablist, index) {
           if ($scope.selectedVocablist) {
@@ -39,7 +37,7 @@ angular.module('vocablists').
 
         // Find a list of Vocablists
         $scope.find = function() {
-          $scope.vocablists = Vocablists.query({userId: $scope.authentication.user._id});
+          $scope.vocablists = Vocablists.query({userId: Authentication.currentUser()._id});
         };
 
         // Find existing Vocablist

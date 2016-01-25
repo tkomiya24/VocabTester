@@ -6,7 +6,10 @@ angular.module('vocablists').
     ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists',
       function($scope, $stateParams, $location, Authentication, Vocablists) {
 
-        Authentication.redirectUnauthenticated();
+        if (!Authentication.currentUser()) {
+          $location.path('/');
+          return;
+        }
         $scope.vocablist = Vocablists.get(
           {
             vocablistId: $stateParams.vocablistId
@@ -54,8 +57,6 @@ angular.module('vocablists').
           }
           $scope.vocablist.vocab[i].timesTested++;
         }
-
-        $scope.authentication = Authentication;
 
         $scope.test = function() {
           $scope.isSubmitted = false;

@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('core').controller('HeaderController',
-  ['$scope','Authentication', 'Menus', '$location', '$http',
-  function($scope, Authentication, Menus, $location, $http) {
-    $scope.authentication = Authentication;
+  ['$scope','Authentication', 'Menus', '$location',
+  function($scope, Authentication, Menus, $location) {
+    $scope.loggedIn = !!Authentication.currentUser();
     $scope.isCollapsed = false;
     $scope.menu = Menus.getMenu('topbar');
 
@@ -12,20 +12,22 @@ angular.module('core').controller('HeaderController',
     };
 
     $scope.signout = function() {
-      $http.post('/auth/signout', $scope.credentials).success(
-        function(response) {
-          delete Authentication.user;
-          $location.path('/');
-        }).error(
-        function(response) {
-          $scope.error = 'There was an error. Could not sign out. ' + response;
-        }
-      );
+      Authentication.signout(function() {
+        $location.path('/');
+      });
     };
 
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function() {
       $scope.isCollapsed = false;
     });
+
+    $scope.$on('signinChange', function(event, authenticated) {
+      $scope.loggedIn = authenticated;
+    });
+
+    $scope.getUser = function() {
+      return Authentication.currentUser();
+    };
   }
 ]);
