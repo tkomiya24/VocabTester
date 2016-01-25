@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('core').controller('HeaderController',
-  ['$scope','Authentication', 'Menus', '$location', '$http',
-  function($scope, Authentication, Menus, $location, $http) {
+  ['$scope','Authentication', 'Menus', '$location',
+  function($scope, Authentication, Menus, $location) {
     $scope.authentication = Authentication;
     $scope.isCollapsed = false;
     $scope.menu = Menus.getMenu('topbar');
@@ -12,15 +12,9 @@ angular.module('core').controller('HeaderController',
     };
 
     $scope.signout = function() {
-      $http.post('/auth/signout', $scope.credentials).success(
-        function(response) {
-          delete Authentication.user;
-          $location.path('/');
-        }).error(
-        function(response) {
-          $scope.error = 'There was an error. Could not sign out. ' + response;
-        }
-      );
+      Authentication.signout(function() {
+        $location.path('/');
+      });
     };
 
     // Collapsing the menu after navigation
