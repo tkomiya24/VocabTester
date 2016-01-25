@@ -55,8 +55,6 @@ angular.module('vocablists').
           $scope.vocablist.vocab[i].timesTested++;
         }
 
-        $scope.authentication = Authentication;
-
         $scope.test = function() {
           $scope.isSubmitted = false;
           $scope.findOne();
