@@ -4,7 +4,6 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
   function($scope, $stateParams, $location, Authentication) {
     //If user is signed in then redirect back home
     if (Authentication.currentUser()) {
-      console.log(Authentication.currentUser());
       $location.path('/');
     }
 

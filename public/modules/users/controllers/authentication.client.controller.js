@@ -6,7 +6,6 @@ angular.module('users').controller('AuthenticationController',
 
     // If user is signed in then redirect back home
     if (Authentication.currentUser()) {
-      console.log(Authentication.currentUser());
       $location.path('/');
     }
 
