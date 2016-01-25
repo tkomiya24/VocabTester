@@ -1,35 +1,27 @@
 'use strict';
 
 angular.module('users').controller('AuthenticationController',
-  ['$scope', '$http', '$location', 'Authentication',
-  function($scope, $http, $location, Authentication) {
-    $scope.authentication = Authentication;
+  ['$scope', '$location', 'Authentication',
+  function($scope, $location, Authentication) {
 
     // If user is signed in then redirect back home
-    if ($scope.authentication.user) {
+    if (Authentication.currentUser()) {
+      console.log(Authentication.currentUser());
       $location.path('/');
     }
 
     $scope.signup = function() {
-      $http.post('/auth/signup', $scope.credentials).success(function(response) {
-        // If successful we assign the response to the global user model
-        $scope.authentication.user = response;
-
-        // And redirect to the index page
+      Authentication.signup($scope.credentials, function() {
         $location.path('/');
-      }).error(function(response) {
+      }, function(response) {
         $scope.error = response.message;
       });
     };
 
     $scope.signin = function() {
-      $http.post('/auth/signin', $scope.credentials).success(function(response) {
-        // If successful we assign the response to the global user model
-        $scope.authentication.user = response;
-
-        // And redirect to the index page
+      Authentication.signin($scope.credentials, function() {
         $location.path('/');
-      }).error(function(response) {
+      }, function(response) {
         $scope.error = response.message;
       });
     };
