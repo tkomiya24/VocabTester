@@ -3,7 +3,7 @@
 angular.module('core').controller('HeaderController',
   ['$scope','Authentication', 'Menus', '$location',
   function($scope, Authentication, Menus, $location) {
-    $scope.authentication = Authentication;
+    $scope.loggedIn = !!Authentication.currentUser();
     $scope.isCollapsed = false;
     $scope.menu = Menus.getMenu('topbar');
 
@@ -21,5 +21,13 @@ angular.module('core').controller('HeaderController',
     $scope.$on('$stateChangeSuccess', function() {
       $scope.isCollapsed = false;
     });
+
+    $scope.$on('signinChange', function(event, authenticated) {
+      $scope.loggedIn = authenticated;
+    });
+
+    $scope.getUser = function() {
+      return Authentication.currentUser();
+    };
   }
 ]);
