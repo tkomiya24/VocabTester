@@ -15,7 +15,7 @@ var methodOverride = require('method-override');
 var cookieParser = require('cookie-parser');
 var helmet = require('helmet');
 var passport = require('passport');
-var mongoStore = require('connect-mongo')({
+var MongoStore = require('connect-mongo')({
   session: session
 });
 var flash = require('connect-flash');
@@ -90,7 +90,7 @@ module.exports = function(db) {
     saveUninitialized: true,
     resave: true,
     secret: config.sessionSecret,
-    store: new mongoStore({
+    store: new MongoStore({
       db: db.connection.db,
       collection: config.sessionCollection
     })
