@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$location', 'Authentication',
+angular.module('users').controller('PasswordController',
+  ['$scope', '$stateParams', '$location', 'Authentication',
   function($scope, $stateParams, $location, Authentication) {
     //If user is signed in then redirect back home
     if (Authentication.currentUser()) {
