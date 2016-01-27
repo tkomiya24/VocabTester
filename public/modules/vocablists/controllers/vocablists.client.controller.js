@@ -5,7 +5,7 @@ angular.module('vocablists').
   controller('VocablistsController',
     ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists',
       function($scope, $stateParams, $location, Authentication, Vocablists) {
-
+        $scope.user = Authentication.currentUser();
         // Remove existing Vocablist
         $scope.remove = function(vocablist, index) {
           if ($scope.selectedVocablist) {
