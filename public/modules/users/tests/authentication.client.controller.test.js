@@ -4,11 +4,11 @@
   // Authentication controller Spec
   describe('AuthenticationController', function() {
     // Initialize global variables
-    var AuthenticationController,
-    scope,
-    $httpBackend,
-    $stateParams,
-    $location;
+    var AuthenticationController;
+    var scope;
+    var $httpBackend;
+    var $stateParams;
+    var $location;
 
     beforeEach(function() {
       jasmine.addMatchers({
