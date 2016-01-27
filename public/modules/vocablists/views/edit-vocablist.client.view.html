@@ -2,10 +2,10 @@
   <div class="page-header">
     <h1>Edit Vocablist</h1>
   </div>
-  <div ng-hide="vocablist.user === authentication.user._id" class="text-center text-danger">
+  <div ng-hide="vocablist.user === user._id" class="text-center text-danger">
     <strong>You are not authorized to edit this vocablist</strong>
   </div>
-  <div ng-show="vocablist.user === authentication.user._id">
+  <div ng-show="vocablist.user === user._id">
     <div class="col-md-12">
       <form class="form-horizontal" data-ng-submit="update()" novalidate>
         <fieldset>
