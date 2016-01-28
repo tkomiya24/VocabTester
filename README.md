@@ -25,15 +25,11 @@ It is therefore going to be very particular to my needs and studying habits. The
     * nodemon
     * node-inspector
 
-### 2.2 Database setup
-
-  1. \*Make a folder called '.vocabtester-mongo-dev' in your home directory. `mkdir ~/.vocabtester-mongo-dev` on Mac OS X
-
-### 2.3 Install process
+### 2.2 Install process
 
   1. Run `npm install`  
 
-### 2.4 Seeding the database
+### 2.3 Seeding the database
 
   1. Run `grunt seed` while MongoDB instance is active.
 
