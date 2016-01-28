@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var errorHandler = require('./errors.server.controller');
 var Vocab = mongoose.model('Vocab');
 var _ = require('lodash');
+var updateVocabHelper = require('../helpers/updateVocab');
 
 /**
  * Create a Vocab
