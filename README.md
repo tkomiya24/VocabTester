@@ -20,8 +20,6 @@ It is therefore going to be very particular to my needs and studying habits. The
   * Some Node global packages:
     * grunt-cli
     * bower
-    * yo
-    * generator-meanjs
     * jsonlint
     * jshint
     * nodemon
