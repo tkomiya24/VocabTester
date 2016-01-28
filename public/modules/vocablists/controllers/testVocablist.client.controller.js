@@ -58,17 +58,6 @@ angular.module('vocablists').
           $scope.vocablist.vocab[i].timesTested++;
         }
 
-        $scope.test = function() {
-          $scope.isSubmitted = false;
-          $scope.findOne();
-          $scope.responses = [];
-          $scope.grades = [];
-          $scope.grade = 0;
-          for (var i = 0; i < $scope.vocablist.length; i++) {
-            $scope.grades[i] = false;
-          }
-        };
-
         $scope.restartTest = function() {
           $scope.isSubmitted = false;
           $scope.grades = [];
