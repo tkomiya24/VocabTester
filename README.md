@@ -13,29 +13,23 @@ It is therefore going to be very particular to my needs and studying habits. The
 ### 2.1 Prerequisites
 
   * MongoDB version 3
-  * Node v0.12.7
+  * Node v4.2.x
   * XCode via the Appstore (make sure you run it at least once!)
   * The command line tools for XCode
 
   * Some Node global packages:
     * grunt-cli
     * bower
-    * yo
-    * generator-meanjs
     * jsonlint
     * jshint
     * nodemon
     * node-inspector
 
-### 2.2 Database setup
-
-  1. \*Make a folder called '.vocabtester-mongo-dev' in your home directory. `mkdir ~/.vocabtester-mongo-dev` on Mac OS X
-
-### 2.3 Install process
+### 2.2 Install process
 
   1. Run `npm install`  
 
-### 2.4 Seeding the database
+### 2.3 Seeding the database
 
   1. Run `grunt seed` while MongoDB instance is active.
 
