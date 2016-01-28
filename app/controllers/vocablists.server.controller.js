@@ -8,6 +8,7 @@ var errorHandler = require('./errors.server.controller');
 var Vocablist = mongoose.model('Vocablist');
 var _ = require('lodash');
 var Vocab = mongoose.model('Vocab');
+var updateVocabHelper = require('../helpers/updateVocab');
 
 function findAndUpdateVocab(vocab) {
   if (vocab.deleted) {
@@ -126,7 +127,7 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
   var vocablist = req.vocablist;
   vocablist = _.extend(vocablist , req.body);
-  findAndUpdateVocabs(req.body.vocab).
+  updateVocabHelper.findAndUpdateVocabs(req.body.vocab).
     then(function(vocabs) {
       removeNullFromArray(vocabs);
       vocablist.vocab = vocabs;
