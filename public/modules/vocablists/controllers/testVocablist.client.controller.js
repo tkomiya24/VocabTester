@@ -10,6 +10,7 @@ angular.module('vocablists').
           $location.path('/');
           return;
         }
+        $scope.completedVocabs = [];
         $scope.vocablist = Vocablists.get(
           {
             vocablistId: $stateParams.vocablistId
@@ -54,6 +55,13 @@ angular.module('vocablists').
           }
         }
 
+        function readdCorrect() {
+          $scope.completedVocabs.forEach(function(vocab) {
+            $scope.vocablist.vocab.push(vocab);
+          });
+          $scope.completedVocabs = [];
+        }
+
         $scope.incompleteCount = function() {
           var count = 0;
           if (!$scope.vocablist.vocab) { //if the vocablist hasn't been read in yet
@@ -71,11 +79,19 @@ angular.module('vocablists').
           $scope.isSubmitted = false;
           $scope.responses = [];
           resetMarkers();
+          readdCorrect();
         };
 
         $scope.retestIncorrect = function() {
           $scope.isSubmitted = false;
           $scope.responses = [];
+          for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
+            if ($scope.vocablist.vocab[i].correct) {
+              $scope.completedVocabs.push($scope.vocablist.vocab[i]);
+              $scope.vocablist.vocab.splice(i, 1);
+              i--;
+            }
+          }
         };
 
         $scope.gradeTest = function() {
