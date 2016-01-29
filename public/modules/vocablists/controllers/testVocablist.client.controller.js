@@ -56,10 +56,17 @@ angular.module('vocablists').
           $scope.vocablist.vocab[i].timesTested++;
         }
 
+        function resetMarkers() {
+          for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
+            delete $scope.vocablist.vocab[i].finished;
+            delete $scope.vocablist.vocab[i].correct;
+          }
+        }
+
         $scope.restartTest = function() {
           $scope.isSubmitted = false;
           $scope.responses = [];
-          $scope.finished = {};
+          resetMarkers();
         };
 
         $scope.retestIncorrect = function() {
