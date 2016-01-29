@@ -52,21 +52,21 @@ section.create-vocablist {
     width: 150px;
     display: inline; }
 
-.vocablist-table {
-  margin: 0 50px;
-  text-align: center; }
-  .vocablist-table table {
-    width: 100%;
-    margin: 0 auto; }
-  .vocablist-table td {
-    text-align: left;
-    padding-left: 4px; }
-  .vocablist-table .search-container {
-    display: flex;
-    justify-content: space-around;
-    margin: 6px;
-    align-items: center; }
-  .vocablist-table .search-field {
-    margin: auto 5px; }
+.vocablist-table table {
+  width: 100%;
+  margin: 0 auto; }
+.vocablist-table td {
+  text-align: left;
+  padding-left: 4px; }
+.vocablist-table .search-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 6px;
+  align-items: center; }
+.vocablist-table .search-field {
+  margin: auto 5px; }
+
+.main-container {
+  padding: 0 50px; }
 
 /*# sourceMappingURL=styles.css.map */
