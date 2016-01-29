@@ -22,6 +22,11 @@ angular.element(document).ready(function() {
   angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 });
 
+angular.module(ApplicationConfiguration.applicationModuleName).constant('Constants', {
+  AUTHORIZED_REROUTE: 'AUTHORIZED_REROUTE',
+  UNAUTHORIZED_REROUTE: 'UNAUTHORIZED_REROUTE'
+});
+
 angular.module(ApplicationConfiguration.applicationModuleName).run(['$rootScope', '$state',
   function($rootScope, $state) {
     $rootScope.$on('$stateChangeError',
