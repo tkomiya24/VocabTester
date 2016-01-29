@@ -1,19 +1,10 @@
 'use strict';
 
 //Setting up route
-angular.module('vocablists').config(['$stateProvider', 'Constants',
-  function($stateProvider, Constants) {
-    function checkAuthentication($q, Authentication) {
-      return $q(function(resolve, reject) {
-        if (!Authentication.currentUser()) {
-          reject(Constants.UNAUTHORIZED_REROUTE);
-        } else {
-          resolve();
-        }
-      });
-    }
+angular.module('vocablists').config(['$stateProvider', 'resolutionServiceProvider',
+  function($stateProvider, resolutionProvider) {
     var authenticateResolve = {
-      authenticate: checkAuthentication
+      authenticate: resolutionProvider.checkAuthentication
     };
     // Vocablists state routing
     $stateProvider.
