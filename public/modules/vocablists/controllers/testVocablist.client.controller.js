@@ -6,10 +6,6 @@ angular.module('vocablists').
     ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists', 'Vocabs',
       function($scope, $stateParams, $location, Authentication, Vocablists, Vocabs) {
 
-        if (!Authentication.currentUser()) {
-          $location.path('/');
-          return;
-        }
         $scope.completedVocabs = [];
         $scope.vocablist = Vocablists.get(
           {
