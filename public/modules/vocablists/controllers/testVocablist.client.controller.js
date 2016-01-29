@@ -22,19 +22,16 @@ angular.module('vocablists').
         );
         $scope.isSubmitted = false;
         $scope.responses = [];
-        $scope.grades = [];
         $scope.grade = 0;
         for (var i = 0; i < $scope.vocablist.length; i++) {
           $scope.grades[i] = false;
         }
-        $scope.finished = {};
 
         function isFinished(i) {
-          return $scope.finished[i];
+          return !!$scope.vocablist.vocab[i].finished;
         }
 
         function markFinished(i) {
-          $scope.finished[i] = true;
           $scope.vocablist.vocab[i].finished = true;
         }
 
@@ -43,7 +40,6 @@ angular.module('vocablists').
         }
 
         function markCorrect(i) {
-          $scope.grades[i] = true;
           $scope.grade++;
           $scope.vocablist.vocab[i].timesCorrect++;
           $scope.vocablist.vocab[i].correct = true;
@@ -62,7 +58,6 @@ angular.module('vocablists').
 
         $scope.restartTest = function() {
           $scope.isSubmitted = false;
-          $scope.grades = [];
           $scope.responses = [];
           $scope.finished = {};
         };
@@ -89,7 +84,7 @@ angular.module('vocablists').
         };
 
         $scope.isTextFieldEnabled = function(index) {
-          return !$scope.isSubmitted && !$scope.grades[index];
+          return !$scope.isSubmitted && !$scope.vocablist.vocab[index].correct;
         };
 
       }
