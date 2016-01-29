@@ -35,6 +35,7 @@ angular.module('vocablists').
 
         function markFinished(i) {
           $scope.finished[i] = true;
+          $scope.vocablist.vocab[i].finished = true;
         }
 
         function guessIsCorrect(i) {
@@ -45,6 +46,7 @@ angular.module('vocablists').
           $scope.grades[i] = true;
           $scope.grade++;
           $scope.vocablist.vocab[i].timesCorrect++;
+          $scope.vocablist.vocab[i].correct = true;
         }
 
         function gradeQuestion(i) {
