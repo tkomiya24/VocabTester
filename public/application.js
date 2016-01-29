@@ -5,6 +5,20 @@ angular.module(ApplicationConfiguration.constantsModuleName, []).constant('Const
   UNAUTHORIZED_REROUTE: 'UNAUTHORIZED_REROUTE'
 });
 
+angular.module(ApplicationConfiguration.resolutionModuleName, []).provider('resolutionService',
+  function resolutionProvider() {
+    this.checkAuthentication = function($q, Authentication, Constants) {
+        return $q(function(resolve, reject) {
+          if (!Authentication.currentUser()) {
+            reject(Constants.UNAUTHORIZED_REROUTE);
+          } else {
+            resolve();
+          }
+        });
+      };
+    this.$get = function() {};
+  });
+
 //Start by defining the main module and adding the module dependencies
 angular.module(ApplicationConfiguration.applicationModuleName,
                ApplicationConfiguration.applicationModuleVendorDependencies);
