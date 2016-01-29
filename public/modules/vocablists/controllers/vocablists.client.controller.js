@@ -43,7 +43,7 @@ angular.module('vocablists').
 
         // Find a list of Vocablists
         $scope.find = function() {
-          $scope.vocablists = Vocablists.query({userId: Authentication.currentUser()._id});
+          $scope.vocablists = Vocablists.query();
         };
 
         // Find existing Vocablist

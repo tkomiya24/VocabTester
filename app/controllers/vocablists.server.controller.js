@@ -131,7 +131,7 @@ exports.delete = function(req, res) {
  * List of Vocablists
  */
 exports.list = function(req, res) {
-  var query = req.query.userId ? {user: req.query.userId} : {};
+  var query = req.user ? {user: req.user._id} : {};
   Vocablist.find(query).sort('-created').populate('vocab').exec(function(err, vocablists) {
     if (err) {
       return res.status(400).send({
