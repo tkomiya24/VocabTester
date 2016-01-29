@@ -10,7 +10,11 @@ angular.module('users').factory('Authentication',
     return {
       signin: function(user, success, error) {
         $http.post('/auth/signin', user).success(function(response) {
-          $cookies.putObject('user', response);
+          var expiryDate = new Date();
+          expiryDate.setMonth(expiryDate.getMonth() + 6);
+          $cookies.putObject('user', response, {
+            expires: expiryDate
+          });
           broadcastAuthentication(true);
           success();
         }).error(function(response) {
