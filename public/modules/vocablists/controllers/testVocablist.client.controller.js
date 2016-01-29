@@ -62,6 +62,16 @@ angular.module('vocablists').
           $scope.completedVocabs = [];
         }
 
+        function shuffle(o) {
+          for (var j, x, i = o.length - 1; i >= 0; i--) {
+            j = Math.floor(Math.random() * i);
+            x = o[i];
+            o[i] = o[j];
+            o[j] = x;
+          }
+          return o;
+        }
+
         $scope.incompleteCount = function() {
           var count = 0;
           if (!$scope.vocablist.vocab) { //if the vocablist hasn't been read in yet
@@ -78,8 +88,8 @@ angular.module('vocablists').
         $scope.restartTest = function() {
           $scope.isSubmitted = false;
           $scope.responses = [];
-          resetMarkers();
           readdCorrect();
+          resetMarkers();
         };
 
         $scope.retestIncorrect = function() {
@@ -92,6 +102,7 @@ angular.module('vocablists').
               i--;
             }
           }
+          shuffle($scope.vocablist.vocab);
         };
 
         $scope.gradeTest = function() {
