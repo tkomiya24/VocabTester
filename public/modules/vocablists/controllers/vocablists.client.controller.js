@@ -3,9 +3,15 @@
 // Vocablists controller
 angular.module('vocablists').
   controller('VocablistsController',
-    ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists',
-      function($scope, $stateParams, $location, Authentication, Vocablists) {
+    ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists', 'Category',
+      function($scope, $stateParams, $location, Authentication, Vocablists, Category) {
         $scope.user = Authentication.currentUser();
+        $scope.categories = [];
+        for (var property in Category) {
+          if (Category.hasOwnProperty(property)) {
+            $scope.categories.push(Category[property]);
+          }
+        }
         // Remove existing Vocablist
         $scope.remove = function(vocablist, index) {
           if ($scope.selectedVocablist) {
