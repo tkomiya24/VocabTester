@@ -18,6 +18,8 @@ angular.module('vocablists').
           function(value, responseHeaders) {
             if (value.user !== Authentication.currentUser()._id) {
               $scope.authenticationError = 'You are not authorized to use this vocablist';
+            } else {
+              shuffle(value.vocab);
             }
           }
         );
