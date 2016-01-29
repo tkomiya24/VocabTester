@@ -23,9 +23,6 @@ angular.module('vocablists').
         $scope.isSubmitted = false;
         $scope.responses = [];
         $scope.grade = 0;
-        for (var i = 0; i < $scope.vocablist.length; i++) {
-          $scope.grades[i] = false;
-        }
 
         function isFinished(i) {
           return !!$scope.vocablist.vocab[i].correct;
