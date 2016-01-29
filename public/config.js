@@ -4,6 +4,7 @@
 var ApplicationConfiguration = (function() {
   // Init module configuration options
   var applicationModuleName = 'vocabtester';
+  var constantsModule = 'constants';
   var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',
                                              'ngAnimate', 'ngTouch',
                                              'ngSanitize',  'ui.router',
@@ -19,6 +20,7 @@ var ApplicationConfiguration = (function() {
   };
 
   return {
+    constantsModuleName: constantsModule,
     applicationModuleName: applicationModuleName,
     applicationModuleVendorDependencies: applicationModuleVendorDependencies,
     registerModule: registerModule
