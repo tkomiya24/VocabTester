@@ -18,6 +18,10 @@ module.exports = new Schema({
   chapter: {
     type: Number
   },
+  category: {
+    type: String,
+    trim: true
+  },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
