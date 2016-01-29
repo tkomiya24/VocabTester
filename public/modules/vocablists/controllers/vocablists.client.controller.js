@@ -14,13 +14,11 @@ angular.module('vocablists').
         }
         // Remove existing Vocablist
         $scope.remove = function(vocablist, index) {
-          if ($scope.selectedVocablist) {
-            $scope.selectedVocablist.$remove(
+          if (vocablist) {
+            vocablist.$remove(
               null,
               function(value, responseHeaders) {
-                $scope.vocablists.splice($scope.currentIndex, 1);
-                $scope.selectedVocablist = null;
-                $scope.currentIndex = -1;
+                $scope.vocablists.splice(index, 1);
               },
               function(httpResponse) {
                 $scope.error = JSON.stringify(httpResponse);

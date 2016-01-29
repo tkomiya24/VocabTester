@@ -23,11 +23,9 @@
                 <span class="glyphicon glyphicon-edit"></span> Edit
               </button>
             </a>
-            <a href="#!/vocablists/delete/{{vocablist._id}}">
-              <button class="btn btn-primary">
-                <span class="glyphicon glyphicon-remove-sign"></span> Delete
-              </button>
-            </a>
+            <button class="btn btn-primary" ng-click="remove(vocablist, $index)">
+              <span class="glyphicon glyphicon-remove-sign"></span> Delete
+            </button>
             <a href="#!/vocablists/test/{{vocablist._id}}">
               <button class="btn btn-primary">
                 <span class="glyphicon glyphicon-pencil"></span> Test
