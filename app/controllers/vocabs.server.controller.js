@@ -51,6 +51,16 @@ exports.update = function(req, res) {
   });
 };
 
+exports.updateMultiple = function(req, res) {
+  var vocabs = req.body;
+  updateVocabHelper.findAndUpdateVocabs(vocabs)
+    .then(function(vocabs) {
+      res.jsonp(vocabs);
+    }).catch(function(err) {
+      return res.status(400).send({message: errorHandler.getErrorMessage(err)});
+    });
+};
+
 /**
  * Delete an Vocab
  */
