@@ -45,4 +45,13 @@ section.create-vocablist {
     text-align: left;
     padding-left: 4px;
   }
+  .search-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 6px;
+    align-items: center;
+  }
+  .search-field {
+    margin: auto 5px;
+  }
 }

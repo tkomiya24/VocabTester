@@ -1,5 +1,9 @@
 <section data-ng-controller="VocablistsController" data-ng-init="find()">
   <div class="vocablist-table">
+    <div class="search-container">
+      <label class="control-label">Filter: </label>
+      <input type="text" class="form-control search-field" ng-model="query"/>
+    </div>
     <table class="table table-striped table-hover table-bordered">
       <thead>
         <tr>
@@ -37,7 +41,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="vocablist in vocablists | orderBy : predicate : reverse">
+        <tr ng-repeat="vocablist in vocablists | filter : query : false | orderBy : predicate : reverse">
             <td>{{vocablist.chapter}}</td>
             <td>{{vocablist.name}}</td>
             <td>{{vocablist.category}}</td>
