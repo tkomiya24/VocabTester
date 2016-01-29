@@ -1,7 +1,7 @@
 'use strict';
 
 //Vocablists service used to communicate Vocablists REST endpoints
-angular.module('vocabs').factory('Vocab', ['$resource',
+angular.module('vocabs').factory('Vocabs', ['$resource',
   function($resource) {
     return $resource(
       'vocabs/:vocabId',
