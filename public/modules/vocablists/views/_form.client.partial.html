@@ -16,7 +16,7 @@
       </select>
     </div>
   </div>
-  <div ng-repeat="vocab in vocablist.vocab">
+  <div ng-repeat="vocab in vocablist.vocab" ng-hide="vocab.deleted">
     <label class="control-label" for="word">Word</label>
     <input type="text" data-ng-model="vocab.word" class="form-control shortfield" placeholder="Word">
     <label class="control-label" for="translation">Translation</label>
