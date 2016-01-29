@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody class="test-table">
-      <tr ng-repeat="vocab in vocablist.vocab" ng-class="{correct: finished[$index]}">
+      <tr ng-repeat="vocab in vocablist.vocab" ng-class="{correct: vocab.finished}">
         <td>{{vocab.word}}</td>
         <td>
           <input type="text" ng-model="responses[$index]" ng-show="isTextFieldEnabled($index)"></input>
@@ -22,8 +22,8 @@
           {{vocab.timesCorrect}} / {{vocab.timesTested}}
         </td>
         <td>
-          <span class="glyphicon glyphicon-ok" ng-show="grades[$index]"></span>
-          <span class="glyphicon glyphicon-remove" ng-hide="grades[$index]"></span>
+          <span class="glyphicon glyphicon-ok" ng-show="vocab.correct"></span>
+          <span class="glyphicon glyphicon-remove" ng-hide="vocab.correct"></span>
         </td>
        </tr>
     </tbody>
