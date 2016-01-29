@@ -21,7 +21,7 @@ module.exports = new Schema({
   category: {
     type: String,
     trim: true,
-    enum: ['Nouns', 'Verbs', 'Adjectives']
+    enum: ['Nouns', 'Verbs', 'Adjectives', null]
   },
   user: {
     type: Schema.Types.ObjectId,
