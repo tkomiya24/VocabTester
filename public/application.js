@@ -1,5 +1,10 @@
 'use strict';
 
+angular.module(ApplicationConfiguration.constantsModuleName, []).constant('Constants', {
+  AUTHORIZED_REROUTE: 'AUTHORIZED_REROUTE',
+  UNAUTHORIZED_REROUTE: 'UNAUTHORIZED_REROUTE'
+});
+
 //Start by defining the main module and adding the module dependencies
 angular.module(ApplicationConfiguration.applicationModuleName,
                ApplicationConfiguration.applicationModuleVendorDependencies);
@@ -22,11 +27,19 @@ angular.element(document).ready(function() {
   angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 });
 
-angular.module(ApplicationConfiguration.applicationModuleName).run(['$rootScope', '$state',
-  function($rootScope, $state) {
+angular.module(ApplicationConfiguration.applicationModuleName).constant('Constants', {
+  AUTHORIZED_REROUTE: 'AUTHORIZED_REROUTE',
+  UNAUTHORIZED_REROUTE: 'UNAUTHORIZED_REROUTE'
+});
+
+angular.module(ApplicationConfiguration.applicationModuleName).
+  run(['$rootScope', '$state', 'Constants',
+  function($rootScope, $state, Constants) {
     $rootScope.$on('$stateChangeError',
       function(event, toState, toParams, fromState, fromParams, error) {
-        $rootScope.error = error;
-        return $state.go('signin');
+        if (error === Constants.UNAUTHORIZED_REROUTE) {
+          $rootScope.error = 'You must be signed in to view this page';
+          return $state.go('signin');
+        }
       });
   }]);
