@@ -52,10 +52,13 @@ angular.module(ApplicationConfiguration.applicationModuleName).
     $rootScope.$on('$stateChangeError',
       function(event, toState, toParams, fromState, fromParams, error) {
         if (error === Constants.UNAUTHORIZED_REROUTE) {
-          $rootScope.error = 'You must be signed in to view this page';
+          $rootScope.authenticationError = 'You must be signed in to view this page';
           return $state.go('signin');
         } else if (error === Constants.AUTHORIZED_REROUTE) {
           return $state.go('listVocablists');
         }
       });
+    $rootScope.$on('$stateChangeSuccess', function() {
+      $rootScope.authenticationError = null;
+    });
   }]);

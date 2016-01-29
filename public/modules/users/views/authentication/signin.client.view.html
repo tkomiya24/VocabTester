@@ -1,8 +1,8 @@
 <section class="row" data-ng-controller="AuthenticationController">
   <h3 class="col-md-12 text-center">Enter your account information</h3>
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
-    <div data-ng-show="authenticationMessage" class="text-center text-danger">
-      <strong data-ng-bind="authenticationMessage"></strong>
+    <div data-ng-show="authenticationError" class="text-center text-danger">
+      <strong data-ng-bind="authenticationError"></strong>
     </div>
     <form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
       <fieldset>
