@@ -82,10 +82,5 @@ angular.module('vocablists').
               $scope.error = httpResponse.message;
             });
         };
-
-        $scope.isTextFieldEnabled = function(index) {
-          return !$scope.isSubmitted && !$scope.vocablist.vocab[index].correct;
-        };
-
       }
 ]);

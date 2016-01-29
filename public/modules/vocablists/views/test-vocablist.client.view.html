@@ -15,8 +15,8 @@
       <tr ng-repeat="vocab in vocablist.vocab" ng-class="{correct: vocab.finished}">
         <td>{{vocab.word}}</td>
         <td>
-          <input type="text" ng-model="responses[$index]" ng-show="isTextFieldEnabled($index)"></input>
-          <label ng-hide="isTextFieldEnabled($index)">{{vocab.translation}}</index>
+          <input type="text" ng-model="responses[$index]" ng-show="!isSubmitted && !vocab.correct"></input>
+          <label ng-hide="!isSubmitted && !vocab.correct">{{vocab.translation}}</index>
         </td>
         <td>
           {{vocab.timesCorrect}} / {{vocab.timesTested}}
