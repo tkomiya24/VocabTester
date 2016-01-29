@@ -32,11 +32,14 @@ angular.module(ApplicationConfiguration.applicationModuleName).constant('Constan
   UNAUTHORIZED_REROUTE: 'UNAUTHORIZED_REROUTE'
 });
 
-angular.module(ApplicationConfiguration.applicationModuleName).run(['$rootScope', '$state',
-  function($rootScope, $state) {
+angular.module(ApplicationConfiguration.applicationModuleName).
+  run(['$rootScope', '$state', 'Constants',
+  function($rootScope, $state, Constants) {
     $rootScope.$on('$stateChangeError',
       function(event, toState, toParams, fromState, fromParams, error) {
-        $rootScope.error = error;
-        return $state.go('signin');
+        if (error === Constants.UNAUTHORIZED_REROUTE) {
+          $rootScope.error = 'You must be signed in to view this page';
+          return $state.go('signin');
+        }
       });
   }]);

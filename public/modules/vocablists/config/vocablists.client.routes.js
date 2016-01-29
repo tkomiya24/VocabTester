@@ -1,12 +1,12 @@
 'use strict';
 
 //Setting up route
-angular.module('vocablists').config(['$stateProvider',
-  function($stateProvider) {
+angular.module('vocablists').config(['$stateProvider', 'Constants',
+  function($stateProvider, Constants) {
     function checkAuthentication($q, Authentication) {
       return $q(function(resolve, reject) {
         if (!Authentication.currentUser()) {
-          reject('You must be logged in to view this page');
+          reject(Constants.UNAUTHORIZED_REROUTE);
         } else {
           resolve();
         }
