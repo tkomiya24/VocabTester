@@ -1,46 +1,75 @@
 <section data-ng-controller="VocablistsController" data-ng-init="find()">
-    <div class="sidebar">
-      <div class="list-group">
-        <button data-ng-repeat="vocablist in vocablists"
-                ng-click="selectVocablist($index)"
-                class="list-group-item"
-                ng-class="{ 'active' : vocablist == selectedVocablist}">
-          {{vocablist.name}}
-        </button>
-      </div>
-      <div class="alert alert-warning text-center" data-ng-hide="!vocablists.$resolved || vocablists.length">
-        No Vocablists yet, why don't you <a href="/#!/vocablists/create">create one</a>?
-      </div>
+  <div class="page-header">
+    <h1>Your Vocablists</h1>
+  </div>
+  <div class="vocablist-table">
+    <div class="search-container">
+      <label class="control-label">Filter: </label>
+      <input type="text" class="form-control search-field" ng-model="query"/>
     </div>
-    <div class="main">
-      <h4>{{selectedVocablist.name}}</h4>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>English</th>
-            <th>Translation</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="vocab in selectedVocablist.vocab">
-            <td>{{vocab.word}}</td>
-            <td>{{vocab.translation}}</td>
-            <td>{{vocab.timesCorrect}}/{{vocab.timesTested}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div data-ng-show="selectedVocablist">
-        <a href="/#!/vocablists/{{selectedVocablist._id}}/test">Test</a>
-        <div class="pull-right">
-        <!-- && (authentication.user._id == vocablist.user._id))"> -->
-          <a class="btn btn-primary" href="/#!/vocablists/{{selectedVocablist._id}}/edit">
-            <i class="glyphicon glyphicon-edit"></i>
-          </a>
-          <a class="btn btn-primary" data-ng-click="remove();">
-            <i class="glyphicon glyphicon-trash"></i>
-          </a>
-        </div>
-      </div>
-    </div>
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>
+            <button ng-click="orderBy('chapter')">Chapter</button>
+            <span class="glyphicon"
+                  ng-show="predicate === 'chapter'"
+                  ng-class="{
+                              'glyphicon-menu-up': !reverse,
+                              'glyphicon-menu-down': reverse
+                            }">
+            </span>
+          </th>
+          <th>
+            <button ng-click="orderBy('name')">Name</button>
+            <span class="glyphicon"
+                  ng-show="predicate === 'name'"
+                  ng-class="{
+                              'glyphicon-menu-up': !reverse,
+                              'glyphicon-menu-down': reverse
+                            }">
+            </span>
+          </th>
+          <th>
+            <button ng-click="orderBy('category')">Category</button>
+            <span class="glyphicon"
+                  ng-show="predicate === 'category'"
+                  ng-class="{
+                              'glyphicon-menu-up': !reverse,
+                              'glyphicon-menu-down': reverse
+                            }">
+            </span>
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="vocablist in vocablists | filter : query : false | orderBy : predicate : reverse">
+            <td>{{vocablist.chapter}}</td>
+            <td>{{vocablist.name}}</td>
+            <td>{{vocablist.category}}</td>
+            <td>
+              <a href="#!/vocablists/show/{{vocablist._id}}">
+                <button class="btn btn-primary">
+                  View
+                </button>
+              </a>
+              <a href="#!/vocablists/edit/{{vocablist._id}}">
+                <button class="btn btn-success">
+                  <span class="glyphicon glyphicon-edit"></span> Edit
+                </button>
+              </a>
+              <button class="btn btn-danger" ng-click="remove(vocablist, $index)">
+                <span class="glyphicon glyphicon-remove-sign"></span> Delete
+              </button>
+              <a href="#!/vocablists/test/{{vocablist._id}}">
+                <button class="btn btn-primary">
+                  <span class="glyphicon glyphicon-pencil"></span> Test
+                </button>
+              </a>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>

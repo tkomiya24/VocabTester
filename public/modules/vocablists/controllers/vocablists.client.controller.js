@@ -14,13 +14,11 @@ angular.module('vocablists').
         }
         // Remove existing Vocablist
         $scope.remove = function(vocablist, index) {
-          if ($scope.selectedVocablist) {
-            $scope.selectedVocablist.$remove(
+          if (vocablist) {
+            vocablist.$remove(
               null,
               function(value, responseHeaders) {
-                $scope.vocablists.splice($scope.currentIndex, 1);
-                $scope.selectedVocablist = null;
-                $scope.currentIndex = -1;
+                $scope.vocablists.splice(index, 1);
               },
               function(httpResponse) {
                 $scope.error = JSON.stringify(httpResponse);
@@ -43,7 +41,7 @@ angular.module('vocablists').
 
         // Find a list of Vocablists
         $scope.find = function() {
-          $scope.vocablists = Vocablists.query({userId: Authentication.currentUser()._id});
+          $scope.vocablists = Vocablists.query();
         };
 
         // Find existing Vocablist
@@ -64,6 +62,15 @@ angular.module('vocablists').
 
         $scope.removeVocab = function(index) {
           $scope.vocablist.vocab[index].deleted = true;
+        };
+
+        $scope.orderBy = function(predicate) {
+          if (predicate === $scope.predicate) {
+            $scope.reverse = !$scope.reverse;
+          } else {
+            $scope.reverse = false;
+            $scope.predicate = predicate;
+          }
         };
       }
 ]);

@@ -27,9 +27,28 @@ div.sidebar {
 }
 
 section.create-vocablist {
-  padding: 50px;
   input.shortfield {
     width: 150px;
     display: inline;
+  }
+}
+
+.vocablist-table {
+  table {
+    width: 100%;
+    margin: 0 auto;
+  }
+  td {
+    text-align: left;
+    padding-left: 4px;
+  }
+  .search-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 6px;
+    align-items: center;
+  }
+  .search-field {
+    margin: auto 5px;
   }
 }
