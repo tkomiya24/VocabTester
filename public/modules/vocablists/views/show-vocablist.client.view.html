@@ -1,0 +1,18 @@
+<section data-ng-controller="VocablistsController" data-ng-init="findOne()">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>English</th>
+        <th>Translation</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="vocab in vocablist.vocab">
+          <td>{{vocab.word}}</td>
+          <td>{{vocab.translation}}</td>
+          <td>{{vocab.timesCorrect}}/{{vocab.timesTested}}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
