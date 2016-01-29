@@ -10,6 +10,7 @@ angular.module('vocablists').
           $location.path('/');
           return;
         }
+        $scope.completedVocabs = [];
         $scope.vocablist = Vocablists.get(
           {
             vocablistId: $stateParams.vocablistId
@@ -17,24 +18,17 @@ angular.module('vocablists').
           function(value, responseHeaders) {
             if (value.user !== Authentication.currentUser()._id) {
               $scope.authenticationError = 'You are not authorized to use this vocablist';
+            } else {
+              shuffle(value.vocab);
             }
           }
         );
         $scope.isSubmitted = false;
         $scope.responses = [];
-        $scope.grades = [];
         $scope.grade = 0;
-        for (var i = 0; i < $scope.vocablist.length; i++) {
-          $scope.grades[i] = false;
-        }
-        $scope.finished = {};
 
         function isFinished(i) {
-          return $scope.finished[i];
-        }
-
-        function markFinished(i) {
-          $scope.finished[i] = true;
+          return !!$scope.vocablist.vocab[i].correct;
         }
 
         function guessIsCorrect(i) {
@@ -42,9 +36,9 @@ angular.module('vocablists').
         }
 
         function markCorrect(i) {
-          $scope.grades[i] = true;
           $scope.grade++;
           $scope.vocablist.vocab[i].timesCorrect++;
+          $scope.vocablist.vocab[i].correct = true;
         }
 
         function gradeQuestion(i) {
@@ -53,21 +47,64 @@ angular.module('vocablists').
           }
           if (guessIsCorrect(i)) {
             markCorrect(i);
-            markFinished(i);
           }
           $scope.vocablist.vocab[i].timesTested++;
         }
 
+        function resetMarkers() {
+          for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
+            delete $scope.vocablist.vocab[i].correct;
+          }
+        }
+
+        function readdCorrect() {
+          $scope.completedVocabs.forEach(function(vocab) {
+            $scope.vocablist.vocab.push(vocab);
+          });
+          $scope.completedVocabs = [];
+        }
+
+        function shuffle(o) {
+          for (var j, x, i = o.length - 1; i >= 0; i--) {
+            j = Math.floor(Math.random() * i);
+            x = o[i];
+            o[i] = o[j];
+            o[j] = x;
+          }
+          return o;
+        }
+
+        $scope.incompleteCount = function() {
+          var count = 0;
+          if (!$scope.vocablist.vocab) { //if the vocablist hasn't been read in yet
+            return 1;
+          }
+          for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
+            if (!$scope.vocablist.vocab[i].correct) {
+              count++;
+            }
+          }
+          return count;
+        };
+
         $scope.restartTest = function() {
           $scope.isSubmitted = false;
-          $scope.grades = [];
           $scope.responses = [];
-          $scope.finished = {};
+          readdCorrect();
+          resetMarkers();
         };
 
         $scope.retestIncorrect = function() {
           $scope.isSubmitted = false;
           $scope.responses = [];
+          for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
+            if ($scope.vocablist.vocab[i].correct) {
+              $scope.completedVocabs.push($scope.vocablist.vocab[i]);
+              $scope.vocablist.vocab.splice(i, 1);
+              i--;
+            }
+          }
+          shuffle($scope.vocablist.vocab);
         };
 
         $scope.gradeTest = function() {
@@ -85,10 +122,5 @@ angular.module('vocablists').
               $scope.error = httpResponse.message;
             });
         };
-
-        $scope.isTextFieldEnabled = function(index) {
-          return !$scope.isSubmitted && !$scope.grades[index];
-        };
-
       }
 ]);
