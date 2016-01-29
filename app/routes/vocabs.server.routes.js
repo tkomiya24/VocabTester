@@ -9,6 +9,9 @@ module.exports = function(app) {
   .get(vocabs.list)
   .post(users.requiresLogin, vocabs.create);
 
+  app.route('/vocabs/updateMultiple')
+    .put(users.requiresLogin, vocabs.updateMultiple);
+
   app.route('/vocabs/:vocabId')
     .get(vocabs.read)
     .put(users.requiresLogin, vocabs.update)

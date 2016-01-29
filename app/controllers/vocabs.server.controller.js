@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var errorHandler = require('./errors.server.controller');
 var Vocab = mongoose.model('Vocab');
 var _ = require('lodash');
+var updateVocabHelper = require('../helpers/updateVocab');
 
 /**
  * Create a Vocab
@@ -48,6 +49,16 @@ exports.update = function(req, res) {
       res.jsonp(vocab);
     }
   });
+};
+
+exports.updateMultiple = function(req, res) {
+  var vocabs = req.body;
+  updateVocabHelper.findAndUpdateVocabs(vocabs)
+    .then(function(vocabs) {
+      res.jsonp(vocabs);
+    }).catch(function(err) {
+      return res.status(400).send({message: errorHandler.getErrorMessage(err)});
+    });
 };
 
 /**

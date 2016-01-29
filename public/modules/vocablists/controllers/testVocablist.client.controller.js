@@ -3,8 +3,8 @@
 // Vocablists controller
 angular.module('vocablists').
   controller('TestController',
-    ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists',
-      function($scope, $stateParams, $location, Authentication, Vocablists) {
+    ['$scope', '$stateParams', '$location', 'Authentication', 'Vocablists', 'Vocabs',
+      function($scope, $stateParams, $location, Authentication, Vocablists, Vocabs) {
 
         if (!Authentication.currentUser()) {
           $location.path('/');
@@ -58,17 +58,6 @@ angular.module('vocablists').
           $scope.vocablist.vocab[i].timesTested++;
         }
 
-        $scope.test = function() {
-          $scope.isSubmitted = false;
-          $scope.findOne();
-          $scope.responses = [];
-          $scope.grades = [];
-          $scope.grade = 0;
-          for (var i = 0; i < $scope.vocablist.length; i++) {
-            $scope.grades[i] = false;
-          }
-        };
-
         $scope.restartTest = function() {
           $scope.isSubmitted = false;
           $scope.grades = [];
@@ -86,13 +75,14 @@ angular.module('vocablists').
           for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
             gradeQuestion(i);
           }
-          $scope.vocablist.$update(
+          Vocabs.updateMultiple(
             null,
-            function(vocablist) {
-              $scope.vocablist = vocablist;
+            $scope.vocablist.vocab,
+            function(value, responseHeaders) {
+
             },
-            function(errorResponse) {
-              $scope.error = errorResponse.data.message;
+            function(httpResponse) {
+              $scope.error = httpResponse.message;
             });
         };
 
