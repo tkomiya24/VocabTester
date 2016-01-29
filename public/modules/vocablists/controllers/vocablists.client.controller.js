@@ -63,5 +63,14 @@ angular.module('vocablists').
         $scope.removeVocab = function(index) {
           $scope.vocablist.vocab[index].deleted = true;
         };
+
+        $scope.orderBy = function(predicate) {
+          if (predicate === $scope.predicate) {
+            $scope.reverse = !$scope.reverse;
+          } else {
+            $scope.reverse = false;
+            $scope.predicate = predicate;
+          }
+        };
       }
 ]);
