@@ -8,12 +8,15 @@ var ApplicationConfiguration = (function() {
   var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',
                                              'ngAnimate', 'ngTouch',
                                              'ngSanitize',  'ui.router',
-                                             'ui.bootstrap', 'ui.utils'];
+                                             'ui.bootstrap', 'ui.utils',
+                                             constantsModule];
 
   // Add a new vertical module
   var registerModule = function(moduleName, dependencies) {
     // Create angular module
-    angular.module(moduleName, dependencies || []);
+    dependencies = dependencies || [];
+    dependencies.push(constantsModule);
+    angular.module(moduleName, dependencies);
 
     // Add the module to the AngularJS configuration file
     angular.module(applicationModuleName).requires.push(moduleName);
