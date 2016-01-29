@@ -1,5 +1,10 @@
 'use strict';
 
+angular.module(ApplicationConfiguration.constantsModuleName, []).constant('Constants', {
+  AUTHORIZED_REROUTE: 'AUTHORIZED_REROUTE',
+  UNAUTHORIZED_REROUTE: 'UNAUTHORIZED_REROUTE'
+});
+
 //Start by defining the main module and adding the module dependencies
 angular.module(ApplicationConfiguration.applicationModuleName,
                ApplicationConfiguration.applicationModuleVendorDependencies);
