@@ -14,6 +14,8 @@ module.exports = function(app) {
     .put(users.requiresLogin, vocabs.update)
     .delete(users.requiresLogin, vocabs.hasAuthorization, vocabs.delete);
 
+  app.route('/vocabs/updateMultiple')
+    .put(users.requiresLogin, vocabs.updateMultiple);
   // Finish by binding the Vocab middleware
   app.param('vocabId', vocabs.vocabByID);
 };
