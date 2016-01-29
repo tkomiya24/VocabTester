@@ -40,6 +40,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).
         if (error === Constants.UNAUTHORIZED_REROUTE) {
           $rootScope.error = 'You must be signed in to view this page';
           return $state.go('signin');
+        } else if (error === Constants.AUTHORIZED_REROUTE) {
+          return $state.go('listVocablists');
         }
       });
   }]);
