@@ -24,7 +24,7 @@ angular.module('vocablists').config(['$stateProvider', 'resolutionServiceProvide
         resolve: authenticateResolve
       }).
       state('editVocablist', {
-        url: '/vocablists/:vocablistId/edit',
+        url: '/vocablists/edit/:vocablistId',
         templateUrl: 'modules/vocablists/views/edit-vocablist.client.view.html',
         resolve: authenticateResolve
       }).
