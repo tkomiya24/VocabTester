@@ -1,38 +1,41 @@
 <section data-ng-controller="VocablistsController" data-ng-init="find()">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Chapter</th>
-        <th>Name</th>
-        <th>Category</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="vocablist in vocablists">
-          <td>{{vocablist.chapter}}</td>
-          <td>{{vocablist.name}}</td>
-          <td>{{vocablist.category}}</td>
-          <td>
-            <a href="#!/vocablists/show/{{vocablist._id}}">
-              <button class="btn btn-primary">
-                View
+  <div class="vocablist-table">
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Chapter</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="vocablist in vocablists">
+            <td>{{vocablist.chapter}}</td>
+            <td>{{vocablist.name}}</td>
+            <td>{{vocablist.category}}</td>
+            <td>
+              <a href="#!/vocablists/show/{{vocablist._id}}">
+                <button class="btn btn-primary">
+                  View
+                </button>
+              </a>
+              <a href="#!/vocablists/edit/{{vocablist._id}}">
+                <button class="btn btn-success">
+                  <span class="glyphicon glyphicon-edit"></span> Edit
+                </button>
+              </a>
+              <button class="btn btn-danger" ng-click="remove(vocablist, $index)">
+                <span class="glyphicon glyphicon-remove-sign"></span> Delete
               </button>
-            </a>
-            <a href="#!/vocablists/edit/{{vocablist._id}}">
-              <button class="btn btn-success">
-                <span class="glyphicon glyphicon-edit"></span> Edit
-              </button>
-            </a>
-            <button class="btn btn-danger" ng-click="remove(vocablist, $index)">
-              <span class="glyphicon glyphicon-remove-sign"></span> Delete
-            </button>
-            <a href="#!/vocablists/test/{{vocablist._id}}">
-              <button class="btn btn-primary">
-                <span class="glyphicon glyphicon-pencil"></span> Test
-              </button>
-            </a>
-          </td>
-      </tr>
-    </tbody>
-  </table>
+              <a href="#!/vocablists/test/{{vocablist._id}}">
+                <button class="btn btn-primary">
+                  <span class="glyphicon glyphicon-pencil"></span> Test
+                </button>
+              </a>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>
