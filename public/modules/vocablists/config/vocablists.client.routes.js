@@ -29,7 +29,7 @@ angular.module('vocablists').config(['$stateProvider', 'resolutionServiceProvide
         resolve: authenticateResolve
       }).
       state('testVocablist', {
-        url: '/vocablists/:vocablistId/test',
+        url: '/vocablists/test/:vocablistId',
         templateUrl: 'modules/vocablists/views/test-vocablist.client.view.html',
         resolve: authenticateResolve
       });
