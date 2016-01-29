@@ -46,11 +46,9 @@ div.sidebar {
   background: rgba(63, 244, 7, 0.2);
   font-style: italic; }
 
-section.create-vocablist {
-  padding: 50px; }
-  section.create-vocablist input.shortfield {
-    width: 150px;
-    display: inline; }
+section.create-vocablist input.shortfield {
+  width: 150px;
+  display: inline; }
 
 .vocablist-table table {
   width: 100%;
