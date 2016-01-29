@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody class="test-table">
-      <tr ng-repeat="vocab in vocablist.vocab" ng-class="{correct: vocab.finished}">
+      <tr ng-repeat="vocab in vocablist.vocab" ng-class="{correct: vocab.correct}">
         <td>{{vocab.word}}</td>
         <td>
           <input type="text" ng-model="responses[$index]" ng-show="!isSubmitted && !vocab.correct"></input>

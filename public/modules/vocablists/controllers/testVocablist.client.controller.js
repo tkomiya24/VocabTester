@@ -28,11 +28,7 @@ angular.module('vocablists').
         }
 
         function isFinished(i) {
-          return !!$scope.vocablist.vocab[i].finished;
-        }
-
-        function markFinished(i) {
-          $scope.vocablist.vocab[i].finished = true;
+          return !!$scope.vocablist.vocab[i].correct;
         }
 
         function guessIsCorrect(i) {
@@ -51,14 +47,12 @@ angular.module('vocablists').
           }
           if (guessIsCorrect(i)) {
             markCorrect(i);
-            markFinished(i);
           }
           $scope.vocablist.vocab[i].timesTested++;
         }
 
         function resetMarkers() {
           for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
-            delete $scope.vocablist.vocab[i].finished;
             delete $scope.vocablist.vocab[i].correct;
           }
         }
