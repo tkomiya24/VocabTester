@@ -18,6 +18,11 @@ angular.module('vocablists').config(['$stateProvider', 'resolutionServiceProvide
         templateUrl: 'modules/vocablists/views/create-vocablist.client.view.html',
         resolve: authenticateResolve
       }).
+      state('showVocablist', {
+        url: '/vocablists/show/:vocablistId',
+        templateUrl: 'modules/vocablists/views/show-vocablist.client.view.html',
+        resolve: authenticateResolve
+      }).
       state('editVocablist', {
         url: '/vocablists/:vocablistId/edit',
         templateUrl: 'modules/vocablists/views/edit-vocablist.client.view.html',
