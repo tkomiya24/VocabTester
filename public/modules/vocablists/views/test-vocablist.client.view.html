@@ -32,10 +32,10 @@
     Back to list
   </a>
   <div ng-hide="authenticationError">
-    <button class="btn btn-primary" ng-click="gradeTest()" ng-show="!isSubmitted && grade !== vocablist.vocab.length">
+    <button class="btn btn-primary" ng-click="gradeTest()" ng-show="!isSubmitted && 0 !== incompleteCount()">
       Submit
     </button>
-    <button class="btn btn-primary" ng-click="retestIncorrect()" ng-show="isSubmitted && grade !== vocablist.vocab.length">
+    <button class="btn btn-primary" ng-click="retestIncorrect()" ng-show="isSubmitted && 0 !== incompleteCount()">
       Redo mistakes
     </button>
     <button class="btn btn-primary" ng-click="restartTest()">

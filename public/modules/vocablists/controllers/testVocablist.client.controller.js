@@ -54,6 +54,19 @@ angular.module('vocablists').
           }
         }
 
+        $scope.incompleteCount = function() {
+          var count = 0;
+          if (!$scope.vocablist.vocab) { //if the vocablist hasn't been read in yet
+            return 1;
+          }
+          for (var i = 0; i < $scope.vocablist.vocab.length; i++) {
+            if (!$scope.vocablist.vocab[i].correct) {
+              count++;
+            }
+          }
+          return count;
+        };
+
         $scope.restartTest = function() {
           $scope.isSubmitted = false;
           $scope.responses = [];
