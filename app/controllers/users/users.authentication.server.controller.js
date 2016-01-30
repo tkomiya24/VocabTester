@@ -10,7 +10,39 @@ var passport = require('passport');
 var User = mongoose.model('User');
 var Vocablist = mongoose.model('Vocablist');
 var Vocab = mongoose.model('Vocab');
-var sampleVocablist = require('./../../data/seed/daysOfTheWeek');
+var sampleVocablists = require('./../../data/seed/daysOfTheWeek');
+
+function saveVocablist(vocablist, user) {
+  return new Promise(function(resolve, reject) {
+    Vocab.create(vocablist.vocab, function(err, docs) {
+      if (err) {
+        reject(err);
+      } else if (!docs) {
+        reject(new Error('Could not create vocabs'));
+      } else {
+        vocablist.user = user;
+        vocablist.vocab = docs;
+        Vocablist.create(vocablist, function(err, doc) {
+          if (err) {
+            reject(err);
+          } else if (!doc) {
+            reject(new Error('Could not create vocablist'));
+          } else {
+            resolve(doc);
+          }
+        });
+      }
+    });
+  });
+}
+
+function saveVocablists(vocablists, user) {
+  var promises = [];
+  vocablists.forEach(function(vocablist) {
+    promises.push(saveVocablist(vocablist, user));
+  });
+  return Promise.all(promises);
+}
 
 /**
  * Signup
@@ -31,29 +63,28 @@ exports.signup = function(req, res) {
   user.
     save().
     then(function(user) {
-      return Vocab.create(sampleVocablist.vocab);
+      console.log('User has been saved');
+      console.log(sampleVocablists.slice());
+      return saveVocablists(_.cloneDeep(sampleVocablists), user);
     }).
-    then(function(vocabs) {
-      sampleVocablist.vocab = vocabs;
-      sampleVocablist.user = user;
-      return new Vocablist(sampleVocablist).save();
-    }).
-    then(function(vocablist) {
-      user.password = undefined;
-      user.salt = undefined;
-      req.login(user, function(err) {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.json(user);
-        }
+    then(function(vocablists) {
+      return new Promise(function(resolve, reject) {
+        user.password = undefined;
+        user.salt = undefined;
+        req.login(user, function(err) {
+          if (err) {
+            reject(err);
+          } else {
+            res.json(user);
+          }
+        });
       });
     }).
     catch(function(error) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(error)
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(error)
+      });
     });
-  });
 };
 
 /**

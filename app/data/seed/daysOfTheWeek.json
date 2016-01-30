@@ -1,33 +1,104 @@
-{
-  "vocab": [
-    {
-      "word": "Monday",
-      "translation": "월요일"
-    },
-    {
-      "word": "Tuesday",
-      "translation": "화요일"
-    },
-    {
-      "word": "Wednesday",
-      "translation": "수요일"
-    },
-    {
-      "word": "Thursday",
-      "translation": "목요일"
-    },
-    {
-      "word": "Friday",
-      "translation": "금요일"
-    },
-    {
-      "word": "Saturday",
-      "translation": "토요일"
-    },
-    {
-      "word": "Sunday",
-      "translation": "일요일"
-    }
-  ],
-  "name": "Days of the Week"
-}
+[
+  {
+    "vocab": [
+      {
+        "word": "Monday",
+        "translation": "월요일"
+      },
+      {
+        "word": "Tuesday",
+        "translation": "화요일"
+      },
+      {
+        "word": "Wednesday",
+        "translation": "수요일"
+      },
+      {
+        "word": "Thursday",
+        "translation": "목요일"
+      },
+      {
+        "word": "Friday",
+        "translation": "금요일"
+      },
+      {
+        "word": "Saturday",
+        "translation": "토요일"
+      },
+      {
+        "word": "Sunday",
+        "translation": "일요일"
+      }
+    ],
+    "category": "Nouns",
+    "name": "Days of the Week Korean"
+  },
+  {
+    "vocab": [
+      {
+        "word": "Monday",
+        "translation": "月曜日"
+      },
+      {
+        "word": "Tuesday",
+        "translation": "火曜日"
+      },
+      {
+        "word": "Wednesday",
+        "translation": "水曜日"
+      },
+      {
+        "word": "Thursday",
+        "translation": "木曜日"
+      },
+      {
+        "word": "Friday",
+        "translation": "金曜日"
+      },
+      {
+        "word": "Saturday",
+        "translation": "土曜日"
+      },
+      {
+        "word": "Sunday",
+        "translation": "日曜日"
+      }
+    ],
+    "category": "Nouns",
+    "name": "Days of the Week Japanese"
+  },
+  {
+    "vocab": [
+      {
+        "word": "Monday",
+        "translation": "Lundi"
+      },
+      {
+        "word": "Tuesday",
+        "translation": "Mardi"
+      },
+      {
+        "word": "Wednesday",
+        "translation": "Mercredi"
+      },
+      {
+        "word": "Thursday",
+        "translation": "Jeudi"
+      },
+      {
+        "word": "Friday",
+        "translation": "Vendredi"
+      },
+      {
+        "word": "Saturday",
+        "translation": "Samedi"
+      },
+      {
+        "word": "Sunday",
+        "translation": "Dimanche"
+      }
+    ],
+    "category": "Nouns",
+    "name": "Days of the Week French"
+  }
+]
