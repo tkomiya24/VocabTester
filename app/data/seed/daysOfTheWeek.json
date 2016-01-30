@@ -66,5 +66,39 @@
     ],
     "category": "Nouns",
     "name": "Days of the Week Japanese"
+  },
+  {
+    "vocab": [
+      {
+        "word": "Monday",
+        "translation": "Lundi"
+      },
+      {
+        "word": "Tuesday",
+        "translation": "Mardi"
+      },
+      {
+        "word": "Wednesday",
+        "translation": "Mercredi"
+      },
+      {
+        "word": "Thursday",
+        "translation": "Jeudi"
+      },
+      {
+        "word": "Friday",
+        "translation": "Vendredi"
+      },
+      {
+        "word": "Saturday",
+        "translation": "Samedi"
+      },
+      {
+        "word": "Sunday",
+        "translation": "Dimanche"
+      }
+    ],
+    "category": "Nouns",
+    "name": "Days of the Week French"
   }
 ]
