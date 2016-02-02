@@ -1,8 +1,33 @@
-.table-striped > .test-table {
+.test-table {
+  width: 50%;
+  margin: 0 auto;
+  tr {
+    margin: 0 auto;
+  }
   tr.correct {
     background: $correctRowColor;
     font-style: italic;
   }
+}
+
+.side-controls {
+  position: fixed;
+  top: 70;
+  float: left;
+  width: 10%;
+  left: 15%;
+  margin-right: 0;
+  button {
+    display: block;
+    margin-bottom: 0.3em;
+  }
+  h3 {
+    margin-top: 0;
+  }
+}
+
+.side-controls.affix {
+  top: 70px;
 }
 
 section.create-vocablist {

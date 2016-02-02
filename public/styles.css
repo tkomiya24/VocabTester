@@ -22,9 +22,30 @@
   right: 10px;
   position: absolute; }
 
-.table-striped > .test-table tr.correct {
-  background: rgba(63, 244, 7, 0.2);
-  font-style: italic; }
+.test-table {
+  width: 50%;
+  margin: 0 auto; }
+  .test-table tr {
+    margin: 0 auto; }
+  .test-table tr.correct {
+    background: rgba(63, 244, 7, 0.2);
+    font-style: italic; }
+
+.side-controls {
+  position: fixed;
+  top: 70;
+  float: left;
+  width: 10%;
+  left: 15%;
+  margin-right: 0; }
+  .side-controls button {
+    display: block;
+    margin-bottom: 0.3em; }
+  .side-controls h3 {
+    margin-top: 0; }
+
+.side-controls.affix {
+  top: 70px; }
 
 section.create-vocablist input.shortfield {
   width: 150px;

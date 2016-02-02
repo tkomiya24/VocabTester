@@ -2,36 +2,13 @@
   <div data-ng-show="authenticationError" class="text-center text-danger">
     <strong data-ng-bind="authenticationError"></strong>
   </div>
-  <table data-ng-hide="authenticationError" class="table table-striped">
-    <thead>
-      <tr>
-        <th>English</th>
-        <th>Korean</th>
-        <th>Record</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody class="test-table">
-      <tr ng-repeat="vocab in vocablist.vocab" ng-class="{correct: vocab.correct}">
-        <td>{{vocab.word}}</td>
-        <td>
-          <input type="text" ng-model="responses[$index]" ng-show="!isSubmitted && !vocab.correct"></input>
-          <label ng-hide="!isSubmitted && !vocab.correct">{{vocab.translation}}</index>
-        </td>
-        <td>
-          {{vocab.timesCorrect}} / {{vocab.timesTested}}
-        </td>
-        <td>
-          <span class="glyphicon glyphicon-ok" ng-show="vocab.correct"></span>
-          <span class="glyphicon glyphicon-remove" ng-hide="vocab.correct"></span>
-        </td>
-       </tr>
-    </tbody>
-  </table>
-  <a href="/#!/vocablists/" class="btn btn-primary">
-    Back to list
-  </a>
-  <div ng-hide="authenticationError">
+  <div class="side-controls" set-class-when-at-top="affix" offset-start="20" ng-hide="authenticationError">
+    <h3>Score: {{score}} / {{total}}<h3>
+    <a href="/#!/vocablists/">
+      <button class="btn btn-primary">
+        Back to list
+      </button>
+    </a>
     <button class="btn btn-primary" ng-click="gradeTest()" ng-show="!isSubmitted && 0 !== incompleteCount()">
       Submit
     </button>
@@ -41,5 +18,24 @@
     <button class="btn btn-primary" ng-click="restartTest()">
       Restart
     </button>
+  </div>
+  <div class="test-table">
+    <h2>Good luck!</h2>
+    <table data-ng-hide="authenticationError" class="table">
+      <tbody>
+        <tr ng-repeat="vocab in vocablist.vocab" ng-class="{correct: vocab.correct}">
+          <td>{{$index + 1}}.</td>
+          <td>{{vocab.word}}</td>
+          <td>
+            <input type="text" ng-model="responses[$index]" ng-show="!isSubmitted && !vocab.correct"></input>
+            <label ng-hide="!isSubmitted && !vocab.correct">{{vocab.translation}}</index>
+          </td>
+          <td ng-show="isSubmitted">
+            <span class="glyphicon glyphicon-ok" ng-show="vocab.correct"></span>
+            <span class="glyphicon glyphicon-remove" ng-hide="vocab.correct"></span>
+          </td>
+         </tr>
+      </tbody>
+    </table>
   </div>
 </section>
