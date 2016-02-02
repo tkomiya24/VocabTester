@@ -22,23 +22,6 @@
   right: 10px;
   position: absolute; }
 
-div.tableContainer {
-  display: table; }
-
-div.tableRow {
-  display: table-row; }
-
-div.main {
-  margin-left: 250px;
-  margin-right: 250px; }
-
-div.sidebar {
-  position: fixed;
-  font-size: 11px;
-  width: 150px;
-  overflow-y: scroll;
-  height: 100%; }
-
 .table-striped > .test-table tr.correct {
   background: rgba(63, 244, 7, 0.2);
   font-style: italic; }
