@@ -23,6 +23,8 @@
   position: absolute; }
 
 .vocablist-fields {
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
   max-width: 100%; }
   .vocablist-fields input, .vocablist-fields select {
     display: inline;
