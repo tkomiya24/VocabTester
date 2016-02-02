@@ -15,13 +15,14 @@ angular.module('vocablists').
             if (value.user !== Authentication.currentUser()._id) {
               $scope.authenticationError = 'You are not authorized to use this vocablist';
             } else {
+              $scope.total = value.vocab.length;
               shuffle(value.vocab);
             }
           }
         );
         $scope.isSubmitted = false;
         $scope.responses = [];
-        $scope.grade = 0;
+        $scope.score = 0;
 
         function isFinished(i) {
           return !!$scope.vocablist.vocab[i].correct;
@@ -32,7 +33,7 @@ angular.module('vocablists').
         }
 
         function markCorrect(i) {
-          $scope.grade++;
+          $scope.score++;
           $scope.vocablist.vocab[i].timesCorrect++;
           $scope.vocablist.vocab[i].correct = true;
         }
@@ -86,6 +87,7 @@ angular.module('vocablists').
         $scope.restartTest = function() {
           $scope.isSubmitted = false;
           $scope.responses = [];
+          $scope.score = 0;
           readdCorrect();
           resetMarkers();
         };
