@@ -22,6 +22,18 @@
   right: 10px;
   position: absolute; }
 
+.vocablist-fields {
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
+  max-width: 100%;
+  padding: 1%; }
+  .vocablist-fields input, .vocablist-fields select {
+    display: inline;
+    width: 15%;
+    max-width: 200px; }
+  .vocablist-fields label, .vocablist-fields input {
+    margin-right: 1%; }
+
 .test-table {
   width: 50%;
   margin: 0 auto; }
@@ -46,10 +58,6 @@
 
 .side-controls.affix {
   top: 70px; }
-
-section.create-vocablist input.shortfield {
-  width: 150px;
-  display: inline; }
 
 .vocablist-table table {
   width: 100%;
