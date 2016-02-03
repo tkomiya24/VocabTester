@@ -27,6 +27,19 @@ angular.module('vocablists').
           }
         };
 
+        $scope.removeOne = function() {
+          $scope.vocablist.$remove(
+            null,
+            function(value, responseHeaders) {
+              $scope.message = 'Vocablist successfully deleted';
+              $location.path('/vocablist');
+            },
+            function(httpResponse) {
+              $scope.error = httpResponse.message;
+            }
+          );
+        };
+
         // Update existing Vocablist
         $scope.update = function() {
           $scope.vocablist.$update(
