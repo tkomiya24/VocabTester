@@ -12,7 +12,7 @@ module.exports = function(app) {
   app.route('/vocablists/:vocablistId')
     .get(vocablists.read)
     .put(users.requiresLogin, vocablists.hasAuthorization, vocablists.update)
-    .delete(vocablists.delete);
+    .delete(users.requiresLogin, vocablists.hasAuthorization, vocablists.delete);
 
   // Finish by binding the Vocablist middleware
   app.param('vocablistId', vocablists.vocablistByID);
