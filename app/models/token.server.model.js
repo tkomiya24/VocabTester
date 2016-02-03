@@ -6,12 +6,12 @@ var Schema = mongoose.Schema;
 var tokenSchema = new Schema({
   token: {
     type: String,
-    required: true
+    required: true,
+    index: true
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
-    index: true
+    ref: 'User'
   }
 });
 
