@@ -10,11 +10,11 @@ var tokenGenerator = require('rand-token');
 function getUserFromToken(token, done) {
   Token.find({token: token}, {user: 1}, null).populate('user', function(err, token) {
     if (err) {
-      done(err);
+      return done(err);
     } else if (!token) {
-      done(null, false);
+      return done(null, false);
     } else {
-      done(null, token.user);
+      return done(null, token.user);
     }
   });
 }
@@ -23,9 +23,9 @@ function issueTokenToUser(user, done) {
   var token = tokenGenerator.generate(64);
   Token.create({token: token, user: user}, function(err, token) {
     if (err) {
-      done(err);
+      return done(err);
     } else {
-      done(null, token);
+      return done(null, token);
     }
   });
 }
