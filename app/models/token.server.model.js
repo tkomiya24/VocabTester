@@ -7,7 +7,8 @@ var tokenSchema = new Schema({
   token: {
     type: String,
     required: true,
-    index: true
+    index: true,
+    unique: true
   },
   user: {
     type: Schema.Types.ObjectId,
