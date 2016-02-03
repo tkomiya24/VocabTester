@@ -73,11 +73,17 @@
 .vocablist-table .search-field {
   margin: auto 5px; }
 
+.action-buttons {
+  margin-bottom: 5px; }
+
 body {
   margin-top: 70px; }
 
 .centered-container {
   width: 85%;
   margin: 0 auto; }
+
+.affix {
+  top: 55px; }
 
 /*# sourceMappingURL=styles.css.map */
