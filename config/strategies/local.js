@@ -13,26 +13,20 @@ module.exports = function() {
     usernameField: 'username',
     passwordField: 'password'
   },
-		function(username, password, done) {
-  User.findOne({
-    username: username
-  }, function(err, user) {
-    if (err) {
-      return done(err);
-    }
-    if (!user) {
-      return done(null, false, {
-        message: 'Unknown user or invalid password'
+    function(username, password, done) {
+      User.findOne({
+        username: username
+      }, function(err, user) {
+        if (err) {
+          return done(err);
+        }
+        if (!user || !user.authenticate(password)) {
+          return done(null, false, {
+            message: 'Unknown user or invalid password'
+          });
+        }
+        return done(null, user);
       });
     }
-    if (!user.authenticate(password)) {
-      return done(null, false, {
-        message: 'Unknown user or invalid password'
-      });
-    }
-
-    return done(null, user);
-  });
-		}
-	));
+  ));
 };
