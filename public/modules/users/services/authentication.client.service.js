@@ -41,21 +41,14 @@ angular.module('users').factory('Authentication',
       currentUser: function() {
         return currentUser;
       },
-      isAuthenticated: function($q, Constants) {
-        return $q(function(resolve, reject) {
-          $http.get('/auth/isauthenticated').
-            success(function(response) {
-              if (response) {
-                currentUser = response;
-                console.log(response);
-                resolve(response);
-              } else {
-                currentUser = null;
-                reject(Constants.UNAUTHORIZED_REROUTE);
-              }
-            }).
-            error(reject);
-        });
+      isAuthenticated: function(success, error) {
+        $http.get('/auth/isauthenticated').
+          success(function(response) {
+            currentUser = response;
+            broadcastAuthentication(!!currentUser);
+            success(response);
+          }).
+          error(error);
       },
       requestPasswordReset: function(user, success, error) {
         $http.post('/auth/forgot', user).success(function(response) {

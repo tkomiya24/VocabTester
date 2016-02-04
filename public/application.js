@@ -8,7 +8,20 @@ angular.module(ApplicationConfiguration.constantsModuleName, []).constant('Const
 angular.module(ApplicationConfiguration.resolutionModuleName, []).provider('resolutionService',
   function resolutionProvider() {
     this.checkAuthentication = function($q, Authentication, Constants) {
-        return Authentication.isAuthenticated($q, Constants);
+        return $q(function(resolve, reject) {
+          Authentication.isAuthenticated(
+            function(response) {
+              if (response) {
+                resolve(response);
+              } else {
+                reject(Constants.UNAUTHORIZED_REROUTE);
+              }
+            },
+            function(error) {
+              reject(error);
+            }
+          );
+        });
       };
     this.$get = function() {};
   });
