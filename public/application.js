@@ -9,11 +9,18 @@ angular.module(ApplicationConfiguration.resolutionModuleName, []).provider('reso
   function resolutionProvider() {
     this.checkAuthentication = function($q, Authentication, Constants) {
         return $q(function(resolve, reject) {
-          if (!Authentication.currentUser()) {
-            reject(Constants.UNAUTHORIZED_REROUTE);
-          } else {
-            resolve();
-          }
+          Authentication.isAuthenticated(
+            function(response) {
+              if (response) {
+                resolve(response);
+              } else {
+                reject(Constants.UNAUTHORIZED_REROUTE);
+              }
+            },
+            function(error) {
+              reject(error);
+            }
+          );
         });
       };
     this.$get = function() {};

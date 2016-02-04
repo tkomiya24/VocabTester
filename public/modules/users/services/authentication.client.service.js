@@ -11,8 +11,6 @@ angular.module('users').factory('Authentication',
     return {
       signin: function(user, success, error) {
         $http.post('/auth/signin', user).success(function(response) {
-          var expiryDate = new Date();
-          expiryDate.setMonth(expiryDate.getMonth() + 6);
           currentUser = response;
           broadcastAuthentication(true);
           success();
@@ -40,6 +38,15 @@ angular.module('users').factory('Authentication',
       },
       currentUser: function() {
         return currentUser;
+      },
+      isAuthenticated: function(success, error) {
+        $http.get('/auth/isauthenticated').
+          success(function(response) {
+            currentUser = response;
+            broadcastAuthentication(!!currentUser);
+            success(response);
+          }).
+          error(error);
       },
       requestPasswordReset: function(user, success, error) {
         $http.post('/auth/forgot', user).success(function(response) {

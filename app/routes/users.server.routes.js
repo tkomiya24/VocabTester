@@ -24,6 +24,7 @@ module.exports = function(app) {
   app.route('/auth/signup').post(users.signup);
   app.route('/auth/signin').post(users.signin);
   app.route('/auth/signout').post(users.signout);
+  app.route('/auth/isauthenticated').get(users.isAuthenticated);
 
   // Setting the facebook oauth routes
   app.route('/auth/facebook').get(passport.authenticate('facebook', {

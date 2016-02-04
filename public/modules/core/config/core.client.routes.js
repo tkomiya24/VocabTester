@@ -11,15 +11,22 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider', 'Constant
       url: '/',
       templateUrl: 'modules/core/views/home.client.view.html',
       resolve: {
-        checkAuthentication: function(Authentication, $q) {
-          return $q(function(resolve, reject) {
-            if (!Authentication.currentUser()) {
-              resolve();
-            } else {
-              reject(Constants.AUTHORIZED_REROUTE);
-            }
-          });
-        }
+        checkAuthentication: function($q, Authentication, Constants) {
+            return $q(function(resolve, reject) {
+              Authentication.isAuthenticated(
+                function(response) {
+                  if (response) {
+                    reject(Constants.AUTHORIZED_REROUTE);
+                  } else {
+                    resolve();
+                  }
+                },
+                function(error) {
+                  reject(error);
+                }
+              );
+            });
+          }
       }
     });
   }
