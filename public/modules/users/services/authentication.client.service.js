@@ -41,6 +41,22 @@ angular.module('users').factory('Authentication',
       currentUser: function() {
         return currentUser;
       },
+      isAuthenticated: function($q, Constants) {
+        return $q(function(resolve, reject) {
+          $http.get('/auth/isauthenticated').
+            success(function(response) {
+              if (response) {
+                currentUser = response;
+                console.log(response);
+                resolve(response);
+              } else {
+                currentUser = null;
+                reject(Constants.UNAUTHORIZED_REROUTE);
+              }
+            }).
+            error(reject);
+        });
+      },
       requestPasswordReset: function(user, success, error) {
         $http.post('/auth/forgot', user).success(function(response) {
           success(response);
