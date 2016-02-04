@@ -56,3 +56,11 @@ exports.hasAuthorization = function(roles) {
     });
   };
 };
+
+exports.isAuthenticated = function(req, res) {
+  if (req.user) {
+    res.jsonp(req.user);
+  } else {
+    res.jsonp(null);
+  }
+};
