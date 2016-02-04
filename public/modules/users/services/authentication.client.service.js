@@ -11,8 +11,6 @@ angular.module('users').factory('Authentication',
     return {
       signin: function(user, success, error) {
         $http.post('/auth/signin', user).success(function(response) {
-          var expiryDate = new Date();
-          expiryDate.setMonth(expiryDate.getMonth() + 6);
           currentUser = response;
           broadcastAuthentication(true);
           success();
