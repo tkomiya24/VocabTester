@@ -6,10 +6,7 @@ module.exports = {
       'localhost') + '/vocabtester',
   assets: {
     lib: {
-      css: [
-      'public/lib/bootstrap/dist/css/bootstrap.min.css',
-      'public/lib/bootstrap/dist/css/bootstrap-theme.min.css'
-      ],
+      css: [],
       js: [
         'public/lib/angular-ui-router/release/angular-ui-router.min.js',
         'public/lib/angular-ui-utils/ui-utils.min.js',

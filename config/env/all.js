@@ -12,10 +12,7 @@ module.exports = {
   sessionCollection: 'sessions',
   assets: {
     lib: {
-      css: [
-        'public/lib/bootstrap/dist/css/bootstrap.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.css'
-      ],
+      css: [],
       js: [
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
