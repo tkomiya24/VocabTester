@@ -11,7 +11,7 @@
     "start": "grunt",
     "test": "grunt test",
     "jshint": "grunt jshint",
-    "postinstall": "bower install --config.interactive=false",
+    "postinstall": "bower install --config.interactive=false && grunt buildCSS",
     "jscs": "grunt jscs"
   },
   "pre-commit": [
@@ -48,6 +48,7 @@
     "swig": "~1.4.1"
   },
   "devDependencies": {
+    "grunt-cli": "^0.1.13",
     "grunt-concurrent": "~1.0.0",
     "grunt-contrib-cssmin": "~0.10.0",
     "grunt-contrib-jshint": "~0.10.0",
