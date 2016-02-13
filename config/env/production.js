@@ -17,10 +17,7 @@ module.exports = {
       'public/styles.css'
     ],
     js: [
-      'public/config.js',
-      'public/application.js',
-      'public/modules/*/*.js',
-      'public/modules/*/*[!tests]*/*.js'
+      'public/dist/application.min.js'
     ]
   },
   facebook: {
