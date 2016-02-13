@@ -11,7 +11,7 @@
     "start": "grunt",
     "test": "grunt test",
     "jshint": "grunt jshint",
-    "postinstall": "bower install --config.interactive=false && grunt buildCSS",
+    "postinstall": "bower install --config.interactive=false && grunt build",
     "jscs": "grunt jscs"
   },
   "pre-commit": [
@@ -52,7 +52,7 @@
     "grunt-concurrent": "~1.0.0",
     "grunt-contrib-cssmin": "~0.10.0",
     "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-uglify": "~0.6.0",
+    "grunt-contrib-uglify": "^0.11.1",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-env": "~0.4.1",
     "grunt-jscs": "^2.3.0",
