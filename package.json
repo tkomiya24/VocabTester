@@ -11,7 +11,7 @@
     "start": "grunt",
     "test": "grunt test",
     "jshint": "grunt jshint",
-    "postinstall": "bower install --config.interactive=false && grunt buildCSS",
+    "postinstall": "bower install --config.interactive=false && grunt build",
     "jscs": "grunt jscs"
   },
   "pre-commit": [
