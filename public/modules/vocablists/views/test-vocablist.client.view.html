@@ -19,9 +19,9 @@
       Restart
     </button>
   </div>
-  <div class="test-table">
+  <div data-ng-hide="authenticationError" class="test-table">
     <h2>Good luck!</h2>
-    <table data-ng-hide="authenticationError" class="table">
+    <table class="table">
       <tbody>
         <tr ng-repeat="vocab in vocablist.vocab" ng-class="{correct: vocab.correct}">
           <td>{{$index + 1}}.</td>
