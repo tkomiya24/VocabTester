@@ -4,6 +4,11 @@
 @import "modules/vocablist/new";
 @import "vocablists";
 @import "vocabs";
+@import "modules/jumbotron";
+
+html, body, section.view-container {
+  height: 100%;
+}
 
 body {
   margin-top: 70px;
@@ -16,4 +21,9 @@ body {
 
 .affix {
   top: 55px;
+}
+
+.pull-bottom-center {
+  position: absolute;
+  bottom: 0;
 }
