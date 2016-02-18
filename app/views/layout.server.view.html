@@ -42,7 +42,7 @@
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
         integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
-        crossorigin="anonymous">      
+        crossorigin="anonymous">
   {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
 
   <!-- HTML5 Shim -->
@@ -53,9 +53,8 @@
 
 <body class="ng-cloak">
   <header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
-  <section class="main-container">
-    {% block content %}{% endblock %}
-  </section>
+  {% block content %}
+  {% endblock %}
 
   <!--Embedding The User Object-->
   <script type="text/javascript">
