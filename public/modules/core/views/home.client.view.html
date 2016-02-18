@@ -1,24 +1,28 @@
-<section data-ng-controller="HomeController">
-  <div class="jumbotron text-center">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-        <img alt="MEAN.JS" class="img-responsive text-center" src="modules/core/img/brand/logo.png" />
-      </div>
+<div data-ng-controller="HomeController" class="my-jumbotron">
+  <div class="centered-container">
+    <div class="jumbotron-header">
+      <h1>
+        VocabTester
+      </h1>
+      <h2>
+        Ready to learn a new language?
+      </h2>
     </div>
-    <br>
-    <div class="row">
-      <p class="lead">
-        Welcome!!!
-      </p>
+    <div class="button-container">
+      <button>
+        <a href="/#!/signin"><i class="glyphicon glyphicon-log-in"></i>Login</a>
+      </button>
+      <button>
+        <a href="/#!/signup"><i class="glyphicon glyphicon-user"></i>Sign Up</a>
+      </button>
     </div>
-    <div class="row">
+    <div class="pull-bottom-center">
       <p>
-        This is a website made with MEAN.JS to help you learn Vocab. Please login or sign up :)
+        Made by Takeru &lt;3
+      </p>
+      <p>
+        Check out the repo <a href="https://github.com/tkomiya24/VocabTester">here</a>
       </p>
     </div>
   </div>
-  <div class="container text-center">
-    <a class="btn btn-primary btn-lg" href="/#!/signin">Login</a>
-    <a class="btn btn-success btn-lg" href="/#!/signup">Sign Up</a>
-  </div>
-</section>
+</div>
