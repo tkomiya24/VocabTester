@@ -127,20 +127,25 @@ exports.delete = function(req, res) {
   });
 };
 
+function getAllVocablists(user) {
+  var query = user ? {user: user._id} : {};
+  return Vocablist.find(query).sort('-created').populate('vocab').exec();
+}
+
 /**
  * List of Vocablists
  */
 exports.list = function(req, res) {
   var query = req.user ? {user: req.user._id} : {};
-  Vocablist.find(query).sort('-created').populate('vocab').exec(function(err, vocablists) {
-    if (err) {
+  getAllVocablists(req.user)
+    .then(function(vocablists) {
+      res.jsonp(vocablists);
+    })
+    .catch(function(err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
-    } else {
-      res.jsonp(vocablists);
-    }
-  });
+    });
 };
 
 function stripVocab(vocab) {
