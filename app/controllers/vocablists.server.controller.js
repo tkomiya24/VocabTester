@@ -181,6 +181,23 @@ exports.download = function(req, res, next) {
   });
 };
 
+exports.downloadAll = function(req, res, next) {
+  getAllVocablists(req.user)
+    .then(function(vocablists) {
+      for (var i = 0; i < vocablists.length; i++) {
+        vocablists[i] = stripVocablist(vocablists[i]);
+      }
+      res.set('Content-Type', 'application/force-download');
+      res.set('Content-Disposition', 'attachment; filename=\"allVocablists.json\"');
+      res.send(vocablists);
+    })
+    .catch(function(err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    });
+};
+
 /**
  * Vocablist middleware
  */
