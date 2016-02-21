@@ -9,6 +9,9 @@ module.exports = function(app) {
   .get(vocablists.list)
   .post(users.requiresLogin, vocablists.create);
 
+  app.route('/vocablists/download')
+    .get(users.requiresLogin, vocablists.downloadAll);
+
   app.route('/vocablists/:vocablistId/download')
     .get(users.requiresLogin, vocablists.hasAuthorization, vocablists.download);
 

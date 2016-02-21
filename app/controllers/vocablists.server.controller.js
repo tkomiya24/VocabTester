@@ -127,20 +127,25 @@ exports.delete = function(req, res) {
   });
 };
 
+function getAllVocablists(user) {
+  var query = user ? {user: user._id} : {};
+  return Vocablist.find(query).sort('-created').populate('vocab').exec();
+}
+
 /**
  * List of Vocablists
  */
 exports.list = function(req, res) {
   var query = req.user ? {user: req.user._id} : {};
-  Vocablist.find(query).sort('-created').populate('vocab').exec(function(err, vocablists) {
-    if (err) {
+  getAllVocablists(req.user)
+    .then(function(vocablists) {
+      res.jsonp(vocablists);
+    })
+    .catch(function(err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
-    } else {
-      res.jsonp(vocablists);
-    }
-  });
+    });
 };
 
 function stripVocab(vocab) {
@@ -174,6 +179,23 @@ exports.download = function(req, res, next) {
     res.set('Content-Disposition', 'attachment; filename=\"' + vocablist.name + '.json' + '\"');
     res.send(stripped);
   });
+};
+
+exports.downloadAll = function(req, res, next) {
+  getAllVocablists(req.user)
+    .then(function(vocablists) {
+      for (var i = 0; i < vocablists.length; i++) {
+        vocablists[i] = stripVocablist(vocablists[i]);
+      }
+      res.set('Content-Type', 'application/force-download');
+      res.set('Content-Disposition', 'attachment; filename=\"allVocablists.json\"');
+      res.send(vocablists);
+    })
+    .catch(function(err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    });
 };
 
 /**
