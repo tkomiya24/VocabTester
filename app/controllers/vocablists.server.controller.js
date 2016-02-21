@@ -143,6 +143,39 @@ exports.list = function(req, res) {
   });
 };
 
+function stripVocab(vocab) {
+  return {
+    word: vocab.word,
+    translation: vocab.translation,
+    timesTested: vocab.timesTested,
+    timesCorrect: vocab.timesCorrect,
+    lastTested: vocab.lastTested
+  };
+}
+
+function stripVocablist(vocablist) {
+  for (var i = 0; i < vocablist.vocab.length; i++) {
+    vocablist.vocab[i] = stripVocab(vocablist.vocab[i]);
+  }
+  return {
+    vocab: vocablist.vocab,
+    name: vocablist.name,
+    category: vocablist.category,
+    created: vocablist.created,
+    chapter: vocablist.chapter,
+    user: vocablist.user
+  };
+}
+
+exports.download = function(req, res, next) {
+  populateVocablist(req.vocablist).then(function(vocablist) {
+    var stripped = stripVocablist(vocablist);
+    res.set('Content-Type', 'application/force-download');
+    res.set('Content-Disposition', 'attachment; filename=\"' + vocablist.name + '.json' + '\"');
+    res.send(stripped);
+  });
+};
+
 /**
  * Vocablist middleware
  */
