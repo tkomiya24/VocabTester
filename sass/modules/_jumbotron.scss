@@ -5,7 +5,7 @@
   font-size: 2em;
   min-width: 653px;
   height: 100%;
-  background: linear-gradient(to bottom, $unauthBackgroundColor, lighten($unauthBackgroundColor, 15%));
+  background: $unauthBackgroundGradient;
   margin: 0 auto;
   margin-top: -20px;
   border-radius: 5px;

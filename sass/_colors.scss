@@ -5,3 +5,4 @@ $correctRowColor: $lightGreen;
 $unauthBorderColor: white;
 $unauthBackgroundColor: #FF6A13;
 $unauthTextColor: white;
+$unauthBackgroundGradient: linear-gradient(to bottom, $unauthBackgroundColor, lighten($unauthBackgroundColor, 10%));
