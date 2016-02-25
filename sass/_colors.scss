@@ -1,2 +1,8 @@
 $lightGreen: rgba(63, 244, 7, 0.2);
 $correctRowColor: $lightGreen;
+
+//unauthenticated pages
+$unauthBorderColor: white;
+$unauthBackgroundColor: #FF6A13;
+$unauthTextColor: white;
+$unauthBackgroundGradient: linear-gradient(to bottom, $unauthBackgroundColor, lighten($unauthBackgroundColor, 10%));

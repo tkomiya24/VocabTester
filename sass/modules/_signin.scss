@@ -1,0 +1,39 @@
+.signin .ng-invalid.ng-dirty {
+  border-color: #FA787E;
+}
+.signin .ng-valid.ng-dirty {
+  border-color: #78FA89;
+}
+
+.signin-container {
+  margin: 0 auto;
+  padding: 1em;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 15em;
+  background-color: white;
+  color: black;
+  input {
+    width: 100%;
+    margin-bottom: 0.2em;
+    padding-right: 0.3em;
+    padding-left: 0.3em;
+  }
+  button {
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    font-size: 0.55em;
+    font-weight: normal;
+  }
+  .need-account {
+    p {
+      display: inline-block;
+      font-size: 0.55em;
+      font-weight: normal;
+      color: rgb(100, 100, 100)
+    }
+  }
+}
