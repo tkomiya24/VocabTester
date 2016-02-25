@@ -10,31 +10,33 @@
   margin-top: -20px;
   border-radius: 5px;
   color: $unauthTextColor;
-  button {
-    border-radius: 5px;
-    border: 1px solid white;
-    background-color: inherit;
-    margin-right: 5px;
-    padding: 0;
-    a {
-      display: block;
-      height: 100%;
-      width: 100%;
-      padding: 0.2em;
-    }
-    a:link, a:visited {
-      text-decoration: none;
-      color: inherit;
-    }
-    a:hover {
-      color: $unauthBackgroundColor;
-      background-color: $unauthTextColor;
-    }
+}
+
+button {
+  border-radius: 5px;
+  border: 1px solid white;
+  background-color: inherit;
+  margin-right: 5px;
+  padding: 0;
+  a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    padding: 0.2em;
   }
-  i {
-    margin-right: 0.2em;
+  a:link, a:visited {
+    text-decoration: none;
+    color: inherit;
+  }
+  a:hover {
+    color: $unauthBackgroundColor;
+    background-color: $unauthTextColor;
   }
 }
+i {
+  margin-right: 0.2em;
+}
+
 
 .jumbotron-header {
   h1 {
