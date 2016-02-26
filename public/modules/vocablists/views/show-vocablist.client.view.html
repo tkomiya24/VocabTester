@@ -6,15 +6,11 @@
     <h2>{{vocablist.name}}<small ng-if="vocablist.chapter">{{vocablist.chapter}}</small></h2>
     <h3>{{vocablist.category}}</h3>
     <div class="action-buttons" set-class-when-at-top="affix" offset-start="63">
-      <a href="#!/vocablists/edit/{{vocablist._id}}">
-        <button class="btn btn-success">
-          <span class="glyphicon glyphicon-edit"></span> Edit
-        </button>
+      <a href="#!/vocablists/edit/{{vocablist._id}}" class="btn btn-success" role="button">
+        <span class="glyphicon glyphicon-edit"></span> Edit
       </a>
-      <a href="#!/vocablists/test/{{vocablist._id}}">
-        <button class="btn btn-primary">
-          <span class="glyphicon glyphicon-pencil"></span> Test
-        </button>
+      <a href="#!/vocablists/test/{{vocablist._id}}" class="btn btn-primary" role="button">
+        <span class="glyphicon glyphicon-pencil"></span> Test
       </a>
       <button class="btn btn-danger" ng-click="removeOne()">
         <span class="glyphicon glyphicon-remove-sign"></span> Delete

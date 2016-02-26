@@ -56,28 +56,20 @@
             <td>{{vocablist.name}}</td>
             <td>{{vocablist.category}}</td>
             <td>
-              <a href="#!/vocablists/show/{{vocablist._id}}">
-                <button class="btn btn-primary">
-                  View
-                </button>
+              <a href="#!/vocablists/show/{{vocablist._id}}" class="btn btn-primary" role="button">
+                View
               </a>
-              <a href="#!/vocablists/edit/{{vocablist._id}}">
-                <button class="btn btn-success">
-                  <span class="glyphicon glyphicon-edit"></span> Edit
-                </button>
+              <a href="#!/vocablists/edit/{{vocablist._id}}" class="btn btn-success" role="button">
+                <span class="glyphicon glyphicon-edit"></span> Edit
               </a>
               <button class="btn btn-danger" ng-click="remove(vocablist, $index)">
                 <span class="glyphicon glyphicon-remove-sign"></span> Delete
               </button>
-              <a href="#!/vocablists/test/{{vocablist._id}}">
-                <button class="btn btn-primary">
-                  <span class="glyphicon glyphicon-pencil"></span> Test
-                </button>
+              <a href="#!/vocablists/test/{{vocablist._id}}" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-pencil"></span> Test
               </a>
-              <a href="vocablists/{{vocablist._id}}/download">
-                <button class="btn btn-success">
-                  <span class="glyphicon glyphicon-download"></span> Download
-                </button>
+              <a href="vocablists/{{vocablist._id}}/download" class="btn btn-success" role="button">
+                <span class="glyphicon glyphicon-download"></span> Download
               </a>
             </td>
         </tr>
