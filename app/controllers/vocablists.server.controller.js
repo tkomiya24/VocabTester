@@ -47,7 +47,7 @@ function removeNullFromArray(array) {
  */
 exports.create = function(req, res) {
   var vocabs = req.body.vocab;
-  Vocab.create(vocabs).
+  updateVocabHelper.createVocabs(req.user, vocabs).
     then(function(vocabDocs) {
       var vocablist = req.body;
       vocablist.vocab = vocabDocs;
