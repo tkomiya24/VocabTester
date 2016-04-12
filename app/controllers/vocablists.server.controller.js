@@ -222,3 +222,21 @@ exports.hasAuthorization = function(req, res, next) {
   }
   next();
 };
+
+exports.mostMistaken = function(req, res, next) {
+  Vocab.find({user: req.user._id}).
+    where('timesTested').gt(0).
+    limit(20).
+    then(function(vocabs) {
+      vocabs.sort(function(vocab1, vocab2) {
+        return (vocab1.timesCorrect / vocab1.timesTested) -
+        (vocab2.timesCorrect / vocab2.timesTested);
+      });
+      res.jsonp({vocab: vocabs});
+    }).
+    catch(function(err) {
+      res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    });
+};
