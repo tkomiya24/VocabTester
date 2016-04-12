@@ -167,8 +167,7 @@ function stripVocablist(vocablist) {
     name: vocablist.name,
     category: vocablist.category,
     created: vocablist.created,
-    chapter: vocablist.chapter,
-    user: vocablist.user
+    chapter: vocablist.chapter
   };
 }
 
