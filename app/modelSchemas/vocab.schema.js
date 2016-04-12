@@ -25,5 +25,9 @@ module.exports = new Schema({
   },
   lastTested: {
     type: Date
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
 });
