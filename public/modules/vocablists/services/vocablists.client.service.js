@@ -15,6 +15,10 @@ angular.module('vocablists').factory('Vocablists', ['$resource',
         create: {
           method: 'POST',
           url: 'vocablists/'
+        },
+        mostMistaken: {
+          method: 'GET',
+          url: 'vocablists/most-mistaken'
         }
       }
     );

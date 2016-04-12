@@ -12,6 +12,9 @@ module.exports = function(app) {
   app.route('/vocablists/download')
     .get(users.requiresLogin, vocablists.downloadAll);
 
+  app.route('/vocablists/most-mistaken')
+    .get(users.requiresLogin, vocablists.mostMistaken);
+
   app.route('/vocablists/:vocablistId/download')
     .get(users.requiresLogin, vocablists.hasAuthorization, vocablists.download);
 
