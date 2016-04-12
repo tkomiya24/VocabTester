@@ -9,6 +9,7 @@ var Vocablist = mongoose.model('Vocablist', VocablistSchema);
 var User = mongoose.model('User', require('./../app/modelSchemas/user.schema'));
 var db = mongoose.connection;
 var migrator = require('./migrator');
+var vocabHelper = require('./../app/helpers/updateVocab');
 var takeruUser = {
   firstName: 'Takeru',
   lastName: 'Komiya',
@@ -51,22 +52,20 @@ function migrate(vocablist) {
 function createVocablistPromise(vocablist, user) {
   vocablist.user = user;
   return new Promise(function(resolve, reject) {
-    Vocab.create(migrate(vocablist.vocab), function(err, vocabsDoc) {
-      if (err) {
-        reject(err);
-      } else if (!vocabsDoc) {
-        err('Vocabs was empty...');
-      } else {
-        var vlistDoc = new Vocablist(vocablist);
-        vlistDoc.vocab = vocabsDoc;
-        vlistDoc.save(function(err) {
-          if (err) {
-            reject(err);
-          } else {
-            resolve();
-          }
-        });
-      }
+    // uncomment this if you need to migrate
+    // vocablist.vocab = migrate(vocablist.vocab);
+    vocabHelper.createVocabs(user, vocablist.vocab).then(function(vocabsDoc) {
+      var vlistDoc = new Vocablist(vocablist);
+      vlistDoc.vocab = vocabsDoc;
+      vlistDoc.save(function(err) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    }).catch(function(err) {
+      reject(err);
     });
   });
 }
