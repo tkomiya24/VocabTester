@@ -37,6 +37,16 @@ function findAndUpdateVocab(vocab) {
   }
 }
 
+module.exports.createVocabs = function(user, vocabs) {
+  var createVocabPromises = [];
+  for (var i = 0; i < vocabs.length; i++) {
+    var vocab = new Vocab(vocabs[i]);
+    vocab.user = user;
+    createVocabPromises.push(vocab.save());
+  }
+  return Promise.all(createVocabPromises);
+};
+
 module.exports.findAndUpdateVocabs = function(vocabs) {
   var promises = [];
   for (var i = 0; i < vocabs.length; i++) {
