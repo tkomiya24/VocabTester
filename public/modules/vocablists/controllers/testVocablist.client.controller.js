@@ -7,19 +7,28 @@ angular.module('vocablists').
       function($scope, $stateParams, $location, Authentication, Vocablists, Vocabs) {
 
         $scope.completedVocabs = [];
-        $scope.vocablist = Vocablists.get(
-          {
-            vocablistId: $stateParams.vocablistId
-          },
-          function(value, responseHeaders) {
-            if (value.user !== Authentication.currentUser()._id) {
-              $scope.authenticationError = 'You are not authorized to use this vocablist';
-            } else {
+        if ($stateParams.vocablistId === 'most-mistaken') {
+          $scope.vocablist = Vocablists.mostMistaken(
+            function(value, responseHeaders) {
               $scope.total = value.vocab.length;
               shuffle(value.vocab);
             }
-          }
-        );
+          );
+        } else {
+          $scope.vocablist = Vocablists.get(
+            {
+              vocablistId: $stateParams.vocablistId
+            },
+            function(value, responseHeaders) {
+              if (value.user !== Authentication.currentUser()._id) {
+                $scope.authenticationError = 'You are not authorized to use this vocablist';
+              } else {
+                $scope.total = value.vocab.length;
+                shuffle(value.vocab);
+              }
+            }
+          );
+        }
         $scope.isSubmitted = false;
         $scope.responses = [];
         $scope.score = 0;
