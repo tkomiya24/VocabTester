@@ -1,0 +1,33 @@
+<section class="centered-container" data-ng-controller="VocabsController" data-ng-init="find()">
+  <div class="page-header">
+    <h1>Your Vocabs</h1>
+  </div>
+  <div class="vocab-table">
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>
+            Word
+          </th>
+          <th>
+            Translation
+          </th>
+          <th>
+            Times correct
+          </th>
+          <th>
+            Times tested
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="vocab in vocabs">
+            <td>{{vocab.word}}</td>
+            <td>{{vocab.translation}}</td>
+            <td>{{vocab.timesCorrect}}</td>
+            <td>{{vocab.timesTested}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
