@@ -11,15 +11,21 @@ var Vocab = mongoose.model('Vocab');
 var updateVocabHelper = require('../helpers/updateVocab');
 
 function saveVocablistPromise(vocablist) {
-  return new Promise(function(resolve, error) {
-    vocablist.save(function(err) {
-      if (err) {
-        error(err);
-      } else {
-        resolve(vocablist);
-      }
+  if (vocablist.id) {
+    return new Promise(function(resolve, error) {
+      vocablist.save(function(err) {
+        if (err) {
+          error(err);
+        } else {
+          resolve(vocablist);
+        }
+      });
     });
-  });
+  } else {
+    return new Promise(function(resolve) {
+      resolve(vocablist);
+    });
+  }
 }
 
 function populateVocablist(vocablist) {
