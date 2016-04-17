@@ -14,6 +14,13 @@ angular.module('vocablists').
               shuffle(value.vocab);
             }
           );
+        } else if ($stateParams.vocablistId === 'leastTested') {
+          $scope.vocablist = Vocablists.leastTested(
+            function(value, responseHeaders) {
+              $scope.total = value.vocab.length;
+              shuffle(value.vocab);
+            }
+          );
         } else {
           $scope.vocablist = Vocablists.get(
             {
