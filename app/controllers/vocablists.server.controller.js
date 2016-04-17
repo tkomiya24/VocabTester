@@ -59,9 +59,7 @@ exports.create = function(req, res) {
       return;
     }).
     catch(function(err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+      errorHandler.sendDatabaseErrorResponse(res, err);
     });
 };
 
@@ -96,9 +94,7 @@ exports.update = function(req, res) {
     }).
     catch(
       function(err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
+        errorHandler.sendDatabaseErrorResponse(res, err);
       }
     );
 };
@@ -121,9 +117,7 @@ exports.delete = function(req, res) {
   }).then(function() {
     res.jsonp(vocablist);
   }).catch(function(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
+    errorHandler.sendDatabaseErrorResponse(res, err);
   });
 };
 
@@ -191,9 +185,7 @@ exports.downloadAll = function(req, res, next) {
       res.send(vocablists);
     })
     .catch(function(err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+      errorHandler.sendDatabaseErrorResponse(res, err);
     });
 };
 
@@ -235,8 +227,6 @@ exports.mostMistaken = function(req, res, next) {
       res.jsonp({vocab: vocabs});
     }).
     catch(function(err) {
-      res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+      errorHandler.sendDatabaseErrorResponse(res, err);
     });
 };
