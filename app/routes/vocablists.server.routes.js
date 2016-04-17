@@ -15,6 +15,9 @@ module.exports = function(app) {
   app.route('/vocablists/most-mistaken')
     .get(users.requiresLogin, vocablists.mostMistaken);
 
+  app.route('/vocablists/leastTested')
+    .get(users.requiresLogin, vocablists.leastTested);
+
   app.route('/vocablists/:vocablistId/download')
     .get(users.requiresLogin, vocablists.hasAuthorization, vocablists.download);
 
