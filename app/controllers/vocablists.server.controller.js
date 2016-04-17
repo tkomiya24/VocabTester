@@ -230,3 +230,15 @@ exports.mostMistaken = function(req, res, next) {
       errorHandler.sendDatabaseErrorResponse(res, err);
     });
 };
+
+exports.leastTested = function(req, res, next) {
+  Vocab.find({user: req.user._id}).
+    sort('timesTested').
+    limit(20).
+    then(function(vocabs) {
+      res.jsonp({vocab: vocabs});
+    }).
+    catch(function(err) {
+      errorHandler.sendDatabaseErrorResponse(res, err);
+    });
+};
