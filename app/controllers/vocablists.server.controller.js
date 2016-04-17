@@ -11,15 +11,21 @@ var Vocab = mongoose.model('Vocab');
 var updateVocabHelper = require('../helpers/updateVocab');
 
 function saveVocablistPromise(vocablist) {
-  return new Promise(function(resolve, error) {
-    vocablist.save(function(err) {
-      if (err) {
-        error(err);
-      } else {
-        resolve(vocablist);
-      }
+  if (vocablist.id) {
+    return new Promise(function(resolve, error) {
+      vocablist.save(function(err) {
+        if (err) {
+          error(err);
+        } else {
+          resolve(vocablist);
+        }
+      });
     });
-  });
+  } else {
+    return new Promise(function(resolve) {
+      resolve(vocablist);
+    });
+  }
 }
 
 function populateVocablist(vocablist) {
@@ -59,9 +65,7 @@ exports.create = function(req, res) {
       return;
     }).
     catch(function(err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+      errorHandler.sendDatabaseErrorResponse(res, err);
     });
 };
 
@@ -96,9 +100,7 @@ exports.update = function(req, res) {
     }).
     catch(
       function(err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
+        errorHandler.sendDatabaseErrorResponse(res, err);
       }
     );
 };
@@ -121,9 +123,7 @@ exports.delete = function(req, res) {
   }).then(function() {
     res.jsonp(vocablist);
   }).catch(function(err) {
-    return res.status(400).send({
-      message: errorHandler.getErrorMessage(err)
-    });
+    errorHandler.sendDatabaseErrorResponse(res, err);
   });
 };
 
@@ -191,9 +191,7 @@ exports.downloadAll = function(req, res, next) {
       res.send(vocablists);
     })
     .catch(function(err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+      errorHandler.sendDatabaseErrorResponse(res, err);
     });
 };
 
@@ -235,8 +233,18 @@ exports.mostMistaken = function(req, res, next) {
       res.jsonp({vocab: vocabs});
     }).
     catch(function(err) {
-      res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
+      errorHandler.sendDatabaseErrorResponse(res, err);
+    });
+};
+
+exports.leastTested = function(req, res, next) {
+  Vocab.find({user: req.user._id}).
+    sort('timesTested').
+    limit(20).
+    then(function(vocabs) {
+      res.jsonp({vocab: vocabs});
+    }).
+    catch(function(err) {
+      errorHandler.sendDatabaseErrorResponse(res, err);
     });
 };

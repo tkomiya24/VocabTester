@@ -34,6 +34,9 @@
             <span class="glyphicon glyphicon-ok" ng-show="vocab.correct"></span>
             <span class="glyphicon glyphicon-remove" ng-hide="vocab.correct"></span>
           </td>
+          <td>
+            {{vocab.timesCorrect}}/{{vocab.timesTested}}
+          </td>
          </tr>
       </tbody>
     </table>
