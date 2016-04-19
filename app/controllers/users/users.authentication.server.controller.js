@@ -63,21 +63,17 @@ exports.signup = function(req, res) {
   user.
     save().
     then(function(user) {
-      console.log('User has been saved');
-      console.log(sampleVocablists.slice());
       return saveVocablists(_.cloneDeep(sampleVocablists), user);
     }).
     then(function(vocablists) {
-      return new Promise(function(resolve, reject) {
-        user.password = undefined;
-        user.salt = undefined;
-        req.login(user, function(err) {
-          if (err) {
-            reject(err);
-          } else {
-            res.json(user);
-          }
-        });
+      user.password = undefined;
+      user.salt = undefined;
+      req.login(user, function(err) {
+        if (err) {
+          return res.status(400).send(err);
+        } else {
+          return res.json(user);
+        }
       });
     }).
     catch(function(error) {
