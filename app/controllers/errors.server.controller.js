@@ -45,6 +45,6 @@ exports.getErrorMessage = function(err) {
 
 exports.sendDatabaseErrorResponse = function(res, error) {
   res.status(400).send({
-    message: exports.getErrorMessage.getErrorMessage(error)
+    message: exports.getErrorMessage(error)
   });
 };
