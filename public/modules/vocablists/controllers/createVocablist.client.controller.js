@@ -25,10 +25,10 @@ angular.module('vocablists').
             $location.path('vocablists/list');
           },
           function(response) {
-            if (typeof response === 'object') {
-              $scope.error = JSON.stringify(response);
+            if (response.data.message) {
+              $scope.error = response.data.message;
             } else {
-              $scope.error = response;
+              $scope.error = JSON.stringify(response.data);
             }
           });
       };
