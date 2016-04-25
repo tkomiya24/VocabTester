@@ -142,6 +142,12 @@ function getAllVocablists(user, params) {
     }
     t.and([{$or: conds}]);
   }
+  if (params.limit) {
+    t.limit(params.limit);
+  }
+  if (params.startVal) {
+    t.lt('created', params.startVal);
+  }
   return t.sort('-created').populate('vocab').exec();
 }
 
@@ -149,7 +155,6 @@ function getAllVocablists(user, params) {
  * List of Vocablists
  */
 exports.list = function(req, res) {
-  var query = req.user ? {user: req.user._id} : {};
   getAllVocablists(req.user, req.query)
     .then(function(vocablists) {
       res.jsonp(vocablists);
