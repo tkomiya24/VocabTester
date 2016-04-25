@@ -127,9 +127,22 @@ exports.delete = function(req, res) {
   });
 };
 
-function getAllVocablists(user) {
+function getAllVocablists(user, params) {
   var query = user ? {user: user._id} : {};
-  return Vocablist.find(query).sort('-created').populate('vocab').exec();
+  var t = Vocablist.find(query);
+  if (params.query) {
+    // var r = {$regex: new RegExp(query, 'i')};
+    var r = new RegExp(params.query, 'i');
+    var conds = [
+      {name: r},
+      {category: r}
+    ];
+    if (!isNaN(params.query)) {
+      conds.push({chapter: query});
+    }
+    t.and([{$or: conds}]);
+  }
+  return t.sort('-created').populate('vocab').exec();
 }
 
 /**
@@ -137,7 +150,7 @@ function getAllVocablists(user) {
  */
 exports.list = function(req, res) {
   var query = req.user ? {user: req.user._id} : {};
-  getAllVocablists(req.user)
+  getAllVocablists(req.user, req.query)
     .then(function(vocablists) {
       res.jsonp(vocablists);
     })
