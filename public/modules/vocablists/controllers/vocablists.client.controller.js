@@ -54,7 +54,18 @@ angular.module('vocablists').
 
         // Find a list of Vocablists
         $scope.find = function() {
-          $scope.vocablists = Vocablists.query();
+          var query = {limit: 10};
+          $scope.vocablists = Vocablists.query(query);
+        };
+
+        $scope.loadMore = function() {
+          var query = {limit: 10};
+          if ($scope.vocablists) {
+            query.startVal = $scope.vocablists[$scope.vocablists.length - 1].created;
+          }
+          Vocablists.query(query, function(value) {
+            $scope.vocablists = $scope.vocablists.concat(value);
+          });
         };
 
         // Find existing Vocablist
