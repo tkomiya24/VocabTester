@@ -11,38 +11,7 @@ var User = mongoose.model('User');
 var Vocablist = mongoose.model('Vocablist');
 var Vocab = mongoose.model('Vocab');
 var sampleVocablists = require('./../../data/seed/daysOfTheWeek');
-
-function saveVocablist(vocablist, user) {
-  return new Promise(function(resolve, reject) {
-    Vocab.create(vocablist.vocab, function(err, docs) {
-      if (err) {
-        reject(err);
-      } else if (!docs) {
-        reject(new Error('Could not create vocabs'));
-      } else {
-        vocablist.user = user;
-        vocablist.vocab = docs;
-        Vocablist.create(vocablist, function(err, doc) {
-          if (err) {
-            reject(err);
-          } else if (!doc) {
-            reject(new Error('Could not create vocablist'));
-          } else {
-            resolve(doc);
-          }
-        });
-      }
-    });
-  });
-}
-
-function saveVocablists(vocablists, user) {
-  var promises = [];
-  vocablists.forEach(function(vocablist) {
-    promises.push(saveVocablist(vocablist, user));
-  });
-  return Promise.all(promises);
-}
+var vocablistHelper = require('../../helpers/vocablistHelper');
 
 /**
  * Signup
@@ -63,7 +32,7 @@ exports.signup = function(req, res) {
   user.
     save().
     then(function(user) {
-      return saveVocablists(_.cloneDeep(sampleVocablists), user);
+      return vocablistHelper.createVocablistsWithVocabs(_.cloneDeep(sampleVocablists), user);
     }).
     then(function(vocablists) {
       user.password = undefined;
