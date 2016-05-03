@@ -85,5 +85,15 @@ angular.module('vocablists').
             $scope.predicate = predicate;
           }
         };
+
+        $scope.$watch('param', function() {
+          $scope.vocablists = Vocablists.query({query: $scope.param});
+        });
+
+        $scope.query = function() {
+          Vocablists.query({
+            query: $scope.param
+          });
+        };
       }
 ]);
