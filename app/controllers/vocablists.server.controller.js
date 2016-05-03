@@ -129,7 +129,7 @@ exports.delete = function(req, res) {
 
 function getAllVocablists(user, params) {
   var query = user ? {user: user._id} : {};
-  var t = Vocablist.find(query);
+  var t = Vocablist.find(query).sort('-created');
   if (params.query) {
     // var r = {$regex: new RegExp(query, 'i')};
     var r = new RegExp(params.query, 'i');
@@ -142,14 +142,19 @@ function getAllVocablists(user, params) {
     }
     t.and([{$or: conds}]);
   }
-  return t.sort('-created').populate('vocab').exec();
+  if (params.limit) {
+    t.limit(params.limit);
+  }
+  if (params.startVal) {
+    t.lt('created', params.startVal);
+  }
+  return t.populate('vocab').exec();
 }
 
 /**
  * List of Vocablists
  */
 exports.list = function(req, res) {
-  var query = req.user ? {user: req.user._id} : {};
   getAllVocablists(req.user, req.query)
     .then(function(vocablists) {
       res.jsonp(vocablists);
