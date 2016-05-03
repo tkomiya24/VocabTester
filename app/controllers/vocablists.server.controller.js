@@ -129,7 +129,7 @@ exports.delete = function(req, res) {
 
 function getAllVocablists(user, params) {
   var query = user ? {user: user._id} : {};
-  var t = Vocablist.find(query);
+  var t = Vocablist.find(query).sort('-created');
   if (params.query) {
     // var r = {$regex: new RegExp(query, 'i')};
     var r = new RegExp(params.query, 'i');
@@ -148,7 +148,7 @@ function getAllVocablists(user, params) {
   if (params.startVal) {
     t.lt('created', params.startVal);
   }
-  return t.sort('-created').populate('vocab').exec();
+  return t.populate('vocab').exec();
 }
 
 /**
