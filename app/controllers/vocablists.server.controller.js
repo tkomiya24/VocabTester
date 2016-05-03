@@ -9,6 +9,7 @@ var Vocablist = mongoose.model('Vocablist');
 var _ = require('lodash');
 var Vocab = mongoose.model('Vocab');
 var updateVocabHelper = require('../helpers/updateVocab');
+var vocablistHelper = require('../helpers/vocablistHelper');
 
 function saveVocablistPromise(vocablist) {
   if (vocablist.id) {
@@ -52,16 +53,9 @@ function removeNullFromArray(array) {
  * Create a Vocablist
  */
 exports.create = function(req, res) {
-  var vocabs = req.body.vocab;
-  updateVocabHelper.createVocabs(req.user, vocabs).
-    then(function(vocabDocs) {
-      var vocablist = req.body;
-      vocablist.vocab = vocabDocs;
-      vocablist.user = req.user;
-      return Vocablist.create(vocablist);
-    }).
-    then(function(vocablist) {
-      res.jsonp(vocablist);
+  vocablistHelper.createVocablistsWithVocabs(req.body, req.user).
+    then(function(vocablists) {
+      res.jsonp(vocablists);
       return;
     }).
     catch(function(err) {
