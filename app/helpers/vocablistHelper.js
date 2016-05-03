@@ -28,12 +28,12 @@ function createVocablists(vocablists, user) {
   for (var i = 0; i < vocablists.length; i++) {
     promises.push(createVocablist(vocablists[i], user));
   }
-  return new Promise.all(promises);
+  return Promise.all(promises);
 }
 
 module.exports.createVocablistsWithVocabs = function(vocablists, user) {
   if (vocablists.constructor === Array) {
-    return createVocablists(vocablists);
+    return createVocablists(vocablists, user);
   } else {
     return createVocablist(vocablists, user);
   }
