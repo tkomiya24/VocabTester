@@ -60,6 +60,9 @@ angular.module('vocablists').
 
         $scope.loadMore = function() {
           var query = {limit: 10};
+          if ($scope.param && $scope.param.length > 2) {
+            query.query = $scope.param;
+          }
           if ($scope.vocablists) {
             query.startVal = $scope.vocablists[$scope.vocablists.length - 1].created;
           }
@@ -98,7 +101,9 @@ angular.module('vocablists').
         };
 
         $scope.$watch('param', function() {
-          $scope.vocablists = Vocablists.query({query: $scope.param});
+          if ($scope.param && $scope.param.length >= 2) {
+            $scope.vocablists = Vocablists.query({query: $scope.param, limit: 10});
+          }
         });
 
         $scope.query = function() {
