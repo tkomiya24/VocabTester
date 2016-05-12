@@ -124,23 +124,25 @@ exports.delete = function(req, res) {
 function getAllVocablists(user, params) {
   var query = user ? {user: user._id} : {};
   var t = Vocablist.find(query).sort('-created');
-  if (params.query) {
-    // var r = {$regex: new RegExp(query, 'i')};
-    var r = new RegExp(params.query, 'i');
-    var conds = [
-      {name: r},
-      {category: r}
-    ];
-    if (!isNaN(params.query)) {
-      conds.push({chapter: query});
+  if (params) {
+    if (params.query) {
+      // var r = {$regex: new RegExp(query, 'i')};
+      var r = new RegExp(params.query, 'i');
+      var conds = [
+        {name: r},
+        {category: r}
+      ];
+      if (!isNaN(params.query)) {
+        conds.push({chapter: query});
+      }
+      t.and([{$or: conds}]);
     }
-    t.and([{$or: conds}]);
-  }
-  if (params.limit) {
-    t.limit(params.limit);
-  }
-  if (params.startVal) {
-    t.lt('created', params.startVal);
+    if (params.limit) {
+      t.limit(params.limit);
+    }
+    if (params.startVal) {
+      t.lt('created', params.startVal);
+    }
   }
   return t.populate('vocab').exec();
 }
