@@ -1,0 +1,7 @@
+<form name="form" ng-controller="UploadController">
+  Single Image with validations
+  <button class="btn btn-default" ngf-select="upload($file)" ng-model="file" name="file"
+    ngf-pattern="'.json'"
+    ngf-accept="'.json'">Select</div>
+  <button type="submit" ng-click="submit()">submit</button>
+</form>
