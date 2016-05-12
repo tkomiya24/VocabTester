@@ -6,7 +6,6 @@ angular.module('vocablists').
     ['$scope', 'Upload', '$timeout', '$location',
       function($scope, Upload, $timeout, $location) {
         $scope.upload = function(file, errFiles) {
-          $scope.f = file;
           $scope.errFile = errFiles && errFiles[0];
           if (file) {
             file.upload = Upload.upload({
@@ -25,7 +24,7 @@ angular.module('vocablists').
                 }
               },
               function(evt) {
-                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                $scope.prog = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
               }
             );
           } else {
