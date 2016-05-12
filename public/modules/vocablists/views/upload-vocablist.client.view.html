@@ -1,7 +1,14 @@
-<form name="form" ng-controller="UploadController">
-  Single Image with validations
-  <button class="btn btn-default" ngf-select="upload($file)" ng-model="file" name="file"
-    ngf-pattern="'.json'"
-    ngf-accept="'.json'">Select</div>
-  <button type="submit" ng-click="submit()">submit</button>
-</form>
+<div ng-controller="UploadController">
+  <form name="form">
+    Select a JSON file
+    <button type="file" class="btn btn-default" ngf-select="upload($file)" name="file"
+      ngf-pattern="'.json'"
+      ngf-accept="'.json'">Select
+    </button>
+  </form>
+  <uib-progressbar ng-if="prog >= 0" class="progress-striped active" value="prog" type="success">
+    <span>
+      {{prog}}%
+    </span>
+  </uib-progressbar>
+</div>
