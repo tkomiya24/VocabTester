@@ -3,8 +3,8 @@
 // Vocablists controller
 angular.module('vocablists').
   controller('UploadController',
-    ['$scope', 'Upload', '$timeout',
-      function($scope, Upload, $timeout) {
+    ['$scope', 'Upload', '$timeout', '$location',
+      function($scope, Upload, $timeout, $location) {
         $scope.upload = function(file, errFiles) {
           $scope.f = file;
           $scope.errFile = errFiles && errFiles[0];
@@ -16,10 +16,8 @@ angular.module('vocablists').
 
             file.upload.then(
               function(response) {
-                $timeout(function() {
-                    file.result = response.data;
-                  }
-                );
+                $timeout(function() { file.result = response.data; });
+                $location.path('vocablists/lists');
               },
               function(response) {
                 if (response.status > 0) {
