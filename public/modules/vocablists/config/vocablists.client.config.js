@@ -7,5 +7,6 @@ angular.module('vocablists').run(['Menus',
   Menus.addMenuItem('topbar', 'Vocablists', 'vocablists', 'dropdown', '/vocablists(/create)?');
   Menus.addSubMenuItem('topbar', 'vocablists', 'List Vocablists', 'vocablists');
   Menus.addSubMenuItem('topbar', 'vocablists', 'New Vocablist', 'vocablists/create');
+  Menus.addSubMenuItem('topbar', 'vocablists', 'Upload Vocablist', 'vocablists/upload');
 	}
 ]);

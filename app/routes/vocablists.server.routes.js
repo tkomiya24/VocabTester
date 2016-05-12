@@ -3,6 +3,7 @@
 module.exports = function(app) {
   var users = require('../../app/controllers/users.server.controller');
   var vocablists = require('../../app/controllers/vocablists.server.controller');
+  var multiparty = require('connect-multiparty')();
 
   // Vocablists Routes
   app.route('/vocablists')
@@ -17,6 +18,9 @@ module.exports = function(app) {
 
   app.route('/vocablists/leastTested')
     .get(users.requiresLogin, vocablists.leastTested);
+
+  app.route('/vocablists/upload')
+    .post(users.requiresLogin, multiparty, vocablists.upload);
 
   app.route('/vocablists/:vocablistId/download')
     .get(users.requiresLogin, vocablists.hasAuthorization, vocablists.download);

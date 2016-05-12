@@ -32,6 +32,11 @@ angular.module('vocablists').config(['$stateProvider', 'resolutionServiceProvide
         url: '/vocablists/test/:vocablistId',
         templateUrl: 'modules/vocablists/views/test-vocablist.client.view.html',
         resolve: authenticateResolve
+      }).
+      state('uploadVocablist', {
+        url: '/vocablists/upload',
+        templateUrl: 'modules/vocablists/views/upload-vocablist.client.view.html',
+        resolve: authenticateResolve
       });
   }
 ]);

@@ -10,6 +10,8 @@ var _ = require('lodash');
 var Vocab = mongoose.model('Vocab');
 var updateVocabHelper = require('../helpers/updateVocab');
 var vocablistHelper = require('../helpers/vocablistHelper');
+var jsonfile = require('jsonfile');
+var fs = require('fs');
 
 function saveVocablistPromise(vocablist) {
   if (vocablist.id) {
@@ -261,4 +263,20 @@ exports.leastTested = function(req, res, next) {
     catch(function(err) {
       errorHandler.sendDatabaseErrorResponse(res, err);
     });
+};
+
+exports.upload = function(req, res, next) {
+  fs.readFile(req.files.file.path, function(err, data) {
+    try {
+      vocablistHelper.createVocablistsWithVocabs(JSON.parse(data), req.user).
+        then(function(vocablists) {
+          res.status(200).send('Success');
+        }).
+        catch(function(error) {
+          errorHandler.sendDatabaseErrorResponse(res, err);
+        });
+    } catch (error) {
+      res.status(400).send('The file uploaded was not a proper JSON');
+    }
+  });
 };
