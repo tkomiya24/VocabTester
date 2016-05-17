@@ -10,7 +10,6 @@ var _ = require('lodash');
 var Vocab = mongoose.model('Vocab');
 var updateVocabHelper = require('../helpers/updateVocab');
 var vocablistHelper = require('../helpers/vocablistHelper');
-var jsonfile = require('jsonfile');
 var fs = require('fs');
 
 function saveVocablistPromise(vocablist) {
