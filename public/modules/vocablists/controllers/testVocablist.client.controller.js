@@ -136,5 +136,9 @@ angular.module('vocablists').
               $scope.error = httpResponse.message;
             });
         };
+
+        $scope.flashTest = function() {
+          $location.path('/vocablists/' + $stateParams.vocablistId + '/flashTest');
+        };
       }
 ]);
