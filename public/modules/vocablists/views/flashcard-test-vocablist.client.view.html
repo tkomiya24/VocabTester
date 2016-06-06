@@ -1,0 +1,26 @@
+<div class="container text-center" ng-controller="flashcardTestController">
+  <div ng-hide="finished">
+    <div>
+      <label>Score:</label>
+      <span>{{score}} / {{length}}</span>
+    </div>
+    <h1 ng-hide="correct">{{correctAnswer}}</h1>
+    <div class="">
+      <h4>{{currentVocab.word}}</h4>
+    </div>
+    <input type="text" value="" id="nameAnswer" ng-model="inputAnswer" ng-keyup="$event.keyCode == 13 ? inputEnter(false) : null" ng-class="getInputClass()" />
+    <div class="button-toolbar">
+      <button class="btn btn-success" ng-click="validateAnswer(false)" ng-show="correct">Submit</button>
+      <button class="btn btn-primary" ng-click="wrongHandler()" ng-show="!correct">Try again!</button>
+    </div>
+  </div>
+  <div ng-show="finished">
+    <h1>Congratulations!!</h1>
+    <div>
+      <p>
+        You got all the vocabs correct!
+      </p>
+      <button ng-click="reset()">Play again</button>
+    </div>
+  </div>
+</div>
